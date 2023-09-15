@@ -1,22 +1,13 @@
-import {StatusBar} from 'expo-status-bar';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {ChildView} from './components/CoolName';
-import {useState} from "react";
+import {StyleSheet} from "react-native";
+import {View} from "react-native";
+import {ChildView} from "./components/CoolName";
+import {ContextExample} from "./components/ContextExample";
 
 export default function App() {
-    const [counter, incrementCounter] = useState(0)
-    const increment = () => {
-        incrementCounter(counter + 1)
-    }
-
     return (
         <View style={styles.container}>
-            <Text>Counter: {counter}</Text>
-            <Button
-                title="Increment"
-                color="#3081d3"
-                onPress={increment}/>
-            <StatusBar style="auto"/>
+            <ChildView name={"He"} description={"He"}></ChildView>
+            <ContextExample></ContextExample>
         </View>
     );
 }
