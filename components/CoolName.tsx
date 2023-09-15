@@ -1,10 +1,11 @@
 import {StatusBar} from 'expo-status-bar';
-import {Button, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {useState} from "react";
 
 interface ChildViewProps {
     name: string;
     description: string;
+    styleSheet: StyleSheet;
 }
 
 const ChildView = (props: ChildViewProps) => {
@@ -13,12 +14,13 @@ const ChildView = (props: ChildViewProps) => {
         incrementCounter(counter + 1)
     }
 
+
     return (
         <View>
-            <Text>Counter: {counter}</Text>
+            <Text style={props.styleSheet.text}>Counter: {counter}</Text>
             <Button
                 title="Increment"
-                color="#3081d3"
+                style={props.styleSheet.button}
                 onPress={increment}/>
             <StatusBar style="auto"/>
         </View>

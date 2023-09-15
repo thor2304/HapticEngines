@@ -1,29 +1,15 @@
-import {Appearance, ColorValue} from "react-native";
 import React, {createContext} from "react";
+import {darkTheme, Theme,} from "./Themes";
 
-export interface Theme {
-    textColor: ColorValue;
-    backgroundColor: ColorValue;
-}
 
-const lightTheme: Theme = {
-    textColor: "#000000",
-    backgroundColor: "#ffffff"
-}
 
-const darkTheme: Theme = {
-    textColor: "#ffffff",
-    backgroundColor: "#000000"
-}
-
-export interface ThemeContextStateType {
+export interface ThemeContextType {
     theme: Theme;
     setState: React.Dispatch<React.SetStateAction<Theme>>;
 }
 
-export const exampleContext = createContext<ThemeContextStateType>({
+export const exampleContext = createContext<ThemeContextType>({
     theme: darkTheme,
     setState: () => {
-        // Todo?
     }
 })
