@@ -5,9 +5,11 @@ import {ContextExample} from "./components/ContextExample";
 import {exampleContext} from "./components/ExampleContext";
 import {useState} from "react";
 import {Theme} from "./components/Themes";
+import {StarWars} from "./components/starWars";
 
 export default function App() {
     const [theme, setTheme] = useState<Theme>({
+        contrastColor: "#365050",
         textColor: "#000000",
         backgroundColor: "#00ffff"
     })
@@ -31,6 +33,7 @@ export default function App() {
             <View style={styles.container}>
                 <ChildView name={"He"} description={"He"} styleSheet={styles}></ChildView>
                 <ContextExample></ContextExample>
+                <StarWars></StarWars>
             </View>
         </exampleContext.Provider>
 
