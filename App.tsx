@@ -8,6 +8,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {exampleContext} from "./components/ExampleContext";
 import {useState} from "react";
 import {Theme} from "./components/Themes";
+import {StarWars} from "./components/starWars";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
     const [theme, setTheme] = useState<Theme>({
-        contrastColor: "#000000",
+        contrastColor: "#365050",
         textColor: "#000000",
         backgroundColor: "#00ffff"
     })
@@ -39,6 +40,7 @@ function HomeScreen() {
             <View style={styles.container}>
                 <ChildView name={"He"} description={"He"} styleSheet={styles}></ChildView>
                 <ContextExample></ContextExample>
+                <StarWars></StarWars>
             </View>
         </exampleContext.Provider>
     );
