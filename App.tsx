@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet} from "./components/ColorPalette"
 import {View} from "react-native";
 import {ChildView} from "./components/CoolName";
 import {ContextExample} from "./components/ContextExample";
@@ -21,7 +21,8 @@ function HomeScreen() {
         backgroundColor: "#00ffff"
     })
 
-    const styles = StyleSheet.create({
+    // Stylesheet used is the interface from ColorPalette.tsx
+    const styles: StyleSheet = {
         container: {
             flex: 1,
             backgroundColor: theme.backgroundColor,
@@ -32,8 +33,13 @@ function HomeScreen() {
         text: {
             color: theme.textColor,
             backgroundColor: theme.backgroundColor,
+        },
+        button: {
+            backgroundColor: theme.contrastColor,
+            color: theme.textColor,
         }
-    });
+    }
+
 
     return (
         <exampleContext.Provider value={{theme: theme, setState: setTheme}}>

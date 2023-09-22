@@ -1,5 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
+import {StyleSheet} from "./ColorPalette";
 import {useState} from "react";
 
 interface ChildViewProps {
