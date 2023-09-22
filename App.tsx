@@ -1,22 +1,21 @@
 import {StyleSheet} from "react-native";
-import {View, Text} from "react-native";
+import {View} from "react-native";
 import {ChildView} from "./components/CoolName";
 import {ContextExample} from "./components/ContextExample";
 import {TestComponent} from "./components/TestComponentFile";
 import {NavigationContainer} from "@react-navigation/native";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {exampleContext} from "./components/ExampleContext";
 import {useState} from "react";
 import {Theme} from "./components/Themes";
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 
 function HomeScreen() {
     const [theme, setTheme] = useState<Theme>({
+        contrastColor: "#000000",
         textColor: "#000000",
         backgroundColor: "#00ffff"
     })
