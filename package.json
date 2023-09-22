@@ -12,7 +12,7 @@
     "@expo/webpack-config": "^19.0.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native-stack": "^6.9.13",
-    "@react-navigation/native": "^6.1.7",a
+    "@react-navigation/native": "^6.1.7",
     "expo": "~49.0.8",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
