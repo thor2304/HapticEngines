@@ -1,24 +1,49 @@
 ```mermaid
 erDiagram
-    CUSTOMER ||--o{ ORDER : places
     User {
-        int id
+        int id PK
         string name
-        string custNumber
-        string sector
+        string email
     }
-    ORDER ||--|{ LINE-ITEM : contains
     Rental {
-        int orderNumber
-        string deliveryAddress
+        int id PK
+        int userId FK
+        int carId FK
+        date startDate
+        date endDate
     }
     Car {
-        string productCode
-        int quantity
-        float pricePerUnit
+        int id PK
+        string model
+        int manufacturerId FK
+        int engineCCSize
+        int fuelTypeId FK
+        int pricePerDay
+        int pricePerWeek
+        int doors
+        string description
+        int transmissionId FK
+        int wheelSize
+    }
+    Manufacturer {
+        int id
+        string name
+    }
+    Transmission {
+        int id
+        string name
     }
     FuelType {
         int id
         string name
     }
+    
+    Rental ||--o{ User : By
+    Rental ||--o{ Car : For
+    Car }|--|| Manufacturer : "Is made by"
+    Car }|--|| Transmission : "Has"
+    Car }|--|| FuelType : "Uses"
+
+%%    CUSTOMER ||--o{ ORDER : places
+    
 ```
