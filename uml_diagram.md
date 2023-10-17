@@ -4,6 +4,8 @@ erDiagram
         int id PK
         string name
         string email
+        string phoneNumber
+        string billingAddress
     }
     Rental {
         int id PK
