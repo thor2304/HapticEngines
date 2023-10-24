@@ -1,6 +1,6 @@
 import {ColorValue, FlexAlignType, FlexStyle} from "react-native";
 
-export interface StyleSheet {
+export interface StyleSheetI {
     container: {
         flex: number;
         backgroundColor: ColorValue;

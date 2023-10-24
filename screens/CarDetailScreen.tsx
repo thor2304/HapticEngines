@@ -1,4 +1,4 @@
-import {StyleSheet} from "../components/Stylesheet"
+import {StyleSheetI} from "../components/Stylesheet"
 import {Button, View} from "react-native";
 import {ChildView} from "../components/CoolName";
 import {ContextExample} from "./ContextExample";
@@ -15,7 +15,7 @@ export function CarDetailScreen() {
     })
 
     // Stylesheet used is the interface from ColorPalette.tsx
-    const styles: StyleSheet = {
+    const styles: StyleSheetI = {
         container: {
             flex: 1,
             backgroundColor: theme.backgroundColor,

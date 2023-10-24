@@ -1,8 +1,7 @@
-import {Button, Text, View} from "react-native";
+import {Button, Text, View, StyleSheet} from "react-native";
 import {useContext} from "react";
 import {exampleContext} from "../components/ExampleContext";
 import {darkTheme, lightTheme} from "../components/Themes";
-import {StyleSheet} from "../components/Stylesheet"
 
 
 export const ContextExample = () => {
@@ -31,9 +30,9 @@ export const ContextExample = () => {
 
     return (
         <View style={stylesheet.container}>
-            <Text style={stylesheet.text}>Context Example : {context.theme.textColor}</Text>
+            <Text style={stylesheet.text}>Context Example : {context.theme.textColor.toString()}</Text>
             <Button title="Change state"
-                    style={stylesheet.button}
+                    // style={stylesheet.button}
                     onPress={changeState}/>
         </View>
     );
