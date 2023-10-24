@@ -1,7 +1,7 @@
 import {Button, Text, View} from "react-native";
 import {useContext} from "react";
-import {exampleContext} from "./ExampleContext";
-import {darkTheme, lightTheme} from "./Themes";
+import {exampleContext} from "../components/ExampleContext";
+import {darkTheme, lightTheme} from "../components/Themes";
 import {StyleSheet} from "react-native";
 
 

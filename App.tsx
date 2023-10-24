@@ -1,62 +1,19 @@
-import {StyleSheet} from "./components/ColorPalette"
-import {View} from "react-native";
-import {ChildView} from "./components/CoolName";
-import {ContextExample} from "./components/ContextExample";
-import {TestComponent} from "./components/TestComponentFile";
+import {ContextExample} from "./screens/ContextExample";
+import {TestComponent} from "./screens/TestComponentFile";
+import {HomeScreen} from "./screens/HomeScreen"
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {exampleContext} from "./components/ExampleContext";
-import {useState} from "react";
-import {Theme} from "./components/Themes";
-import {StarWars} from "./components/starWars";
+import {DetailStackComponent} from "./components/DetailStackComponent";
 
 const Tab = createBottomTabNavigator();
 
-
-
-function HomeScreen() {
-    const [theme, setTheme] = useState<Theme>({
-        contrastColor: "#365050",
-        textColor: "#000000",
-        backgroundColor: "#00ffff"
-    })
-
-    // Stylesheet used is the interface from ColorPalette.tsx
-    const styles: StyleSheet = {
-        container: {
-            flex: 1,
-            backgroundColor: theme.backgroundColor,
-            color: theme.textColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        text: {
-            color: theme.textColor,
-            backgroundColor: theme.backgroundColor,
-        },
-        button: {
-            backgroundColor: theme.contrastColor,
-            color: theme.textColor,
-        }
-    }
-
-
-    return (
-        <exampleContext.Provider value={{theme: theme, setState: setTheme}}>
-            <View style={styles.container}>
-                <ChildView name={"He"} description={"He"} styleSheet={styles}></ChildView>
-                <ContextExample></ContextExample>
-                <StarWars></StarWars>
-            </View>
-        </exampleContext.Provider>
-    );
-}
 export default function App() {
 
+    // @ts-ignore
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name="Home" component={HomeScreen} />
+                <Tab.Screen name="DetailStack" component={DetailStackComponent} />
                 <Tab.Screen name="TestComponent" component={TestComponent} />
                 <Tab.Screen name="ContextExample" component={ContextExample} />
             </Tab.Navigator>
