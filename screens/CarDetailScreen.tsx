@@ -1,13 +1,14 @@
 import {getDefaultStyleSheet} from "../components/Stylesheet"
-import {View, Text} from "react-native";
+import {View, Text, Button} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
-import {useContext} from "react";
+import React, {useContext} from "react";
+import {CarDetailsProps, CarDetailsScreenNavigationProp, CarDetailsScreenRouteProp} from "../App";
 
 /**
  * This is the screen that is displayed when the user clicks on a car in the Discovery screen.
  * @param route The parameters passed to this screen
  */
-export function CarDetailScreen({route}) {
+export function CarDetailScreen({route} : CarDetailsProps, {navigation} : CarDetailsProps) {
     const theme = useContext(ThemeContext).theme
 
     const {itemId, otherParam} = route.params;
@@ -19,6 +20,7 @@ export function CarDetailScreen({route}) {
             <Text style={defaultStyleSheet.text}> Details about your favorite car! </Text>
             <Text style={defaultStyleSheet.text}> ItemId: {JSON.stringify(itemId)}</Text>
             <Text style={defaultStyleSheet.text}> OtherParam: {JSON.stringify(otherParam)}</Text>
+            // Navigate to profle screen
         </View>
     );
 }
