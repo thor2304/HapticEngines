@@ -86,9 +86,18 @@ export default function App() {
         <ThemeContextProvider>
             <NavigationContainer>
                 <Tab.Navigator screenOptions={{ headerShown: false}}>
-                    <Tab.Screen name="DiscoveryScreen" component={HomeStackScreen} />
-                    <Tab.Screen name="MyRentalsScreen" component={MyRentalsStackScreen} />
-                    <Tab.Screen name="ProfileScreen" component={ProfileStackScreen} />
+                    <Tab.Screen
+                        name="DiscoveryScreen"
+                        component={HomeStackScreen}
+                        options={{title: 'Discover'}} />
+                    <Tab.Screen
+                        name="MyRentalsScreen"
+                        component={MyRentalsStackScreen}
+                        options={{title: 'My Rentals'}}/>
+                    <Tab.Screen
+                        name="ProfileScreen"
+                        component={ProfileStackScreen}
+                        options={{title: 'Profile'}}/>
                 </Tab.Navigator>
             </NavigationContainer>
         </ThemeContextProvider>
