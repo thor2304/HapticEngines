@@ -2,13 +2,13 @@ import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet"
 import {View, Text, Button} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import React, {useContext} from "react";
-import {DiscoveryScreenNavigationProp} from "../App";
+import {CarDetailsProps, DiscoveryScreenNavigationProp} from "../App";
 
 /**
  * This is the primary screen, showing all the cars
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
-export function Discovery(navigation : DiscoveryScreenNavigationProp) {
+export function Discovery({navigation} : CarDetailsProps) {
     const theme = useContext(ThemeContext).theme
 
     // Stylesheet used is the interface from ColorPalette.tsx

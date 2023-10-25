@@ -20,7 +20,6 @@ export function CarDetailScreen({route} : CarDetailsProps, {navigation} : CarDet
             <Text style={defaultStyleSheet.text}> Details about your favorite car! </Text>
             <Text style={defaultStyleSheet.text}> ItemId: {JSON.stringify(itemId)}</Text>
             <Text style={defaultStyleSheet.text}> OtherParam: {JSON.stringify(otherParam)}</Text>
-            // Navigate to profle screen
         </View>
     );
 }
