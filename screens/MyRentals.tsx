@@ -4,7 +4,7 @@ import {View, Text} from 'react-native';
 import {ThemeContext} from "../components/ThemeContext";
 import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet";
 
-const MyRentals = ({ navigation } : any) => {
+const MyRentals = ({}) => {
     const theme = useContext(ThemeContext).theme
 
     // Stylesheet used is the interface from ColorPalette.tsx

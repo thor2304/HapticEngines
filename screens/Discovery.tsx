@@ -3,8 +3,11 @@ import {View, Text, Button} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import React, {useContext} from "react";
 
-
-export function Discovery({route, navigation} : any) {
+/**
+ * This is the primary screen, showing all the cars
+ * @param navigation The navigation object passed to this screen, used to navigate to other screens
+ */
+export function Discovery({navigation}) {
     const theme = useContext(ThemeContext).theme
 
     // Stylesheet used is the interface from ColorPalette.tsx
@@ -17,7 +20,7 @@ export function Discovery({route, navigation} : any) {
                 title="Go to Details"
                 onPress={() => {
                     /* 1. Navigate to the Details route with params */
-                    navigation.navigate('CarDetails', {
+                    navigation.navigate('CarDetailsScreen', {
                         itemId: 86,
                         otherParam: 'anything you want here',
                     });

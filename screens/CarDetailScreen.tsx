@@ -1,10 +1,13 @@
 import {getDefaultStyleSheet} from "../components/Stylesheet"
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import {useContext} from "react";
 
-
-export function CarDetailScreen({route, navigation}: any) {
+/**
+ * This is the screen that is displayed when the user clicks on a car in the Discovery screen.
+ * @param route The parameters passed to this screen
+ */
+export function CarDetailScreen({route}) {
     const theme = useContext(ThemeContext).theme
 
     const {itemId, otherParam} = route.params;
