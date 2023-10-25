@@ -1,21 +1,13 @@
-import {StyleSheet} from "../components/ColorPalette"
+import {StyleSheetI} from "../components/Stylesheet"
 import {Button, View} from "react-native";
-import {ChildView} from "../components/CoolName";
-import {ContextExample} from "./ContextExample";
-import {exampleContext} from "../components/ExampleContext";
-import {useState} from "react";
-import {Theme} from "../components/Themes";
-import {StarWars} from "../components/starWars";
+import {ThemeContext} from "../components/ThemeContext";
+import {useContext, useState} from "react";
 
-export function HomeScreen({ navigation }) {
-    const [theme, setTheme] = useState<Theme>({
-        contrastColor: "#365050",
-        textColor: "#000000",
-        backgroundColor: "#00ffff"
-    })
+export function HomeScreen({ navigation } : any) {
+    const theme = useContext(ThemeContext).theme
 
     // Stylesheet used is the interface from ColorPalette.tsx
-    const styles: StyleSheet = {
+    const styles: StyleSheetI = {
         container: {
             flex: 1,
             backgroundColor: theme.backgroundColor,
@@ -34,22 +26,17 @@ export function HomeScreen({ navigation }) {
     }
 
     return (
-        <exampleContext.Provider value={{theme: theme, setState: setTheme}}>
-            <View style={styles.container}>
-                <ChildView name={"He"} description={"He"} styleSheet={styles}></ChildView>
-                <ContextExample></ContextExample>
-                <StarWars></StarWars>
-            </View>
+        <View style={styles.container}>
             <Button
                 title="Go to Details"
                 onPress={() => {
                     /* 1. Navigate to the Details route with params */
-                    navigation.navigate('CarDetail', {
+                    navigation.navigate('CarDetailScreen', {
                         itemId: 86,
                         otherParam: 'anything you want here',
                     });
                 }}
             />
-        </exampleContext.Provider>
+        </View>
     );
 }

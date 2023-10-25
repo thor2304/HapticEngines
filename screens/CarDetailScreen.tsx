@@ -1,18 +1,12 @@
 import {StyleSheetI} from "../components/Stylesheet"
-import {Button, View} from "react-native";
+import {View} from "react-native";
 import {ChildView} from "../components/CoolName";
-import {ContextExample} from "./ContextExample";
-import {exampleContext} from "../components/ExampleContext";
-import {useState} from "react";
-import {Theme} from "../components/Themes";
-import {StarWars} from "../components/starWars";
+import {ThemeContext} from "../components/ThemeContext";
+import {useContext} from "react";
+
 
 export function CarDetailScreen() {
-    const [theme, setTheme] = useState<Theme>({
-        contrastColor: "#365050",
-        textColor: "#000000",
-        backgroundColor: "#ffffff"
-    })
+    const theme = useContext(ThemeContext).theme
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = {
@@ -35,12 +29,8 @@ export function CarDetailScreen() {
 
 
     return (
-        <exampleContext.Provider value={{theme: theme, setState: setTheme}}>
-            <View style={styles.container}>
-                <ChildView name={"Hej"} description={"Hej"} styleSheet={styles}></ChildView>
-                <ContextExample></ContextExample>
-                <StarWars></StarWars>
-            </View>
-        </exampleContext.Provider>
+        <View style={styles.container}>
+            <ChildView name={"Hej"} description={"Hej"} styleSheet={styles}></ChildView>
+        </View>
     );
 }

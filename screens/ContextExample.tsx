@@ -1,16 +1,15 @@
 import {Button, Text, View, StyleSheet} from "react-native";
 import {useContext} from "react";
-import {exampleContext} from "../components/ExampleContext";
+import {ThemeContext} from "../components/ThemeContext";
 import {darkTheme, lightTheme} from "../components/Themes";
 
 
 export const ContextExample = () => {
-    const context = useContext(exampleContext);
+    const context = useContext(ThemeContext);
 
-    const changeState = () => {
-        context.setState(
-            context.theme === darkTheme ? lightTheme : darkTheme
-        )
+    function changeState() {
+        context.setTheme(context.theme === darkTheme ? lightTheme : darkTheme)
+
     }
 
     const stylesheet = StyleSheet.create({
