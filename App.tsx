@@ -1,19 +1,29 @@
-import {NavigationContainer, RouteProp, useRoute} from "@react-navigation/native";
+import {NavigationContainer} from "@react-navigation/native";
 import {ThemeContextProvider} from "./components/ThemeContext";
-import {createNativeStackNavigator, NativeStackScreenProps, NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {createNativeStackNavigator, NativeStackScreenProps} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
 import {ContextExample} from "./screens/ContextExample";
-import {BottomTabNavigationProp, createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 
 
+type CarDetailParams = { itemId: number, otherParam: string };
+type DiscoveryParams = undefined;
+type RentalParams = undefined;
+type ProfileParams = {userId: number};
+
 // This type is used to define the parameters passed to the CarDetailsScreen and the DiscoveryScreen
-type DiscoveryStackParamList = {
-    CarDetailsScreen: { itemId: number, otherParam: string };
-    DiscoveryScreen: undefined;
+type NavigatorParamList = {
+    CarDetailsScreen: CarDetailParams;
+    DiscoveryScreen: DiscoveryParams;
+    MyRentalsScreen: RentalParams;
+    ProfileScreen: ProfileParams;
 }
-const DiscoveryStack = createNativeStackNavigator<DiscoveryStackParamList>();
+
+const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
+// Props for DiscoveryScreen
+export type DiscoveryProps = NativeStackScreenProps<NavigatorParamList, 'DiscoveryScreen'>
 function HomeStackScreen() {
     return(
         <DiscoveryStack.Navigator>
@@ -32,9 +42,9 @@ function HomeStackScreen() {
 
 // This type is used to define the parameters passed to the MyRentalsScreen
 type MyRentalsStackParamList = {
-    MyRentalsScreen: undefined;
+    MyRentalsScreen: RentalParams;
 }
-const MyRentalsStack = createNativeStackNavigator();
+const MyRentalsStack = createNativeStackNavigator<MyRentalsStackParamList>();
 function MyRentalsStackScreen() {
     return(
         <MyRentalsStack.Navigator>
@@ -47,10 +57,10 @@ function MyRentalsStackScreen() {
 }
 
 // This type is used to define the parameters passed to the ProfileScreen
-type ProfileStackParamList = {
-    ProfileScreen: {userId: number};
-}
-const ProfileStack = createNativeStackNavigator();
+const ProfileStack = createNativeStackNavigator<NavigatorParamList>();
+// Props for ProfileScreen
+export type ProfileProps = NativeStackScreenProps<NavigatorParamList, 'ProfileScreen'>
+
 function ProfileStackScreen() {
     return(
         <ProfileStack.Navigator>
@@ -63,36 +73,22 @@ function ProfileStackScreen() {
 }
 
 // Props for CarDetailsScreen
-export type CarDetailsProps = NativeStackScreenProps<DiscoveryStackParamList, 'CarDetailsScreen'>
-export type CarDetailsScreenNavigationProp = CarDetailsProps['navigation']
-export type CarDetailsScreenRouteProp = CarDetailsProps['route']
-
-// Props for DiscoveryScreen
-type DiscoveryProps = NativeStackScreenProps<DiscoveryStackParamList, 'DiscoveryScreen'>
-export type DiscoveryScreenNavigationProp = DiscoveryProps['navigation']
-export type DiscoveryScreenRouteProp = DiscoveryProps['route']
+export type CarDetailsProps = NativeStackScreenProps<NavigatorParamList, 'CarDetailsScreen'>
 
 // Props for MyRentalsScreen
-type MyRentalsProps = NativeStackScreenProps<MyRentalsStackParamList, 'MyRentalsScreen'>
-export type MyRentalsScreenNavigationProp = MyRentalsProps['navigation']
-export type MyRentalsScreenRouteProp = MyRentalsProps['route']
+export type MyRentalsProps = NativeStackScreenProps<NavigatorParamList, 'MyRentalsScreen'>
 
-// Props for ProfileScreen
-type ProfileProps = NativeStackScreenProps<ProfileStackParamList, 'ProfileScreen'>
-export type ProfileScreenNavigationProp = ProfileProps['navigation']
-export type ProfileScreenRouteProp = ProfileProps['route']
 
 // Application
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
-
     return (
         <ThemeContextProvider>
             <NavigationContainer>
                 <Tab.Navigator screenOptions={{ headerShown: false}}>
-                    <Tab.Screen name="Discovery" component={HomeStackScreen} />
-                    <Tab.Screen name="MyRentals" component={MyRentalsStackScreen} />
-                    <Tab.Screen name="Profile" component={ProfileStackScreen} />
+                    <Tab.Screen name="DiscoveryScreen" component={HomeStackScreen} />
+                    <Tab.Screen name="MyRentalsScreen" component={MyRentalsStackScreen} />
+                    <Tab.Screen name="ProfileScreen" component={ProfileStackScreen} />
                 </Tab.Navigator>
             </NavigationContainer>
         </ThemeContextProvider>
