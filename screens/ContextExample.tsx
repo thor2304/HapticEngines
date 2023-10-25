@@ -2,7 +2,7 @@ import {Button, Text, View} from "react-native";
 import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
 import {darkTheme, lightTheme} from "../components/Themes";
-import {StyleSheetI} from "../components/Stylesheet";
+import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet";
 
 export function ContextExample () {
     const context = useContext(ThemeContext);
@@ -14,23 +14,7 @@ export function ContextExample () {
     }
 
     // Stylesheet used is the interface from ColorPalette.tsx
-    const styles: StyleSheetI = {
-        container: {
-            flex: 1,
-            backgroundColor: theme.backgroundColor,
-            color: theme.textColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        text: {
-            color: theme.textColor,
-            backgroundColor: theme.backgroundColor,
-        },
-        button: {
-            backgroundColor: theme.contrastColor,
-            color: theme.textColor,
-        }
-    }
+    const styles: StyleSheetI = getDefaultStyleSheet()
 
     return (
         <View style={styles.container}>
