@@ -1,4 +1,4 @@
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
 import {ThemeContextProvider} from "./components/ThemeContext";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
@@ -9,6 +9,7 @@ import {Discovery} from "./screens/Discovery";
 
 
 const HomeStack = createNativeStackNavigator();
+
 function HomeStackScreen() {
     return(
         <HomeStack.Navigator>
