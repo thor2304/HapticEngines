@@ -2,7 +2,7 @@ import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet"
 import {View, Text, Button} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import React, {useContext} from "react";
-import {DiscoveryProps} from "../App";
+import {DiscoveryProps} from "./ScreenParams";
 
 /**
  * This is the primary screen, showing all the cars

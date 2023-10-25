@@ -9,7 +9,7 @@ export const ThemeContext = createContext({ theme: lightTheme, setTheme: (theme:
  * @param children This ensures that everything wrapped in the ThemeContextProvider has access to the theme.
  * @constructor
  */
-export const ThemeContextProvider = ({ children } : any) => {
+export function ThemeContextProvider({ children } : any){
     const [theme, setTheme] = useState(lightTheme);
 
     return (

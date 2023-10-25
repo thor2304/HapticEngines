@@ -3,9 +3,9 @@ import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
 import {darkTheme, lightTheme} from "../components/Themes";
 import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet";
-import {ProfileProps} from "../App";
+import {ProfileProps} from "./ScreenParams";
 
-export function ContextExample ({route}: ProfileProps) {
+export function ContextExample ({route, navigation}: ProfileProps) {
     const context = useContext(ThemeContext);
     const theme = context.theme
 

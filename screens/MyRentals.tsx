@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {View, Text} from 'react-native';
 import {ThemeContext} from "../components/ThemeContext";
 import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet";
-import {MyRentalsProps} from "../App";
+import {MyRentalsProps} from "./ScreenParams";
 
 export function MyRentals({route, navigation}: MyRentalsProps){
     const theme = useContext(ThemeContext).theme

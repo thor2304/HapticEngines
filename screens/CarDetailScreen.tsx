@@ -1,8 +1,8 @@
 import {getDefaultStyleSheet} from "../components/Stylesheet"
-import {View, Text, Button} from "react-native";
+import {View, Text} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import React, {useContext} from "react";
-import {CarDetailsProps} from "../App";
+import {CarDetailsProps} from "./ScreenParams";
 
 /**
  * This is the screen that is displayed when the user clicks on a car in the Discovery screen.
