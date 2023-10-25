@@ -1,22 +1,79 @@
-import {ContextExample} from "./screens/ContextExample";
-import {TestComponent} from "./screens/TestComponentFile";
-import {HomeScreen} from "./screens/HomeScreen"
 import {NavigationContainer} from "@react-navigation/native";
+import {ThemeContextProvider} from "./components/ThemeContext";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {CarDetailScreen} from "./screens/CarDetailScreen";
+import {MyRentals} from "./screens/MyRentals";
+import {ContextExample} from "./screens/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {DetailStackComponent} from "./components/DetailStackComponent";
+import {Discovery} from "./screens/Discovery";
+import {NavigatorParamList} from "./screens/ScreenParams";
 
-const Tab = createBottomTabNavigator();
+const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
+function HomeStackScreen() {
+    return(
+        <DiscoveryStack.Navigator>
+            <DiscoveryStack.Screen
+                name="DiscoveryScreen"
+                component={Discovery}
+                options={{headerShown: false}} />
+            <DiscoveryStack.Screen
+                name="CarDetailsScreen"
+                component={CarDetailScreen}
+                // The initialParams are the parameters passed to the screen when it is first created
+                initialParams={{itemId: 0, otherParam: ""}}/>
+        </DiscoveryStack.Navigator>
+    );
+}
+
+
+const MyRentalsStack = createNativeStackNavigator<NavigatorParamList>();
+function MyRentalsStackScreen() {
+    return(
+        <MyRentalsStack.Navigator>
+            <MyRentalsStack.Screen
+                name="MyRentalsScreen"
+                component={MyRentals}
+                options={{headerShown: false}} />
+        </MyRentalsStack.Navigator>
+    );
+}
+
+// This type is used to define the parameters passed to the ProfileScreen
+const ProfileStack = createNativeStackNavigator<NavigatorParamList>();
+
+function ProfileStackScreen() {
+    return(
+        <ProfileStack.Navigator>
+            <ProfileStack.Screen
+                name="ProfileScreen"
+                component={ContextExample}
+                options={{headerShown: false}} />
+        </ProfileStack.Navigator>
+    );
+}
+
+// Application
+const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
-
-    // @ts-ignore
     return (
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen name="DetailStack" component={DetailStackComponent} />
-                <Tab.Screen name="TestComponent" component={TestComponent} />
-                <Tab.Screen name="ContextExample" component={ContextExample} />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <ThemeContextProvider>
+            <NavigationContainer>
+                <Tab.Navigator screenOptions={{ headerShown: false}}>
+                    <Tab.Screen
+                        name="DiscoveryScreen"
+                        component={HomeStackScreen}
+                        options={{title: 'Discover'}} />
+                    <Tab.Screen
+                        name="MyRentalsScreen"
+                        component={MyRentalsStackScreen}
+                        options={{title: 'My Rentals'}}/>
+                    <Tab.Screen
+                        name="ProfileScreen"
+                        component={ProfileStackScreen}
+                        options={{title: 'Profile'}}/>
+                </Tab.Navigator>
+            </NavigationContainer>
+        </ThemeContextProvider>
     );
 }

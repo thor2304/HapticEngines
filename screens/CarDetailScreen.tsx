@@ -1,46 +1,26 @@
-import {StyleSheetI} from "../components/Stylesheet"
-import {Button, View} from "react-native";
-import {ChildView} from "../components/CoolName";
-import {ContextExample} from "./ContextExample";
-import {exampleContext} from "../components/ExampleContext";
-import {useState} from "react";
-import {Theme} from "../components/Themes";
-import {StarWars} from "../components/starWars";
+import {getDefaultStyleSheet} from "../components/Stylesheet"
+import {View, Text} from "react-native";
+import {ThemeContext} from "../components/ThemeContext";
+import React, {useContext} from "react";
+import {CarDetailsProps} from "./ScreenParams";
 
-export function CarDetailScreen() {
-    const [theme, setTheme] = useState<Theme>({
-        contrastColor: "#365050",
-        textColor: "#000000",
-        backgroundColor: "#ffffff"
-    })
+/**
+ * This is the screen that is displayed when the user clicks on a car in the Discovery screen.
+ * @param route The parameters passed to this screen
+ * @param navigation The navigation object passed to this screen, used to navigate to other screens
+ */
+export function CarDetailScreen({route, navigation} : CarDetailsProps) {
+    const theme = useContext(ThemeContext).theme
 
-    // Stylesheet used is the interface from ColorPalette.tsx
-    const styles: StyleSheetI = {
-        container: {
-            flex: 1,
-            backgroundColor: theme.backgroundColor,
-            color: theme.textColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        text: {
-            color: theme.textColor,
-            backgroundColor: theme.backgroundColor,
-        },
-        button: {
-            backgroundColor: theme.contrastColor,
-            color: theme.textColor,
-        }
-    }
+    const {itemId, otherParam} = route.params;
 
+    const defaultStyleSheet = getDefaultStyleSheet();
 
     return (
-        <exampleContext.Provider value={{theme: theme, setState: setTheme}}>
-            <View style={styles.container}>
-                <ChildView name={"Hej"} description={"Hej"} styleSheet={styles}></ChildView>
-                <ContextExample></ContextExample>
-                <StarWars></StarWars>
-            </View>
-        </exampleContext.Provider>
+        <View style={defaultStyleSheet.container}>
+            <Text style={defaultStyleSheet.text}> Details about your favorite car! </Text>
+            <Text style={defaultStyleSheet.text}> ItemId: {JSON.stringify(itemId)}</Text>
+            <Text style={defaultStyleSheet.text}> OtherParam: {JSON.stringify(otherParam)}</Text>
+        </View>
     );
 }
