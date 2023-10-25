@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
-
 import {View, Text} from 'react-native';
+
 import {ThemeContext} from "../components/ThemeContext";
-import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet";
+import {getDefaultStyleSheet} from "../components/Stylesheet";
+import {StyleSheetI} from "../components/StyleSheetTypes";
 import {MyRentalsProps} from "./ScreenParams";
 
 export function MyRentals({route, navigation}: MyRentalsProps){

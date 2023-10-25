@@ -1,6 +1,6 @@
 import {NavigationContainer} from "@react-navigation/native";
 import {ThemeContextProvider} from "./components/ThemeContext";
-import {createNativeStackNavigator, NativeStackScreenProps} from "@react-navigation/native-stack";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
 import {ContextExample} from "./screens/ContextExample";

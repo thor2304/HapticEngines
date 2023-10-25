@@ -2,8 +2,9 @@ import {Button, Text, View} from "react-native";
 import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
 import {darkTheme, lightTheme} from "../components/Themes";
-import {getDefaultStyleSheet, StyleSheetI} from "../components/Stylesheet";
+import {getDefaultStyleSheet} from "../components/Stylesheet";
 import {ProfileProps} from "./ScreenParams";
+import {StyleSheetI} from "../components/StyleSheetTypes";
 
 export function ContextExample ({route, navigation}: ProfileProps) {
     const context = useContext(ThemeContext);

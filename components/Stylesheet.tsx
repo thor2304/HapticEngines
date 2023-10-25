@@ -1,34 +1,35 @@
-import {ColorValue, FlexAlignType, FlexStyle} from "react-native";
 import {useContext} from "react";
 import {ThemeContext} from "./ThemeContext";
+import {buttonStyleType, containerStyleType, StyleSheetI, textStyleType} from "./StyleSheetTypes";
 
-export interface StyleSheetI {
-    container: {
-        flex: number;
-        backgroundColor: ColorValue;
-        color: ColorValue;
-        alignItems: FlexAlignType;
-        justifyContent: FlexStyle["justifyContent"];
-    },
-    text: {
-        color: ColorValue;
-        backgroundColor: ColorValue;
-    },
-    button: {
-        backgroundColor: ColorValue;
-        color: ColorValue;
+/**
+ * The Stylesheet that is returned from this method is frozen and its properties cannot be changed.<br>
+ * Use the copy() method to get a copy of the stylesheet that can be changed.<br>
+ * This stylesheet is shared between all callers, which is why it is frozen.
+ */
+export function getDefaultStyleSheet(): MyStyleSheet {
+    const theme = useContext(ThemeContext).theme
+
+    const containerStyle: containerStyleType = {
+        flex: 1,
+        backgroundColor: theme.backgroundColor,
+        color: theme.textColor,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
-}
 
-export type buttonStyleType = { backgroundColor: ColorValue; color: ColorValue };
-export type containerStyleType = {
-    flex: number;
-    backgroundColor: ColorValue;
-    color: ColorValue;
-    alignItems: FlexAlignType;
-    justifyContent: FlexStyle["justifyContent"]
-};
-export type textStyleType = { color: ColorValue; backgroundColor: ColorValue };
+    const textStyle: textStyleType = {
+        color: theme.textColor,
+        backgroundColor: theme.backgroundColor,
+    }
+
+    const buttonStyle: buttonStyleType = {
+        backgroundColor: theme.contrastColor,
+        color: theme.textColor,
+    }
+
+    return new FrozenStyleSheet(buttonStyle, containerStyle, textStyle);
+}
 
 export class MyStyleSheet implements StyleSheetI {
     button: buttonStyleType;
@@ -70,31 +71,4 @@ class FrozenStyleSheet extends MyStyleSheet {
     }
 }
 
-/**
- * The Stylesheet that is returned from this method is frozen and its properties cannot be changed.<br>
- * Use the copy() method to get a copy of the stylesheet that can be changed.<br>
- * This stylesheet is shared between all callers, which is why it is frozen.
- */
-export function getDefaultStyleSheet(): MyStyleSheet {
-    const theme = useContext(ThemeContext).theme
 
-    const containerStyle: containerStyleType = {
-        flex: 1,
-        backgroundColor: theme.backgroundColor,
-        color: theme.textColor,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-
-    const textStyle: textStyleType = {
-        color: theme.textColor,
-        backgroundColor: theme.backgroundColor,
-    }
-
-    const buttonStyle: buttonStyleType = {
-        backgroundColor: theme.contrastColor,
-        color: theme.textColor,
-    }
-
-    return new FrozenStyleSheet(buttonStyle, containerStyle, textStyle);
-}

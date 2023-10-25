@@ -1,5 +1,5 @@
 import {lightTheme} from "./Themes";
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { Theme } from "./Themes";
 
 export const ThemeContext = createContext({ theme: lightTheme, setTheme: (theme: Theme) => {} });
@@ -9,7 +9,7 @@ export const ThemeContext = createContext({ theme: lightTheme, setTheme: (theme:
  * @param children This ensures that everything wrapped in the ThemeContextProvider has access to the theme.
  * @constructor
  */
-export function ThemeContextProvider({ children } : any){
+export function ThemeContextProvider({ children } : { children: React.ReactNode }) {
     const [theme, setTheme] = useState(lightTheme);
 
     return (
