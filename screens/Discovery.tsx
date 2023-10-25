@@ -1,15 +1,13 @@
 import {StyleSheetI} from "../components/Stylesheet"
-import {View, Text} from "react-native";
+import {View, Text, Button} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
-import {useContext} from "react";
+import React, {useContext} from "react";
 
 
-export function CarDetailScreen( {route, navigation} : any) {
+export function Discovery({route, navigation} : any) {
     const theme = useContext(ThemeContext).theme
 
-    const { itemId, otherParam } = route.params;
-
-    // Stylesheet using the StyleSheetInterface from Stylesheet.tsx
+    // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = {
         container: {
             flex: 1,
@@ -30,9 +28,17 @@ export function CarDetailScreen( {route, navigation} : any) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}> Details about your favorite car! </Text>
-            <Text style={styles.text}> ItemId: {JSON.stringify(itemId)}</Text>
-            <Text style={styles.text}> OtherParam: {JSON.stringify(otherParam)}</Text>
+            <Text style={styles.text}>Home Screen</Text>
+            <Button
+                title="Go to Details"
+                onPress={() => {
+                    /* 1. Navigate to the Details route with params */
+                    navigation.navigate('CarDetails', {
+                        itemId: 86,
+                        otherParam: 'anything you want here',
+                    });
+                }}
+            />
         </View>
     );
 }

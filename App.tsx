@@ -1,22 +1,19 @@
 import {HomeScreen} from "./screens/HomeScreen"
 import {NavigationContainer} from "@react-navigation/native";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {ThemeContextProvider} from "./components/ThemeContext";
-import {TestComponent} from "./screens/TestComponentFile";
-import {ContextExample} from "./screens/ContextExample";
-
-const Tab = createBottomTabNavigator();
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {CarDetailScreen} from "./screens/CarDetailScreen";
 
 export default function App() {
+    const Stack = createNativeStackNavigator();
 
     return (
         <ThemeContextProvider>
             <NavigationContainer>
-                <Tab.Navigator>
-                    <Tab.Screen name="HomeScreen" component={HomeScreen} />
-                    <Tab.Screen name="TestComponent" component={TestComponent} />
-                    <Tab.Screen name="ContextExample" component={ContextExample} />
-                </Tab.Navigator>
+                <Stack.Navigator>
+                    <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}} />
+                    <Stack.Screen name="CarDetails" component={CarDetailScreen} />
+                </Stack.Navigator>
             </NavigationContainer>
         </ThemeContextProvider>
     );

@@ -1,17 +1,11 @@
-import {Button, Text, View} from "react-native";
-import {useContext} from "react";
+import React, {useContext} from 'react';
+
+import {View, Text} from 'react-native';
 import {ThemeContext} from "../components/ThemeContext";
-import {darkTheme, lightTheme} from "../components/Themes";
 import {StyleSheetI} from "../components/Stylesheet";
 
-export function ContextExample () {
-    const context = useContext(ThemeContext);
-    const theme = context.theme
-
-    function changeState() {
-        context.setTheme(context.theme === darkTheme ? lightTheme : darkTheme)
-
-    }
+const MyRentals = ({ navigation } : any) => {
+    const theme = useContext(ThemeContext).theme
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = {
@@ -31,12 +25,11 @@ export function ContextExample () {
             color: theme.textColor,
         }
     }
-
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Context Example : {context.theme.textColor.toString()}</Text>
-            <Button title="Change state"
-                    onPress={changeState}/>
+            <Text style={styles.text}> Hello </Text>
         </View>
     );
 }
+
+export {MyRentals};
