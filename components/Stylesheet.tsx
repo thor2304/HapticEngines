@@ -70,37 +70,31 @@ class FrozenStyleSheet extends MyStyleSheet {
     }
 }
 
-let defaultStyleSheet: MyStyleSheet;
-
 /**
  * The Stylesheet that is returned from this method is frozen and its properties cannot be changed.<br>
  * Use the copy() method to get a copy of the stylesheet that can be changed.<br>
  * This stylesheet is shared between all callers, which is why it is frozen.
  */
 export function getDefaultStyleSheet(): MyStyleSheet {
-    if (defaultStyleSheet === undefined) {
-        const theme = useContext(ThemeContext).theme
+    const theme = useContext(ThemeContext).theme
 
-        const containerStyle: containerStyleType = {
-            flex: 1,
-            backgroundColor: theme.backgroundColor,
-            color: theme.textColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-        }
-
-        const textStyle: textStyleType = {
-            color: theme.textColor,
-            backgroundColor: theme.backgroundColor,
-        }
-
-        const buttonStyle: buttonStyleType = {
-            backgroundColor: theme.contrastColor,
-            color: theme.textColor,
-        }
-
-        defaultStyleSheet = new FrozenStyleSheet(buttonStyle, containerStyle, textStyle);
+    const containerStyle: containerStyleType = {
+        flex: 1,
+        backgroundColor: theme.backgroundColor,
+        color: theme.textColor,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 
-    return defaultStyleSheet;
+    const textStyle: textStyleType = {
+        color: theme.textColor,
+        backgroundColor: theme.backgroundColor,
+    }
+
+    const buttonStyle: buttonStyleType = {
+        backgroundColor: theme.contrastColor,
+        color: theme.textColor,
+    }
+
+    return new FrozenStyleSheet(buttonStyle, containerStyle, textStyle);
 }
