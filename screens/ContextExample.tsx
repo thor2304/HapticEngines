@@ -4,7 +4,7 @@ import {ThemeContext} from "../components/ThemeContext";
 import {darkTheme, lightTheme} from "../components/Themes";
 import {getDefaultStyleSheet} from "../components/Stylesheet";
 import {ProfileProps} from "./ScreenParams";
-import {StyleSheetI} from "../components/StyleSheetTypes";
+import {StyleSheetI} from "../components/types/StyleSheetTypes";
 
 export function ContextExample ({route, navigation}: ProfileProps) {
     const context = useContext(ThemeContext);
