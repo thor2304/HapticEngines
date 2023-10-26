@@ -1,9 +1,10 @@
 import {getDefaultStyleSheet} from "../components/Stylesheet"
 import {StyleSheetI} from "../components/types/StyleSheetTypes";
-import {View} from "react-native";
+import {Text, View, StyleSheet} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import React, {useContext} from "react";
 import {DiscoveryProps} from "./ScreenParams";
+import {darkTheme, lightTheme} from "../components/Themes";
 
 /**
  * This is the primary screen, showing all the cars
@@ -11,16 +12,30 @@ import {DiscoveryProps} from "./ScreenParams";
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
 export function ProfileScreen({route, navigation} : DiscoveryProps) {
-    const theme = useContext(ThemeContext).theme
+    const context = useContext(ThemeContext);
+    const theme = context.theme
+
+    function changeState() {
+        context.setTheme(context.theme === darkTheme ? lightTheme : darkTheme)
+
+    }
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = getDefaultStyleSheet()
+    const profilePicture = StyleSheet.create({
+        image: {
+            width: 128,
+            height: 128,
+        }
+    })
 
     return (
         <View style={styles.container}>
-            {/*<Text style={styles.text}>Context Example : {context.theme.textColor.toString()}</Text>*/}
-            {/*<Button title="Change state"*/}
-            {/*        onPress={changeState}/>*/}
+            <Image
+                style={profilePicture.image}
+                source={require('add image path here')} />
+            <Text style={styles.text}>Chad Payne</Text>
+            <Text style={styles.text}>chad@beauty.com</Text>
         </View>
     );
 }
