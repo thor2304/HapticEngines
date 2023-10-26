@@ -1,4 +1,3 @@
-import CarCollection = Backend.CarCollection;
 import Car from "./types/Car";
 
 
@@ -12,15 +11,16 @@ class BackendHandler {
     /**
      * Gets all cars from the API.
      */
-    async getCars(): Promise<CarCollection> {
+    async getCars(): Promise<Backend.CarCollection> {
         // Should of course be implemented, but the return hides ts errors
+        console.log(apiURL + "/cars")
         const jsonString = await fetchFromAPI(apiURL + "/cars")
         const carArray = JSON.parse(jsonString)
         if (!Array.isArray(carArray)) {
             throw new Error("Invalid response from API, carArray is not an array" + carArray)
         }
 
-        const carCollection: CarCollection = []
+        const carCollection: Backend.CarCollection = []
 
         for (const car of carArray) {
             carCollection.push(new Car(car))
@@ -35,7 +35,7 @@ class BackendHandler {
 }
 
 export const Backend = new BackendHandler();
-
+export default Backend;
 
 
 // Image?
