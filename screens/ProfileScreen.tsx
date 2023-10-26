@@ -22,6 +22,7 @@ export function ProfileScreen({route, navigation} : DiscoveryProps) {
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = getDefaultStyleSheet()
+
     const profilePicture = StyleSheet.create({
         image: {
             width: 128,
@@ -31,11 +32,25 @@ export function ProfileScreen({route, navigation} : DiscoveryProps) {
 
     return (
         <View style={styles.container}>
-            <Image
-                style={profilePicture.image}
-                source={require('add image path here')} />
-            <Text style={styles.text}>Chad Payne</Text>
-            <Text style={styles.text}>chad@beauty.com</Text>
+            {/*<Image*/}
+            {/*    style={profilePicture.image}*/}
+            {/*    source={require('add image path here')} />*/}
+            <Text style={cStyle.name}>Chad Payne</Text>
+            <Text style={cStyle.email}>chad@beauty.com</Text>
         </View>
     );
 }
+
+const cStyle = StyleSheet.create({
+    name: {
+        fontFamily: 'Inter',
+        fontSize: 32,
+        fontWeight: '700',
+    },
+    email: {
+        fontFamily: 'Inter',
+        fontSize: 26,
+        fontWeight: '700',
+        color: '#BFBFBF'
+    }
+});
