@@ -7,6 +7,7 @@ import {ContextExample} from "./screens/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
+import {ProfileScreen} from "./screens/ProfileScreen";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -47,7 +48,7 @@ function ProfileStackScreen() {
         <ProfileStack.Navigator>
             <ProfileStack.Screen
                 name="ProfileScreen"
-                component={ContextExample}
+                component={ProfileScreen}
                 options={{headerShown: false}} />
         </ProfileStack.Navigator>
     );
