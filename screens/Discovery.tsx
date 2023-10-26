@@ -25,13 +25,13 @@ export function Discovery({route, navigation}: DiscoveryProps) {
     const allCars: Backend.CarCollection = []
 
 
+    let [data, setData] = useState(allCars);
 
-    let [data, setData] = useState(allCars)
     backendHandler.getCars()
         .then(myData => {
             setData(myData)
             console.log(data)
-        }).catch((e)=>{
+        }).catch((e) => {
         console.log(e)
         console.log("catch error")
     })
@@ -64,7 +64,7 @@ export function Discovery({route, navigation}: DiscoveryProps) {
                                       <View style={pageStyles.car_preview_card_text_box}>
                                           <Text>{item["model"]}</Text>
                                           <Text>Car model</Text>
-                                          <Text >Horse power</Text>
+                                          <Text>Horse power</Text>
                                           <Text
                                               style={pageStyles.bold}>Price/day</Text>
                                       </View>

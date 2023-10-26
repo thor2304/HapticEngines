@@ -14,7 +14,7 @@ class BackendHandler {
     async getCars(): Promise<Backend.CarCollection> {
         // Should of course be implemented, but the return hides ts errors
         console.log(apiURL + "/cars")
-        const jsonString = await fetchFromAPI(apiURL + "/cars")
+        const jsonString = await fetchFromAPI( "/cars")
         const carArray = JSON.parse(jsonString)
         if (!Array.isArray(carArray)) {
             throw new Error("Invalid response from API, carArray is not an array" + carArray)
@@ -40,5 +40,5 @@ export default Backend;
 
 // Image?
 async function fetchFromAPI(endpoint: Endpoint): Promise<string> {
-    return (await fetch(apiURL + endpoint)).text()
+    return (await fetch(apiURL + endpoint, {mode:'cors'})).text()
 }
