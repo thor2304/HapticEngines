@@ -1,4 +1,5 @@
 import Car from "./types/Car";
+import {useEffect, useState} from "react";
 
 
 const apiURL = "https://mobiledev.cryptobot.dk";
@@ -13,6 +14,23 @@ class BackendHandler {
      */
     async getCars(): Promise<Backend.CarCollection> {
         // Should of course be implemented, but the return hides ts errors
+
+        const [cars, setCars] = useState<Backend.CarCollection>([])
+
+        useEffect(() => {
+            fetch(apiURL + "/cars")
+                .then(response => response.json())
+                .then(json => {
+                    // Move this into function that checks if it lives up to carCollection, if true return the json
+                    // as a carcollection object
+                    if (!Array.isArray(json)) {
+                        throw new Error("Invalid response from API, carArray is not an array" + carArray)
+                    }
+                    return json
+                })
+                .then(json => setCars(json))
+        }, [])
+
         console.log(apiURL + "/cars")
         const jsonString = await fetchFromAPI( "/cars")
         const carArray = JSON.parse(jsonString)
@@ -26,7 +44,7 @@ class BackendHandler {
             carCollection.push(new Car(car))
         }
 
-        return carCollection
+        return cars
     }
 
     //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.

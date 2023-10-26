@@ -1,6 +1,3 @@
-import {getDefaultStyleSheet} from "../components/Stylesheet"
-import {StyleSheetI} from "../components/types/StyleSheetTypes";
-import BackendHandler from "../components/BackendHandler"
 import {
     StyleSheet,
     View,
