@@ -9,6 +9,7 @@ import {
 import React, {useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
+import {CarCard} from "../components/CarCard";
 
 
 /**
@@ -34,39 +35,20 @@ export function Discovery({route, navigation}: DiscoveryProps) {
         <View style={pageStyles.car_preview_container}>
             <FlatList data={data}
                       renderItem={({item, index}) =>
-                          <TouchableOpacity
-                              onPress={() => {
-                                  /* 1. Navigate to the Details route with params */
-                                  navigation.navigate('CarDetailsScreen', {
-                                      car: item,
-                                  });
-                              }}
-                          >
-                              <View style={pageStyles.car_preview_card}>
-                                  <View style={index % 2 === 0 ? pageStyles.row : pageStyles.reverse_row}>
-                                      <View style={pageStyles.car_preview_card_image_box}>
-                                          <Image
-                                              style={pageStyles.car_image}
-                                              source={{
-                                                  uri: backendHandler.getImageUrl(item.imageName),
-                                              }}
-                                          />
-                                      </View>
-                                      <View style={pageStyles.car_preview_card_text_box}>
-                                          <Text>{item.model}</Text>
-                                          <Text>Doors: {item.doors}</Text>
-                                          <Text>Fuel type: {item.fuelType.name}</Text>
-                                          <Text style={pageStyles.bold}>{item.pricePerDay}$ / day</Text>
-                                      </View>
-                                  </View>
-                              </View>
-                          </TouchableOpacity>
+                        <CarCard
+                            params={
+                                {
+                                    car: item,
+                                    alignLeft: index % 2 == 0
+                                }
+                            }
+                        navigation={navigation}>
+                        </CarCard>
                       }
             />
         </View>
     );
 }
-
 const pageStyles = StyleSheet.create({
     bold: {
         fontWeight: 'bold',
