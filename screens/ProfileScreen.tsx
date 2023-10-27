@@ -1,19 +1,17 @@
 import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {StyleSheetI} from "../types/StyleSheetTypes";
 import {Text, View, StyleSheet, Image} from "react-native";
-import React, {useContext, useState} from "react";
-import {DiscoveryProps} from "./ScreenParams";
+import React, {useState} from "react";
+import {ProfileProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
-import {ThemeContext} from "../components/ThemeContext";
 
 /**
  * This is the profile screen, which shows information about the user.
  * @param route The parameters passed to this screen
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
-export function ProfileScreen({route, navigation} : DiscoveryProps) {
+export function ProfileScreen({route, navigation} : ProfileProps) {
     const userID = 2;
-    const context = useContext(ThemeContext);
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = getDefaultStyleSheet();
