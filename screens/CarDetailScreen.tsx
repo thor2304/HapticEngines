@@ -18,7 +18,7 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
 
     return (
         <View style={defaultStyleSheet.container}>
-            <Text style={defaultStyleSheet.text}> Details about your favorite car! </Text>
+            <Text style={defaultStyleSheet.text}> Details about your favoritesss car! </Text>
             <Text style={defaultStyleSheet.text}> ItemId: {JSON.stringify(itemId)}</Text>
             <Text style={defaultStyleSheet.text}> OtherParam: {JSON.stringify(otherParam)}</Text>
         </View>

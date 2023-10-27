@@ -3,7 +3,9 @@ declare namespace Backend {
     /**
      * This allows us to change the type later if we want to be more specific
      */
-    type Endpoint = string;
+    type Endpoint = "cars" |"cars/hash" | "rentals" | "manufacturers" | "carHash";
+    type EndpointWithIds = "car" | "rentals/byRental" | "rentals/byUser" | "manufacturers" | "images";
+    type PostableEndpoint = "rentals" | "cars";
 
     /**
      * Transmission is used to represent the different types of transmissions.<br>

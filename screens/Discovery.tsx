@@ -24,11 +24,10 @@ export function Discovery({route, navigation}: DiscoveryProps) {
 
     let [data, setData] = useState(allCars);
 
-    backendHandler.getCars()
-        .then(myData => {
-            setData(myData)
-        }).catch((e) => {
-        console.log("catch error")
+    backendHandler.getCars().then((cars) => {
+        setData(cars)
+    }).catch((error) => {
+        console.log(error)
     })
 
     return (
@@ -44,7 +43,7 @@ export function Discovery({route, navigation}: DiscoveryProps) {
                               }}
                           >
                               <View style={pageStyles.car_preview_card}>
-                                  <View style={index % 2 === 0 ? pageStyles.row: pageStyles.reverse_row}>
+                                  <View style={index % 2 === 0 ? pageStyles.row : pageStyles.reverse_row}>
                                       <View style={pageStyles.car_preview_card_image_box}>
                                           <Image
                                               style={pageStyles.car_image}
