@@ -12,15 +12,15 @@ import {CarDetailsProps} from "./ScreenParams";
 export function CarDetailScreen({route, navigation} : CarDetailsProps) {
     const theme = useContext(ThemeContext).theme
 
-    const {itemId, otherParam} = route.params;
+    const car: Backend.Car = route.params.car;
 
     const defaultStyleSheet = getDefaultStyleSheet();
 
     return (
         <View style={defaultStyleSheet.container}>
             <Text style={defaultStyleSheet.text}> Details about your favoritesss car! </Text>
-            <Text style={defaultStyleSheet.text}> ItemId: {JSON.stringify(itemId)}</Text>
-            <Text style={defaultStyleSheet.text}> OtherParam: {JSON.stringify(otherParam)}</Text>
+            <Text style={defaultStyleSheet.text}> ItemId: {JSON.stringify(car.id)}</Text>
+            <Text style={defaultStyleSheet.text}> OtherParam: {JSON.stringify(car.description)}</Text>
         </View>
     );
 }
