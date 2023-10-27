@@ -4,6 +4,10 @@ type DiscoveryParams = undefined;
 type RentalParams = undefined;
 type ProfileParams = {userId: number};
 type CarDetailParams = { car: Backend.car };
+type CarCardParams = {
+    car: Backend.Car,
+    alignLeft: boolean
+}
 
 // This type is used to define the parameters passed to the CarDetailsScreen and the DiscoveryScreen
 type NavigatorParamList = {
@@ -11,6 +15,7 @@ type NavigatorParamList = {
     DiscoveryScreen: DiscoveryParams;
     MyRentalsScreen: RentalParams;
     ProfileScreen: ProfileParams;
+    CarCard: CarCardParams;
 }
 
 // Props for DiscoveryScreen
@@ -22,5 +27,14 @@ export type ProfileProps = NativeStackScreenProps<NavigatorParamList, 'ProfileSc
 // Props for CarDetailsScreen
 export type CarDetailsProps = NativeStackScreenProps<NavigatorParamList, 'CarDetailsScreen'>
 
+export type discoveryNavigation = DiscoveryProps.navigation
+
 // Props for MyRentalsScreen
 export type MyRentalsProps = NativeStackScreenProps<NavigatorParamList, 'MyRentalsScreen'>
+
+// Component params:
+export type CarCardPropsForReal = {
+    params: CarCardParams,
+    navigation: discoveryNavigation,
+    children?: never[]
+}
