@@ -1,6 +1,11 @@
 declare namespace Backend {
 
     /**
+     * This allows us to change the type later if we want to be more specific
+     */
+    type Endpoint = string;
+
+    /**
      * Transmission is used to represent the different types of transmissions.<br>
      * It can be one of
      * <ul>
