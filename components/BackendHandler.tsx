@@ -24,25 +24,25 @@ class BackendHandler {
                     // Move this into function that checks if it lives up to carCollection, if true return the json
                     // as a carcollection object
                     if (!Array.isArray(json)) {
-                        throw new Error("Invalid response from API, carArray is not an array" + carArray)
+                        throw new Error("Invalid response from API, carArray is not an array" + json)
                     }
                     return json
                 })
                 .then(json => setCars(json))
         }, [])
 
-        console.log(apiURL + "/cars")
-        const jsonString = await fetchFromAPI( "/cars")
-        const carArray = JSON.parse(jsonString)
-        if (!Array.isArray(carArray)) {
-            throw new Error("Invalid response from API, carArray is not an array" + carArray)
-        }
-
-        const carCollection: Backend.CarCollection = []
-
-        for (const car of carArray) {
-            carCollection.push(new Car(car))
-        }
+        // console.log(apiURL + "/cars")
+        // const jsonString = await fetchFromAPI( "/cars")
+        // const carArray = JSON.parse(jsonString)
+        // if (!Array.isArray(carArray)) {
+        //     throw new Error("Invalid response from API, carArray is not an array" + carArray)
+        // }
+        //
+        // const carCollection: Backend.CarCollection = []
+        //
+        // for (const car of carArray) {
+        //     carCollection.push(new Car(car))
+        // }
 
         return cars
     }
@@ -57,6 +57,6 @@ export default Backend;
 
 
 // Image?
-async function fetchFromAPI(endpoint: Endpoint): Promise<string> {
-    return (await fetch(apiURL + endpoint, {mode:'cors'})).text()
-}
+// async function fetchFromAPI(endpoint: Endpoint): Promise<string> {
+//     return (await fetch(apiURL + endpoint, {mode:'cors'})).text()
+// }
