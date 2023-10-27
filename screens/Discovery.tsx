@@ -38,18 +38,17 @@ export function Discovery({route, navigation}: DiscoveryProps) {
     return (
         <View style={pageStyles.car_preview_container}>
             <FlatList data={data}
-                      renderItem={({item}) =>
+                      renderItem={({item, index}) =>
                           <TouchableOpacity
                               onPress={() => {
                                   /* 1. Navigate to the Details route with params */
                                   navigation.navigate('CarDetailsScreen', {
-                                      itemId: 86,
-                                      otherParam: 'anything you want here',
+                                      car: item,
                                   });
                               }}
                           >
                               <View style={pageStyles.car_preview_card}>
-                                  <View style={pageStyles.row}>
+                                  <View style={index % 2 === 0 ? pageStyles.row: pageStyles.reverse_row}>
                                       <View style={pageStyles.car_preview_card_image_box}>
                                           <Image
                                               style={pageStyles.car_image}
@@ -59,11 +58,10 @@ export function Discovery({route, navigation}: DiscoveryProps) {
                                           />
                                       </View>
                                       <View style={pageStyles.car_preview_card_text_box}>
-                                          <Text>{item["model"]}</Text>
-                                          <Text>Car model</Text>
-                                          <Text>Horse power</Text>
-                                          <Text
-                                              style={pageStyles.bold}>Price/day</Text>
+                                          <Text>{item.model}</Text>
+                                          <Text>Doors: {item.doors}</Text>
+                                          <Text>Fuel type: {item.fuelType.name}</Text>
+                                          <Text style={pageStyles.bold}>{item.pricePerDay}$ / day</Text>
                                       </View>
                                   </View>
                               </View>
@@ -82,6 +80,12 @@ const pageStyles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
+    },
+    reverse_row: {
+        flexDirection: 'row-reverse',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        paddingRight: 15,
     },
     car_preview_container: {
         flex: 1,

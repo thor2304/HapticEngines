@@ -3,7 +3,7 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 type DiscoveryParams = undefined;
 type RentalParams = undefined;
 type ProfileParams = {userId: number};
-type CarDetailParams = { itemId: number, otherParam: string };
+type CarDetailParams = { car: Backend.car };
 
 // This type is used to define the parameters passed to the CarDetailsScreen and the DiscoveryScreen
 type NavigatorParamList = {
