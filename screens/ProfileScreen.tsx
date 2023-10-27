@@ -1,6 +1,6 @@
 import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {StyleSheetI} from "../types/StyleSheetTypes";
-import {Text, View, StyleSheet} from "react-native";
+import {Text, View, StyleSheet, Image} from "react-native";
 import React, {useContext, useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
@@ -18,34 +18,40 @@ export function ProfileScreen({route, navigation} : DiscoveryProps) {
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = getDefaultStyleSheet();
 
-    let [data, setData] = useState<Backend.User>({
+    let [user, setUser] = useState<Backend.User>({
         id: 0,
         name: "Name unavailable",
         email: "Email unavailable",
         phoneNumber: "Phone number unavailable",
-        billingAddress: "Billing address unavailable"
+        billingAddress: "Billing address unavailable",
+        image: "404_img.png",
     });
 
     backendHandler.getUser(userID).then((user) => {
-        setData(user)
+        if (user == undefined){
+            return
+        }
+        setUser(user)
     }).catch((error) => {
         console.log(error)
     })
+
+
+    // View created to be able to add edit icon besides name in the future.
+    // TODO: Add functionality to allow users to edit their information.
 
     return (
         <View style={styles.container}>
             <Image
                 style={cStyle.image}
-                source={{uri: backendHandler.getImageUrl('Chad_Payne')}} />
+                source={{uri: backendHandler.getImageUrl(user.image)}} />
 
-            // View created to be able to add edit icon besides name in the future.
-            // TODO: Add functionality to allow users to edit their information.
             <View>
-                <Text style={cStyle.name}>{data.name} : {context.theme.textColor.toString()}</Text>
+                <Text style={cStyle.name}>{user.name}</Text>
             </View>
-            <Text style={cStyle.info}>{data.email} : {context.theme.textColor.toString()}</Text>
-            <Text style={cStyle.info}>{data.phoneNumber} : {context.theme.textColor.toString()}</Text>
-            <Text style={cStyle.info}>{data.billingAddress} : {context.theme.textColor.toString()}</Text>
+            <Text style={cStyle.info}>{user.email}</Text>
+            <Text style={cStyle.info}>{user.phoneNumber}</Text>
+            <Text style={cStyle.info}>{user.billingAddress}</Text>
         </View>
     );
 }

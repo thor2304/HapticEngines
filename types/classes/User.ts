@@ -4,6 +4,7 @@ export default class User implements Backend.User {
     email: string;
     phoneNumber: string;
     billingAddress: string;
+    image: string;
 
     constructor(json: string | object) {
         const parsed: Backend.User = typeof json == "string" ? JSON.parse(json) : json;
@@ -12,8 +13,17 @@ export default class User implements Backend.User {
             throw new Error("Invalid response from API, user is not an object.")
         }
 
-        if (Object.keys(parsed).length !== 12) {
-            throw new Error("Invalid response from API, car object does not have the correct number of keys (12).")
+        const attributeCount = 6;
+        if (Object.keys(parsed).length != attributeCount) {
+            throw new Error(`Invalid response from API, user does not have the correct number of attributes, should be ${attributeCount}.`);
+        }
+
+        if (parsed.id === undefined || parsed.id == null || parsed.name === undefined || parsed.name == null ||
+            parsed.email === undefined || parsed.email == null || parsed.phoneNumber === undefined ||
+            parsed.phoneNumber == null || parsed.billingAddress === undefined || parsed.billingAddress == null ||
+            parsed.image === undefined || parsed.image == null) {
+            throw new Error("Invalid response from API, user object does not have the correct keys, " +
+                "should be id, name, email, phoneNumber, billingAddress and image" + parsed)
         }
 
         this.id = parsed.id;
@@ -21,10 +31,6 @@ export default class User implements Backend.User {
         this.email = parsed.email;
         this.phoneNumber = parsed.phoneNumber;
         this.billingAddress = parsed.billingAddress;
-
-        if (this.id == null || this.name == null || this.email == null ||
-            this.phoneNumber == null || this.billingAddress == null) {
-            throw new Error(`Car is missing attributes: ${this}`);
-        }
+        this.image = parsed.image;
     }
 }
