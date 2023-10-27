@@ -1,9 +1,10 @@
-import {getDefaultStyleSheet} from "../components/Stylesheet"
-import {StyleSheetI} from "../components/types/StyleSheetTypes";
+import {getDefaultStyleSheet} from "../services/Stylesheet"
+import {StyleSheetI} from "../types/StyleSheetTypes";
 import {Text, View, StyleSheet} from "react-native";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
-import backendHandler from "../components/BackendHandler";
+import backendHandler from "../services/BackendHandler";
+import {ThemeContext} from "../components/ThemeContext";
 
 /**
  * This is the profile screen, which shows information about the user.
@@ -11,41 +12,45 @@ import backendHandler from "../components/BackendHandler";
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
 export function ProfileScreen({route, navigation} : DiscoveryProps) {
+    const userID = 2;
+    const context = useContext(ThemeContext);
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = getDefaultStyleSheet();
 
-
-    const allUsers: Backend.UserCollection = [];
-    let [data, setData] = useState(allUsers);
-
-    backendHandler.getUsers()
-        .then(myData => {
-            setData(myData)
-            console.log(data)
-        }).catch((e) => {
-        console.log(e)
-        console.log("caught error")
+    let [data, setData] = useState<Backend.User>({
+        id: 0,
+        name: "Name unavailable",
+        email: "Email unavailable",
+        phoneNumber: "Phone number unavailable",
+        billingAddress: "Billing address unavailable"
     });
+
+    backendHandler.getUser(userID).then((user) => {
+        setData(user)
+    }).catch((error) => {
+        console.log(error)
+    })
 
     return (
         <View style={styles.container}>
-            {/*<Image*/}
-            {/*    style={cStyle.image}*/}
-            {/*    source={require('add image path here')} />*/}
+            <Image
+                style={cStyle.image}
+                source={{uri: backendHandler.getImageUrl('Chad_Payne')}} />
 
             // View created to be able to add edit icon besides name in the future.
+            // TODO: Add functionality to allow users to edit their information.
             <View>
-                <Text style={cStyle.name}>{item.name}</Text>
+                <Text style={cStyle.name}>{data.name} : {context.theme.textColor.toString()}</Text>
             </View>
-            <Text style={cStyle.info}>{item.email}</Text>
-            <Text style={cStyle.info}>{item.phoneNumber}</Text>
-            <Text style={cStyle.info}>{item.billingAddress}</Text>
+            <Text style={cStyle.info}>{data.email} : {context.theme.textColor.toString()}</Text>
+            <Text style={cStyle.info}>{data.phoneNumber} : {context.theme.textColor.toString()}</Text>
+            <Text style={cStyle.info}>{data.billingAddress} : {context.theme.textColor.toString()}</Text>
         </View>
     );
 }
 
-const cStyle = StyleSheet.create({
+const cStyle = StyleSheet.create ({
     name: {
         fontFamily: 'Inter',
         fontSize: 32,
