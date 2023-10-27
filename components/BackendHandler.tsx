@@ -1,13 +1,8 @@
-import {useEffect, useState} from "react";
-import Manufacturer = Backend.Manufacturer;
-
+import React, {useEffect, useState} from "react";
 
 const apiURL = "https://mobiledev.cryptobot.dk";
 
-// This allows us to change the type later if we want to be more specific
-type Endpoint = string;
-
-class BackendHandler {
+class BackendHandlerClass {
 
     /**
      * Gets all cars from the API.
@@ -18,16 +13,7 @@ class BackendHandler {
 
         const [cars, setCars] = useState<Backend.CarCollection>([])
 
-        useEffect(() => {
-            fetch(apiURL + "/cars")
-                .then(response => response.json())
-                .then(json => {
-                    // Move this into function that checks if it lives up to carCollection, if true return the json
-                    // as a carcollection object
-                    return validateCarCollection(json)
-                })
-                .then(json => setCars(json))
-        }, [])
+        fetchFromAPI("cars", setCars, validateCarCollection)
 
         return cars
     }
@@ -36,6 +22,43 @@ class BackendHandler {
         return "https://mobiledev.cryptobot.dk/images/audi_a4.webp"
     }
     //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
+}
+
+
+function fetchFromAPI(endpoint: Backend.Endpoint,
+                      setDataOption: React.Dispatch<React.SetStateAction<any>>,
+                      validatorFunction: (possibleCollection: any) => any): void {
+    fetchFromAPIUnderlying(endpoint, setDataOption, validatorFunction)
+}
+
+function fetchFromAPIUnderlying(endpoint: string,
+                      setDataOption: React.Dispatch<React.SetStateAction<any>>,
+                      validatorFunction: (possibleCollection: any) => any): void {
+    useEffect(() => {
+        fetch(apiURL + "/" + endpoint)
+            .then(response => response.json())
+            .then(json => {
+                return validatorFunction(json)
+            })
+            .then(json => setDataOption(json))
+    }, [])
+}
+
+
+function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>,   validatorFunction: (possibleCollection: any) => any): void {
+    fetchFromAPIUnderlying(endpoint + "/" + id, setDataOption, validatorFunction)
+}
+
+function postToAPI(endpoint: Backend.PostableEndpoint, data: any): void {
+    // Validation?
+
+    fetch(apiURL + "/" + endpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    }).then(r => r.json())
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {
@@ -144,11 +167,19 @@ function validateCarCollection(possibleCollection: any): Backend.CarCollection {
     return output
 }
 
-export const Backend = new BackendHandler();
-export default Backend;
+function validateManufacturerCollection(possibleCollection: any): Backend.ManufacturerCollection {
+    if (!Array.isArray(possibleCollection)) {
+        throw new Error("Invalid response from API, manufacturerArray is not an array" + possibleCollection)
+    }
 
+    const output: Backend.ManufacturerCollection = []
 
-// Image?
-async function fetchFromAPI(endpoint: Endpoint): Promise<string> {
-    return (await fetch(apiURL + endpoint, {mode: 'cors'})).text()
+    for (const manufacturer of possibleCollection) {
+        output.push(validateManufacturer(manufacturer))
+    }
+
+    return output
 }
+
+export const BackendHandler = new BackendHandlerClass();
+export default BackendHandler;
