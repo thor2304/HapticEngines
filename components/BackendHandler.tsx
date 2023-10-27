@@ -32,6 +32,9 @@ class BackendHandler {
         return cars
     }
 
+    getImageUrl(imageName: string): string {
+        return "https://mobiledev.cryptobot.dk/images/audi_a4.webp"
+    }
     //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
 }
 
