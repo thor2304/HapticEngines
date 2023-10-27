@@ -1,4 +1,4 @@
-import {getDefaultStyleSheet} from "../components/Stylesheet"
+import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {View, Text} from "react-native";
 import {ThemeContext} from "../components/ThemeContext";
 import React, {useContext} from "react";

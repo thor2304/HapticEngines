@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, {useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
-import backendHandler from "../components/BackendHandler";
+import backendHandler from "../services/BackendHandler";
 
 
 /**
