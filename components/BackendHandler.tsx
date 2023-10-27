@@ -40,7 +40,7 @@ function validateManufacturer(manufacturer: any): Backend.Manufacturer {
         throw new Error("Invalid response from API, manufacturer is not an object" + manufacturer)
     }
 
-    if (manufacturer.keys().length !== 2) {
+    if (Object.keys(manufacturer).length !== 2) {
         throw new Error("Invalid response from API, manufacturer object does not have the correct number of keys" + manufacturer)
     }
 
@@ -60,7 +60,7 @@ function validateFuelType(fuelType: any): Backend.FuelType {
         throw new Error("Invalid response from API, fuelType is not an object" + fuelType)
     }
 
-    if (fuelType.keys().length !== 2) {
+    if (Object.keys(fuelType).length !== 2) {
         throw new Error("Invalid response from API, fuelType object does not have the correct number of keys" + fuelType)
     }
 
@@ -80,7 +80,7 @@ function validateTransmission(transmission: any): Backend.Transmission {
         throw new Error("Invalid response from API, transmission is not an object" + transmission)
     }
 
-    if (transmission.keys().length !== 2) {
+    if (Object.keys(transmission).length !== 2) {
         throw new Error("Invalid response from API, transmission object does not have the correct number of keys" + transmission)
     }
 
@@ -100,7 +100,7 @@ function validateCar(car: any): Backend.Car {
         throw new Error("Invalid response from API, car is not an object" + car)
     }
 
-    if (car.keys().length !== 12) {
+    if (Object.keys(car).length !== 12) {
         throw new Error("Invalid response from API, car object does not have the correct number of keys (12)" + car)
     }
 
