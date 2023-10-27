@@ -1,9 +1,19 @@
 import React, {useEffect, useState} from "react";
 import Car from "./types/Car";
+import Manufacturer from "./types/Manufacturer";
+import User from "./types/User";
 
 const apiURL = "https://mobiledev.cryptobot.dk";
 
 class BackendHandlerClass {
+
+    async getCar(id: number): Promise<Backend.Car | undefined> {
+        const [car, setCar] = useState<Backend.Car>()
+
+        fetchFromAPIWithId("car", id, setCar, validateCarCollection)
+
+        return car
+    }
 
     /**
      * Gets all cars from the API.
@@ -19,7 +29,31 @@ class BackendHandlerClass {
         return cars
     }
 
-    async getUser(id: number): Promise<Backend.User|undefined> {
+    async getCarHash(): Promise<Backend.CarHash | undefined> {
+        const [carHash, setCarHash] = useState<Backend.CarHash>()
+
+        fetchFromAPI("carHash", setCarHash, (possibleCollection: any) => possibleCollection)
+
+        return carHash
+    }
+
+    async getManufacturer(id: number): Promise<Backend.Manufacturer | undefined> {
+        const [manufacturer, setManufacturer] = useState<Backend.Manufacturer>()
+
+        fetchFromAPIWithId("manufacturers", id, setManufacturer, validateManufacturer)
+
+        return manufacturer
+    }
+
+    async getManufacturers(): Promise<Backend.ManufacturerCollection> {
+        const [manufacturers, setManufacturers] = useState<Backend.ManufacturerCollection>([])
+
+        fetchFromAPI("manufacturers", setManufacturers, validateManufacturerCollection)
+
+        return manufacturers
+    }
+
+    async getUser(id: number): Promise<Backend.User | undefined> {
         const [user, setUser] = useState<Backend.User>()
 
         fetchFromAPIWithId("users", id, setUser, validateUser)
@@ -27,9 +61,41 @@ class BackendHandlerClass {
         return user
     }
 
+
+    async getRentals(): Promise<Backend.RentalCollection> {
+        const [rentals, setRentals] = useState<Backend.RentalCollection>([])
+
+        fetchFromAPI("rentals", setRentals, (possibleCollection: any) => possibleCollection)
+
+        return rentals
+    }
+
+    /**
+     * Gets a rental from the API.
+     * @param rentalId The id of the rental to get. A rental is the time that a car was rented out
+     */
+    async getRental(rentalId: number): Promise<Backend.Rental | undefined> {
+        const [rental, setRental] = useState<Backend.Rental>()
+
+        fetchFromAPIWithId("rentals/byRental", rentalId, setRental, (possibleCollection: any) => possibleCollection)
+
+        return rental
+    }
+
+    async getRentalsByUser(userId: number): Promise<Backend.RentalCollection | undefined> {
+        const [rentals, setRentals] = useState<Backend.RentalCollection>()
+
+        fetchFromAPIWithId("rentals/byUser", userId, setRentals, (possibleCollection: any) => possibleCollection)
+
+        return rentals
+    }
+
+
+
     getImageUrl(imageName: string): string {
         return apiURL + "/images/" + imageName
     }
+
     //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
 }
 
@@ -41,8 +107,8 @@ function fetchFromAPI(endpoint: Backend.Endpoint,
 }
 
 function fetchFromAPIUnderlying(endpoint: string,
-                      setDataOption: React.Dispatch<React.SetStateAction<any>>,
-                      validatorFunction: (possibleCollection: any) => any): void {
+                                setDataOption: React.Dispatch<React.SetStateAction<any>>,
+                                validatorFunction: (possibleCollection: any) => any): void {
     useEffect(() => {
         fetch(apiURL + "/" + endpoint)
             .then(response => response.json())
@@ -54,48 +120,12 @@ function fetchFromAPIUnderlying(endpoint: string,
 }
 
 
-function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>,   validatorFunction: (possibleCollection: any) => any): void {
+function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>, validatorFunction: (possibleCollection: any) => any): void {
     fetchFromAPIUnderlying(endpoint + "/" + id, setDataOption, validatorFunction)
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {
-    if (typeof manufacturer !== "object") {
-        throw new Error("Invalid response from API, manufacturer is not an object" + manufacturer)
-    }
-
-    if (Object.keys(manufacturer).length !== 2) {
-        throw new Error("Invalid response from API, manufacturer object does not have the correct number of keys" + manufacturer)
-    }
-
-    if (manufacturer.id === undefined || manufacturer.name === undefined) {
-        throw new Error("Invalid response from API, manufacturer object does not have the correct keys, " +
-            "should be name and id" + manufacturer)
-    }
-
-    return {
-        id: manufacturer.id,
-        name: manufacturer.name,
-    };
-}
-
-function validateFuelType(fuelType: any): Backend.FuelType {
-    if (typeof fuelType !== "object") {
-        throw new Error("Invalid response from API, fuelType is not an object" + fuelType)
-    }
-
-    if (Object.keys(fuelType).length !== 2) {
-        throw new Error("Invalid response from API, fuelType object does not have the correct number of keys" + fuelType)
-    }
-
-    if (fuelType.id === undefined || fuelType.name === undefined) {
-        throw new Error("Invalid response from API, fuelType object does not have the correct keys, " +
-            "should be name and id" + fuelType)
-    }
-
-    return {
-        id: fuelType.id,
-        name: fuelType.name,
-    }
+    return new Manufacturer(manufacturer)
 }
 
 function validateCarCollection(possibleCollection: any): Backend.CarCollection {
@@ -112,28 +142,8 @@ function validateCarCollection(possibleCollection: any): Backend.CarCollection {
     return output
 }
 
-function validateUser(user: any) :Backend.User {
-    if (typeof user !== "object") {
-        throw new Error("Invalid response from API, user is not an object" + user)
-    }
-
-    if (Object.keys(user).length !== 5) {
-        throw new Error("Invalid response from API, user object does not have the correct number of keys (5)" + user)
-    }
-
-    if (user.id === undefined || user.name === undefined || user.email === undefined || user.phoneNumber === undefined ||
-        user.billingAddress === undefined) {
-        throw new Error("Invalid response from API, user object does not have the correct keys, " +
-            "should be id, name, email, phoneNumber and billingAddress" + user)
-    }
-
-    return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        billingAddress: user.billingAddress,
-    }
+function validateUser(user: any): Backend.User {
+    return new User(user)
 }
 
 function validateManufacturerCollection(possibleCollection: any): Backend.ManufacturerCollection {
@@ -144,7 +154,7 @@ function validateManufacturerCollection(possibleCollection: any): Backend.Manufa
     const output: Backend.ManufacturerCollection = []
 
     for (const manufacturer of possibleCollection) {
-        output.push(validateManufacturer(manufacturer))
+        output.push(new Manufacturer(manufacturer))
     }
 
     return output

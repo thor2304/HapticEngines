@@ -1,5 +1,6 @@
 import Transmission from "./Transmission";
 import FuelType from "./FuelType";
+import Manufacturer from "./Manufacturer";
 
 export default class Car implements Backend.Car{
     id: number;
@@ -43,7 +44,7 @@ export default class Car implements Backend.Car{
         this.pricePerWeek = parsed.pricePerWeek;
         this.wheelSize = parsed.wheelSize;
 
-        this.manufacturer = parsed.manufacturer; // TODO: This is not cast to a FuelType object. (Because it does not exist yet.)
+        this.manufacturer = new Manufacturer(parsed.manufacturer);
         this.fuelType = new FuelType(parsed.fuelType);
         this.transmission = new Transmission(parsed.transmission);
 
