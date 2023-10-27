@@ -19,9 +19,7 @@ function HomeStackScreen() {
                 options={{headerShown: false}} />
             <DiscoveryStack.Screen
                 name="CarDetailsScreen"
-                component={CarDetailScreen}
-                // The initialParams are the parameters passed to the screen when it is first created
-                initialParams={{itemId: 0, otherParam: ""}}/>
+                component={CarDetailScreen}/>
         </DiscoveryStack.Navigator>
     );
 }
