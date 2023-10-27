@@ -27,13 +27,9 @@ export function Discovery({route, navigation}: DiscoveryProps) {
     backendHandler.getCars()
         .then(myData => {
             setData(myData)
-            console.log(data)
         }).catch((e) => {
-        console.log(e)
         console.log("catch error")
     })
-
-    console.log("hello")
 
     return (
         <View style={pageStyles.car_preview_container}>
