@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import Car from "./types/Car";
 
 const apiURL = "https://mobiledev.cryptobot.dk";
 
@@ -16,6 +17,14 @@ class BackendHandlerClass {
         fetchFromAPI("cars", setCars, validateCarCollection)
 
         return cars
+    }
+
+    async getUser(id: number): Promise<Backend.User|undefined> {
+        const [user, setUser] = useState<Backend.User>()
+
+        fetchFromAPIWithId("users", id, setUser, validateUser)
+
+        return user
     }
 
     getImageUrl(imageName: string): string {
@@ -47,18 +56,6 @@ function fetchFromAPIUnderlying(endpoint: string,
 
 function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>,   validatorFunction: (possibleCollection: any) => any): void {
     fetchFromAPIUnderlying(endpoint + "/" + id, setDataOption, validatorFunction)
-}
-
-function postToAPI(endpoint: Backend.PostableEndpoint, data: any): void {
-    // Validation?
-
-    fetch(apiURL + "/" + endpoint, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    }).then(r => r.json())
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {
@@ -101,58 +98,6 @@ function validateFuelType(fuelType: any): Backend.FuelType {
     }
 }
 
-function validateTransmission(transmission: any): Backend.Transmission {
-    if (typeof transmission !== "object") {
-        throw new Error("Invalid response from API, transmission is not an object" + transmission)
-    }
-
-    if (Object.keys(transmission).length !== 2) {
-        throw new Error("Invalid response from API, transmission object does not have the correct number of keys" + transmission)
-    }
-
-    if (transmission.id === undefined || transmission.name === undefined) {
-        throw new Error("Invalid response from API, transmission object does not have the correct keys, " +
-            "should be name and id" + transmission)
-    }
-
-    return {
-        id: transmission.id,
-        name: transmission.name,
-    };
-}
-
-function validateCar(car: any): Backend.Car {
-    if (typeof car !== "object") {
-        throw new Error("Invalid response from API, car is not an object" + car)
-    }
-
-    if (Object.keys(car).length !== 12) {
-        throw new Error("Invalid response from API, car object does not have the correct number of keys (12)" + car)
-    }
-
-    if (car.id === undefined || car.manufacturer === undefined || car.model === undefined || car.fuelType === undefined ||
-        car.pricePerDay === undefined || car.pricePerWeek === undefined || car.description === undefined || car.doors === undefined ||
-        car.engineCCSize === undefined || car.transmission === undefined || car.wheelSize === undefined || car.imageName === undefined) {
-        throw new Error("Invalid response from API, car object does not have the correct keys, " +
-            "should be id, manufacturer, model, fuelType, pricePerDay, pricePerWeek, description, doors, engineCCSize, transmission, wheelSize and imageName" + car)
-    }
-
-    return {
-        id: car.id,
-        manufacturer: validateManufacturer(car.manufacturer),
-        model: car.model,
-        fuelType: validateFuelType(car.fuelType),
-        pricePerDay: car.pricePerDay,
-        pricePerWeek: car.pricePerWeek,
-        description: car.description,
-        doors: car.doors,
-        engineCCSize: car.engineCCSize,
-        transmission: validateTransmission(car.transmission),
-        wheelSize: car.wheelSize,
-        imageName: car.imageName,
-    }
-}
-
 function validateCarCollection(possibleCollection: any): Backend.CarCollection {
     if (!Array.isArray(possibleCollection)) {
         throw new Error("Invalid response from API, carArray is not an array" + possibleCollection)
@@ -161,10 +106,34 @@ function validateCarCollection(possibleCollection: any): Backend.CarCollection {
     const output: Backend.CarCollection = []
 
     for (const car of possibleCollection) {
-        output.push(validateCar(car))
+        output.push(new Car(car))
     }
 
     return output
+}
+
+function validateUser(user: any) :Backend.User {
+    if (typeof user !== "object") {
+        throw new Error("Invalid response from API, user is not an object" + user)
+    }
+
+    if (Object.keys(user).length !== 5) {
+        throw new Error("Invalid response from API, user object does not have the correct number of keys (5)" + user)
+    }
+
+    if (user.id === undefined || user.name === undefined || user.email === undefined || user.phoneNumber === undefined ||
+        user.billingAddress === undefined) {
+        throw new Error("Invalid response from API, user object does not have the correct keys, " +
+            "should be id, name, email, phoneNumber and billingAddress" + user)
+    }
+
+    return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        billingAddress: user.billingAddress,
+    }
 }
 
 function validateManufacturerCollection(possibleCollection: any): Backend.ManufacturerCollection {
