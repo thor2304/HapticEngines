@@ -10,7 +10,7 @@ import {NavigatorParamList} from "./screens/ScreenParams";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
-function HomeStackScreen() {
+function DiscoveryStackScreen() {
     return(
         <DiscoveryStack.Navigator>
             <DiscoveryStack.Screen
@@ -23,7 +23,6 @@ function HomeStackScreen() {
         </DiscoveryStack.Navigator>
     );
 }
-
 
 const MyRentalsStack = createNativeStackNavigator<NavigatorParamList>();
 function MyRentalsStackScreen() {
@@ -59,15 +58,15 @@ export default function App() {
             <NavigationContainer>
                 <Tab.Navigator screenOptions={{ headerShown: false}}>
                     <Tab.Screen
-                        name="DiscoveryScreen"
-                        component={HomeStackScreen}
+                        name="DiscoveryScreenStack"
+                        component={DiscoveryStackScreen}
                         options={{title: 'Discover'}} />
                     <Tab.Screen
-                        name="MyRentalsScreen"
+                        name="MyRentalsScreenStack"
                         component={MyRentalsStackScreen}
                         options={{title: 'My Rentals'}}/>
                     <Tab.Screen
-                        name="ProfileScreen"
+                        name="ProfileScreenStack"
                         component={ProfileStackScreen}
                         options={{title: 'Profile'}}/>
                 </Tab.Navigator>
