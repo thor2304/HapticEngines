@@ -2,9 +2,9 @@ import {Button, Text, View} from "react-native";
 import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
 import {darkTheme, lightTheme} from "../components/Themes";
-import {getDefaultStyleSheet} from "../components/Stylesheet";
+import {getDefaultStyleSheet} from "../services/Stylesheet";
 import {ProfileProps} from "./ScreenParams";
-import {StyleSheetI} from "../components/types/StyleSheetTypes";
+import {StyleSheetI} from "../types/StyleSheetTypes";
 
 export function ContextExample ({route, navigation}: ProfileProps) {
     const context = useContext(ThemeContext);
@@ -15,7 +15,7 @@ export function ContextExample ({route, navigation}: ProfileProps) {
 
     }
 
-    // Stylesheet used is the interface from ColorPalette.tsx
+    // Stylesheet used is the interface from ColorPalette.ts
     const styles: StyleSheetI = getDefaultStyleSheet()
 
     return (
