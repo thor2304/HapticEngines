@@ -4,14 +4,14 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    FlatList, SafeAreaView
+    FlatList,
+    SafeAreaView
 } from "react-native";
 import React, {useContext, useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
 import {CarList} from "../components/CarList";
 import {ThemeContext} from "../components/ThemeContext";
-
 
 /**
  * This is the primary screen, showing all the cars
@@ -28,7 +28,7 @@ export function Discovery({route, navigation}: DiscoveryProps) {
             backgroundColor: theme.backgroundColor,
         }
     });
-    
+
     const allCars: Backend.CarCollection = []
 
     let [data, setData] = useState(allCars);
