@@ -8,15 +8,23 @@ function playHaptic(feedBackStyle: Haptics.ImpactFeedbackStyle) {
     Haptics.impactAsync(feedBackStyle);
 }
 
-function getlistOfTimesBetweenHaptics(id: number) : number[] {
+// Return the json object with the id
+function getJsonObject(id: number) {
     const json = require('../assets/haptic.json');
-    const jsonObject = json[id];
+    for (const jsonObject of json) {
+        if (jsonObject.id === id) {
+            return jsonObject;
+        }
+    }
+}
+
+function getlistOfTimesBetweenHaptics(id: number) : number[] {
+    const jsonObject = getJsonObject(id)
     return jsonObject.timings;
 }
 
 function getListOfHapticFeedbackStyles(id: number) : Haptics.ImpactFeedbackStyle[] {
-    const json = require('../assets/haptic.json');
-    const jsonObject = json[id];
+    const jsonObject = getJsonObject(id)
     return jsonObject.types;
 }
 
@@ -28,6 +36,7 @@ export function playHapticFeedbackMultipleTimes(id: number) {
         for (let i = 0; i < hapticTimings.length; i++) {
             await delay(hapticTimings[i]);
             playHaptic(hapticFeedbackStyles[i]);
+            console.log("Haptic played", hapticFeedbackStyles[i])
         }
     })();
 }

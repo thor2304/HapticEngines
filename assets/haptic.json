@@ -3,5 +3,25 @@
     "id": 1,
     "timings": [ 100, 50, 100, 400, 100, 100, 700, 800, 900, 1000 ],
     "types": ["light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light"]
+  },
+  {
+    "id": 2,
+    "timings": [ 50, 50, 50, 50, 50, 50, 50, 50, 400, 800 ],
+    "types": ["heavy", "heavy", "heavy", "heavy", "heavy", "heavy", "heavy", "medium", "heavy", "light"]
+  },
+  {
+    "id": 3,
+    "timings": [ 100, 100, 200, 200, 200, 100, 100, 800, 100, 100 ],
+    "types": ["light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light"]
+  },
+  {
+    "id": 4,
+    "timings": [ 30, 30, 30, 30, 30, 30, 30, 30, 30, 200, 30, 30, 30, 30, 30, 30, 200, 30, 30, 600],
+    "types": ["light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light", "medium"]
+  },
+  {
+    "id": 5,
+    "timings": [ 30, 50, 80, 50, 30, 50, 400, 50, 50, 50, 400, 50, 50, 50, 50, 800 ],
+    "types": ["light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light", "medium", "heavy", "light"]
   }
 ]

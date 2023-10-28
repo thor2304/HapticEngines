@@ -14,7 +14,7 @@ function CarCard({params, navigation}: CarCardPropsForReal ){
     return (
         <TouchableOpacity
             onPress={() => {
-                playHapticFeedbackMultipleTimes(0) // Haptic feedback
+                playHapticFeedbackMultipleTimes(car.id) // Haptic feedback
                 /* 1. Navigate to the Details route with params */
                 navigation.navigate('CarDetailsScreen', {
                     car: car,
