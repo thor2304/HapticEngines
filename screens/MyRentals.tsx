@@ -19,28 +19,28 @@ export function MyRentals({route, navigation}: MyRentalsProps){
         console.log(error)
     });
 
-    const currentRentalsByUser: Backend.RentalCollection = [];
-    const pastRentalsByUser: Backend.RentalCollection = [];
+    const currentRentals: Backend.RentalCollection = [];
+    const pastRentals: Backend.RentalCollection = [];
 
     let currentDay = new Date()
     for(const rental of data){
         let rentalEndDate = new Date(rental.endDate)
 
         if(currentDay.getTime() > rentalEndDate.getTime()) {
-            pastRentalsByUser.push(rental)
+            pastRentals.push(rental)
         } else {
-            currentRentalsByUser.push(rental)
+            currentRentals.push(rental)
         }
     }
 
     let viewData = [
         {
             title: 'Current Rentals',
-            data: currentRentalsByUser.sort((a,b) => a.startDate > b.startDate ? -1 : 1)
+            data: currentRentals.sort((a,b) => a.startDate > b.startDate ? -1 : 1)
         },
         {
             title: 'Past Rentals',
-            data: pastRentalsByUser.sort((a,b) => a.endDate > b.endDate ? -1 : 1)
+            data: pastRentals.sort((a,b) => a.endDate > b.endDate ? -1 : 1)
         }
     ]
 
