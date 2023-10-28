@@ -9,10 +9,9 @@ import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
 import {SoundPlayerProvider} from "./components/SoundPlayerContext";
 import {useContext, useState} from "react";
-import Discoverysvg from "./assets/logos/discovery.svg";
-import Profilesvg from "./assets/logos/profile.svg";
-import MyRentalssvg from "./assets/logos/myrentals.svg";
-
+import DiscoverySvg from "./assets/logos/discovery.svg";
+import ProfileSvg from "./assets/logos/profile.svg";
+import MyRentalsSvg from "./assets/logos/myrentals.svg";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -76,11 +75,11 @@ export default function App() {
                         tabBarIcon: ({focused}) => {
                             setTheme(useContext(ThemeContext).theme);
                             if (route.route.name === 'DiscoveryScreenStack') {
-                                return <Discoverysvg height={30}></Discoverysvg>
+                                return <DiscoverySvg height={30}></DiscoverySvg>
                             } else if (route.route.name === 'ProfileScreenStack') {
-                                return <Profilesvg height={25}></Profilesvg>
+                                return <ProfileSvg height={25}></ProfileSvg>
                             } else if (route.route.name === 'MyRentalsScreenStack') {
-                                return <MyRentalssvg height={25}></MyRentalssvg>
+                                return <MyRentalsSvg height={25}></MyRentalsSvg>
                             }
                         },
                     })}>
