@@ -1,5 +1,5 @@
 import {NavigationContainer} from "@react-navigation/native";
-import {ThemeContextProvider} from "./components/ThemeContext";
+import {ThemeContext, ThemeContextProvider} from "./components/ThemeContext";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
@@ -8,6 +8,11 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
 import {SoundPlayerProvider} from "./components/SoundPlayerContext";
+import {useContext} from "react";
+import Discoverysvg from "./assets/logos/discovery.svg";
+import Profilesvg from "./assets/logos/profile.svg";
+import MyRentalssvg from "./assets/logos/myrentals.svg";
+
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -55,11 +60,26 @@ function ProfileStackScreen() {
 // Application
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
+    // Themes context
+    const theme = useContext(ThemeContext).theme;
     return (
         <ThemeContextProvider>
             <SoundPlayerProvider>
                 <NavigationContainer>
-                    <Tab.Navigator screenOptions={{headerShown: false}}>
+                    <Tab.Navigator
+                        screenOptions={(route) => ({
+                        headerShown: false,
+                        tabBarStyle: { backgroundColor: theme.backgroundColor, height: 60, paddingBottom: 10, paddingTop: 10 },
+                        tabBarIcon: ({focused}) => {
+                            if (route.route.name === 'DiscoveryScreenStack') {
+                                return <Discoverysvg height={30}></Discoverysvg>
+                            } else if (route.route.name === 'ProfileScreenStack') {
+                                return <Profilesvg height={25}></Profilesvg>
+                            } else if (route.route.name === 'MyRentalsScreenStack') {
+                                return <MyRentalssvg height={25}></MyRentalssvg>
+                            }
+                        },
+                    })}>
                         <Tab.Screen
                             name="DiscoveryScreenStack"
                             component={DiscoveryStackScreen}
