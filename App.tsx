@@ -9,9 +9,9 @@ import {exampleContext} from "./components/ExampleContext";
 import {useState} from "react";
 import {Theme} from "./components/Themes";
 import {StarWars} from "./components/starWars";
+import { usePushNotifications } from "./usePushNotifications";
 
 const Tab = createBottomTabNavigator();
-
 
 
 function HomeScreen() {
@@ -39,7 +39,6 @@ function HomeScreen() {
             color: theme.textColor,
         }
     }
-
 
     return (
         <exampleContext.Provider value={{theme: theme, setState: setTheme}}>

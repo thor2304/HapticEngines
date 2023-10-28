@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "the-travelling-car-salesman",
-    "slug": "the-travelling-car-salesman",
+    "slug": "thetravellingcarsalesman",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.the_travelling_car_salesman",
+      "googleServiceFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "85585586-7779-45d0-a2d2-e8acc246ea7b"
+      }
+    },
+    "owner": "pekinggezer"
   }
 }
