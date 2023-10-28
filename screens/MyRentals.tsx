@@ -49,7 +49,8 @@ export function MyRentals({route, navigation}: MyRentalsProps){
             <CarSectionList
                 params={
                     {
-                        data: viewData
+                        data: viewData,
+                        switchAlignment: false
                     }
                 }
                 navigation={navigation}

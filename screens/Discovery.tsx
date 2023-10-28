@@ -2,8 +2,8 @@ import { View } from "react-native";
 import { useState } from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
-import {CarList} from "../components/CarList";
 import {getDefaultStyleSheet} from "../services/Stylesheet";
+import {CarSectionList} from "../components/CarSectionList";
 
 /**
  * This is the primary screen, showing all the cars
@@ -23,12 +23,18 @@ export function Discovery({navigation}: DiscoveryProps) {
         console.log(error)
     })
 
+    const viewData = [
+        {
+            data: data,
+        }
+    ]
+
     return (
         <View style={pageStyles.background}>
-            <CarList
+            <CarSectionList
                 params={
                     {
-                        data: data,
+                        data: viewData,
                         switchAlignment: true
                     }
                 }

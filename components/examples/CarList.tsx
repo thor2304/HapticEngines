@@ -1,8 +1,8 @@
-import {CarListProps} from "../screens/ScreenParams";
-import {CarCard} from "./CarCard";
+import {CarListProps} from "../../screens/ScreenParams";
+import {CarCard} from "../CarCard";
 import {FlatList} from "react-native";
 import React from "react";
-import {getCarListStylesheet} from "../services/carListStylesheet";
+import {getCarListStylesheet} from "../../services/carListStylesheet";
 
 export function CarList({params, navigation}: CarListProps){
     const pageStyles = getCarListStylesheet()

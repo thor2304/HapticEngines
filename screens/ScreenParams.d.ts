@@ -5,7 +5,7 @@ type RentalParams = undefined;
 type ProfileParams = {userId: number};
 type CarDetailParams = { car: Backend.car };
 type CarCardParams = {
-    car: Backend.Car,
+    car: Backend.Car | Backend.Rental,
     alignLeft: boolean
 }
 
@@ -15,7 +15,8 @@ type CarListParams = {
 }
 
 type CarSectionListParams = {
-    data: {title: string, data: Backend.RentalCollection}[]
+    data: {title?: string, data: (backend.RentalCollection) | (backend.CarCollection)}[],
+    switchAlignment: boolean,
 }
 
 // This type is used to define the parameters passed to the CarDetailsScreen and the DiscoveryScreen
