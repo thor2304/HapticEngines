@@ -26,14 +26,9 @@ export function CarList({params, navigation}: CarListProps){
 }
 
 const pageStyles = StyleSheet.create({
-    background: {
-        flex: 1,
-        backgroundColor: '#FFF',
-    },
     car_preview_list: {
         flex: 1,
         paddingLeft: 25,
         paddingRight: 25,
-        maxHeight: window.innerHeight,
     }
 });

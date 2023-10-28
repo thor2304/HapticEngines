@@ -2,10 +2,13 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from "react";
 import backendHandler from "../services/BackendHandler";
 import {CarCardPropsForReal} from "../screens/ScreenParams";
+import {getCarCardStylesheet} from "../services/CarCardStylesheet";
 
 function CarCard({params, navigation}: CarCardPropsForReal ){
     const car = params.car
     const alignLeft = params.alignLeft
+
+    const pageStyles = getCarCardStylesheet()
 
     return (
         <TouchableOpacity
@@ -27,10 +30,10 @@ function CarCard({params, navigation}: CarCardPropsForReal ){
                         />
                     </View>
                     <View style={pageStyles.car_preview_card_text_box}>
-                        <Text>{car.model}</Text>
-                        <Text>Doors: {car.doors}</Text>
-                        <Text>Fuel type: {car.fuelType.name}</Text>
-                        <Text style={pageStyles.bold}>{car.pricePerDay}$ / day</Text>
+                        <Text style={pageStyles.car_preview_card_text}>{car.model}</Text>
+                        <Text style={pageStyles.car_preview_card_text}>Doors: {car.doors}</Text>
+                        <Text style={pageStyles.car_preview_card_text}>Fuel type: {car.fuelType.name}</Text>
+                        <Text style={[pageStyles.car_preview_card_text, pageStyles.bold]}>{car.pricePerDay}$ / day</Text>
                     </View>
                 </View>
             </View>
@@ -39,43 +42,43 @@ function CarCard({params, navigation}: CarCardPropsForReal ){
 }
 
 export {CarCard};
-
-const pageStyles = StyleSheet.create({
-    bold: {
-        fontWeight: 'bold',
-    },
-    row: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-    },
-    reverse_row: {
-        flexDirection: 'row-reverse',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        paddingRight: 15,
-    },
-    car_preview_card: {
-        minHeight: 150,
-        borderRadius: 25,
-        overflow: 'hidden',
-        justifyContent: 'space-between',
-        marginTop: 12,
-        marginBottom: 12,
-        backgroundColor: '#F0F6F6',
-        padding: 7,
-    },
-    car_preview_card_image_box: {
-        flex: 0.6,
-    },
-    car_preview_card_text_box: {
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        flex: 0.38,
-        Height: 150,
-    },
-    car_image: {
-        height: 150,
-        borderRadius: 25,
-    }
-});
+//
+// const pageStyles = StyleSheet.create({
+//     bold: {
+//         fontWeight: 'bold',
+//     },
+//     row: {
+//         flexDirection: 'row',
+//         flexWrap: 'wrap',
+//         justifyContent: 'space-between',
+//     },
+//     reverse_row: {
+//         flexDirection: 'row-reverse',
+//         flexWrap: 'wrap',
+//         justifyContent: 'space-between',
+//         paddingRight: 15,
+//     },
+//     car_preview_card: {
+//         minHeight: 150,
+//         borderRadius: 25,
+//         overflow: 'hidden',
+//         justifyContent: 'space-between',
+//         marginTop: 12,
+//         marginBottom: 12,
+//         backgroundColor: '#F0F6F6',
+//         padding: 7,
+//     },
+//     car_preview_card_image_box: {
+//         flex: 0.6,
+//     },
+//     car_preview_card_text_box: {
+//         flexDirection: 'column',
+//         justifyContent: 'space-around',
+//         flex: 0.38,
+//         Height: 150,
+//     },
+//     car_image: {
+//         height: 150,
+//         borderRadius: 25,
+//     }
+// });

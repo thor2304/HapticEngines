@@ -7,8 +7,9 @@ import {ContextExample} from "./screens/examples/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
-import {Platform, SafeAreaView, StyleSheet, StatusBar} from "react-native";
+import {Platform} from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
+import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -28,19 +29,6 @@ function DiscoveryStackScreen() {
             </DiscoveryStack.Navigator>
     );
 }
-
-const stausBarHeight = (StatusBar.currentHeight == undefined ? 0 : StatusBar.currentHeight)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: Platform.OS === "android" ? ( stausBarHeight + 2 ) : 0,
-        backgroundColor: "#777"
-    },
-    tabBar: {
-        backgroundColor: "#111"
-    }
-});
 
 const MyRentalsStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -79,8 +67,8 @@ export default function App() {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ThemeContextProvider>
+        <ThemeContextProvider>
+            <CustomSafeAreaView>
                 <NavigationContainer>
                     <Tab.Navigator screenOptions={{headerShown: false}}>
                         <Tab.Screen
@@ -97,7 +85,7 @@ export default function App() {
                             options={{title: 'Profile'}}/>
                     </Tab.Navigator>
                 </NavigationContainer>
-            </ThemeContextProvider>
-        </SafeAreaView>
+            </CustomSafeAreaView>
+        </ThemeContextProvider>
     );
 }

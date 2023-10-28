@@ -54,6 +54,5 @@ export type CarListProps = {
     params: CarListParams,
     navigation: discoveryNavigation,
     children?: never[]
-
 }
 

@@ -1,4 +1,4 @@
-import {ColorValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
+import {ColorValue, DimensionValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
 
 export interface StyleSheetI {
     container: {
@@ -18,6 +18,17 @@ export interface StyleSheetI {
     }
 }
 
+export interface CarPreviewCard {
+    minHeight: FlexStyle['minHeight'],
+    borderRadius: number,
+    overflow: FlexStyle['overflow'],
+    justifyContent: FlexStyle['justifyContent'],
+    marginTop: FlexStyle['marginTop'],
+    marginBottom: FlexStyle['marginBottom'],
+    backgroundColor: ColorValue,
+    padding: number,
+}
+
 export interface CarCardStyleSheetI {
     bold: {
         fontWeight: TextStyle['fontWeight']
@@ -33,15 +44,7 @@ export interface CarCardStyleSheetI {
         justifyContent: FlexStyle['justifyContent'],
         paddingRight: FlexStyle['paddingRight'],
     },
-    car_preview_card: {
-        minHeight: FlexStyle['minHeight'],
-        borderRadius: number,
-        overflow: FlexStyle['overflow'],
-        justifyContent: FlexStyle['justifyContent'],
-        marginTop: FlexStyle['marginTop'],
-        backgroundColor: ColorValue,
-        padding: FlexStyle['padding'],
-    },
+    car_preview_card: CarPreviewCard,
     car_preview_card_image_box: {
         flex: FlexStyle['flex'],
     },
@@ -50,6 +53,9 @@ export interface CarCardStyleSheetI {
         justifyContent: FlexStyle['justifyContent'],
         flex: FlexStyle['flex'],
         Height: FlexStyle['height'],
+    },
+    car_preview_card_text: {
+        color: ColorValue,
     },
     car_image: {
         height: FlexStyle['height'],

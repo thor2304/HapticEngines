@@ -6,10 +6,11 @@ import {
     TouchableOpacity,
     FlatList, SafeAreaView
 } from "react-native";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
 import {CarList} from "../components/CarList";
+import {ThemeContext} from "../components/ThemeContext";
 
 
 /**
@@ -19,9 +20,17 @@ import {CarList} from "../components/CarList";
  */
 export function Discovery({route, navigation}: DiscoveryProps) {
 
+    const theme = useContext(ThemeContext).theme
+
+    const pageStyles = StyleSheet.create({
+        background: {
+            flex: 1,
+            backgroundColor: theme.backgroundColor,
+        }
+    });
+
     // const allCars = await BackendHandler.getCars();
     const allCars: Backend.CarCollection = []
-
 
     let [data, setData] = useState(allCars);
 
@@ -33,10 +42,10 @@ export function Discovery({route, navigation}: DiscoveryProps) {
 
     return (
         <View style={pageStyles.background}>
-            <CarList params={                {
+            <CarList params={{
                     data:data,
                     switchAlignment: true
-                }  } navigation={
+                }} navigation={
                 navigation
             }>
 
@@ -44,15 +53,3 @@ export function Discovery({route, navigation}: DiscoveryProps) {
         </View>
     );
 }
-const pageStyles = StyleSheet.create({
-    background: {
-        flex: 1,
-        backgroundColor: '#95bdf3',
-    },
-    car_preview_list: {
-        flex: 1,
-        paddingLeft: 25,
-        paddingRight: 25,
-        maxHeight: window.innerHeight,
-    }
-});

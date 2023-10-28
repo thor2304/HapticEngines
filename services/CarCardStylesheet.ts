@@ -1,11 +1,21 @@
-import {ColorValue, FlexStyle, TextStyle} from "react-native";
-import {CarCardStyleSheetI} from "../types/StyleSheetTypes";
+import {CarCardStyleSheetI, CarPreviewCard} from "../types/StyleSheetTypes";
 import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
 
 
 export function getCarCardStylesheet() : CarCardStyleSheetI{
     const theme = useContext(ThemeContext).theme
+
+    const carPreviewCard: CarPreviewCard = {
+        minHeight: 150,
+        borderRadius: 25,
+        overflow: 'hidden',
+        justifyContent: 'space-between',
+        marginTop: 12,
+        marginBottom: 12,
+        backgroundColor: theme.contrastColor,
+        padding: 7,
+    }
 
     return {
         bold: {
@@ -22,15 +32,7 @@ export function getCarCardStylesheet() : CarCardStyleSheetI{
             justifyContent: 'space-between',
             paddingRight: 15,
         },
-        car_preview_card: {
-            minHeight: 150,
-            borderRadius: 25,
-            overflow: 'hidden',
-            justifyContent: 'space-between',
-            marginTop: 25,
-            backgroundColor: theme.contrastColor,
-            padding: 7,
-        },
+        car_preview_card: carPreviewCard,
         car_preview_card_image_box: {
             flex: 0.6,
         },
@@ -40,9 +42,12 @@ export function getCarCardStylesheet() : CarCardStyleSheetI{
             flex: 0.38,
             Height: 150,
         },
+        car_preview_card_text: {
+            color: theme.textColor,
+        },
         car_image: {
             height: 150,
-            borderRadius: 25,
+            borderRadius: carPreviewCard.borderRadius - carPreviewCard.padding,
         }
     }
 }
