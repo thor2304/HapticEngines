@@ -3,14 +3,32 @@ import React, { useState, useEffect } from 'react';
 import { BackgroundFetchStatus } from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 import * as BackgroundFetch from 'expo-background-fetch';
-import BackgroundDbHandler from '../services/BackgroundDbHandler';
+import * as Notifications from 'expo-notifications';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackendHandler from '../services/BackendHandler';
+
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
 TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
   const now = Date.now();
-  
+
+  const expoPushToken = await Notifications.getExpoPushTokenAsync({
+    projectId: "85585586-7779-45d0-a2d2-e8acc246ea7b",
+  });
+
+  AsyncStorage.getItem('carHash').then((value => { console.log(value + " from LOCAL") }));
+
+  // if (BackendHandler.getCarHash().then((value => { value })) == AsyncStorage.getItem('carHash').then((value => { value }))) {
+  //   console.log("Same hash");
+  // }
+  // else {
+  //   console.log("Not same Hash");
+  //   BackendHandler.getCarHash().then((value) => {
+  //     AsyncStorage.setItem('carHash', JSON.stringify(value))
+  //   })
+  // }
+
   fetch('https://exp.host/--/api/v2/push/send', {
     method: 'POST',
     headers: {
@@ -19,22 +37,23 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "to": `ExponentPushToken[2ATCe1Is0q4YokiC0GZBr5]`,
+      "to": expoPushToken.data,
       "title": "Background Fetch test",
-      "body": "Background Fetch just ran",
+      "body": "Background fetch call at date: " + new Date(now).toString(),
       "priority": "high"
     }),
   }),
 
     console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
+
   return BackgroundFetch.BackgroundFetchResult.NewData;
 });
 
 async function registerBackgroundFetchAsync() {
   return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
-    minimumInterval:  0.1, // 15 minutes
+    minimumInterval: 60 * 0.1, // 15 minutes
     stopOnTerminate: true,
-    startOnBoot: true, 
+    startOnBoot: true,
   });
 }
 
@@ -44,29 +63,15 @@ async function unregisterBackgroundFetchAsync() {
 
 export default function BackgroundFetchScreen() {
 
-  const carHashPromise: Promise<string | undefined> = BackendHandler.getCarHash().catch((error) => {
-    console.log(error);
-  });
+  const [isRegistered, setIsRegistered] = React.useState(false);
+  const [status, setStatus] = React.useState(null);
 
-  let [data, setData] = useState<string>('');
-
-  useEffect(() => {
-    carHashPromise.then((hash) => {
-      setData(hash || 'no Data');
-    }).catch((error) => {
-      console.log(error);
-    });
-  }, []);
-
-  const [isRegistered, setIsRegistered] = useState<boolean>(false);
-  const [status, setStatus] = useState<BackgroundFetchStatus | null>(null);
-  
   React.useEffect(() => {
     checkStatusAsync();
   }, []);
-  
+
   const [fetchStatus, setFetchStatus] = useState<BackgroundFetchStatus | null>(null);
-  
+
   const checkStatusAsync = async () => {
 
     const status = await BackgroundFetch.getStatusAsync();
@@ -74,17 +79,17 @@ export default function BackgroundFetchScreen() {
     setFetchStatus(status);
     setIsRegistered(isRegistered);
   };
-  
+
   const toggleFetchTask = async () => {
     if (isRegistered) {
       await unregisterBackgroundFetchAsync();
     } else {
       await registerBackgroundFetchAsync();
     }
-    
+
     checkStatusAsync();
   };
-  
+
   return (
     <View style={styles.screen}>
       <View style={styles.textContainer}>
@@ -105,24 +110,21 @@ export default function BackgroundFetchScreen() {
       <Button
         title={isRegistered ? 'Unregister BackgroundFetch task' : 'Register BackgroundFetch task'}
         onPress={toggleFetchTask}
-        />
+      />
     </View>
   );
 }
-  
-  const styles = StyleSheet.create({
-    screen: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    textContainer: {
-      margin: 10,
-    },
-    boldText: {
-      fontWeight: 'bold',
-    },
-  });
 
-
-
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textContainer: {
+    margin: 10,
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+});
