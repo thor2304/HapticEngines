@@ -8,7 +8,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
 import {SoundPlayerProvider} from "./components/SoundPlayerContext";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import Discoverysvg from "./assets/logos/discovery.svg";
 import Profilesvg from "./assets/logos/profile.svg";
 import MyRentalssvg from "./assets/logos/myrentals.svg";
@@ -61,16 +61,20 @@ function ProfileStackScreen() {
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
     // Themes context
-    const theme = useContext(ThemeContext).theme;
+
+    const [theme, setTheme] = useState(useContext(ThemeContext).theme);
+
     return (
         <ThemeContextProvider>
             <SoundPlayerProvider>
                 <NavigationContainer>
                     <Tab.Navigator
-                        screenOptions={(route) => ({
+                        screenOptions={( route) => ({
                         headerShown: false,
                         tabBarStyle: { backgroundColor: theme.backgroundColor, height: 60, paddingBottom: 10, paddingTop: 10 },
+                        tabBarLabelStyle: { color: theme.textColor },
                         tabBarIcon: ({focused}) => {
+                            setTheme(useContext(ThemeContext).theme);
                             if (route.route.name === 'DiscoveryScreenStack') {
                                 return <Discoverysvg height={30}></Discoverysvg>
                             } else if (route.route.name === 'ProfileScreenStack') {
@@ -83,18 +87,23 @@ export default function App() {
                         <Tab.Screen
                             name="DiscoveryScreenStack"
                             component={DiscoveryStackScreen}
-                            options={{title: 'Discover'}}/>
+                            options={{title: 'Discover'}}
+                        />
                         <Tab.Screen
                             name="MyRentalsScreenStack"
                             component={MyRentalsStackScreen}
-                            options={{title: 'My Rentals'}}/>
+                            options={{title: 'My Rentals'}}
+                        />
                         <Tab.Screen
                             name="ProfileScreenStack"
                             component={ProfileStackScreen}
-                            options={{title: 'Profile'}}/>
+                            options={{title: 'Profile'}}
+                        />
                     </Tab.Navigator>
                 </NavigationContainer>
             </SoundPlayerProvider>
         </ThemeContextProvider>
     );
 }
+
+
