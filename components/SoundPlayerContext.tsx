@@ -7,11 +7,16 @@ export const SoundPlayerContext = createContext({playSound: async (soundfile: an
 export function SoundPlayerProvider({ children } : { children: React.ReactNode }) {
     const [sound, setSound] = useState<Audio.Sound>();
 
-    const playSound = async (soundFile: any) => {
+    const playSound = async (soundUrl: any) => {
         try {
-            console.log('Loading Sound');
-            const { sound } = await Audio.Sound.createAsync(soundFile);
-            setSound(sound);
+            console.log('Fetching Sound');
+            const response = await fetch(soundUrl);
+            const soundBlob = await response.blob();
+            const { sound } = await Audio.Sound.createAsync(soundBlob);
+
+            // console.log('Loading Sound');
+            // const { sound } = await Audio.Sound.createAsync(soundFile);
+            // setSound(sound);
 
             console.log('Playing Sound');
             await sound.playAsync();
