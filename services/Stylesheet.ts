@@ -1,6 +1,6 @@
 import {useContext} from "react";
-import {ThemeContext} from "./ThemeContext";
-import {buttonStyleType, containerStyleType, StyleSheetI, textStyleType} from "./types/StyleSheetTypes";
+import {ThemeContext} from "../components/ThemeContext";
+import {buttonStyleType, containerStyleType, StyleSheetI, textStyleType} from "../types/StyleSheetTypes";
 
 /**
  * The Stylesheet that is returned from this method is frozen and its properties cannot be changed.<br>
