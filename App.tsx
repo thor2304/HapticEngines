@@ -7,6 +7,9 @@ import {ContextExample} from "./screens/examples/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
+import { useState } from "react";
+import BackendHandler from "./services/BackendHandler";
+import { usePushNotifications } from "./Notifications/usePushNotifications";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -54,6 +57,9 @@ function ProfileStackScreen() {
 // Application
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
+    const test = usePushNotifications();
+    console.log(test)
+
     return (
         <ThemeContextProvider>
             <NavigationContainer>
@@ -75,3 +81,7 @@ export default function App() {
         </ThemeContextProvider>
     );
 }
+function getCarHash() {
+    throw new Error("Function not implemented.");
+}
+
