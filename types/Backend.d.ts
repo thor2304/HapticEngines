@@ -108,6 +108,7 @@ declare namespace Backend {
         email: string;
         phoneNumber: string;
         billingAddress: string;
+        image: string;
     }
 
 

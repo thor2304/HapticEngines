@@ -3,10 +3,10 @@ import {ThemeContext, ThemeContextProvider} from "./components/ThemeContext";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
-import {ContextExample} from "./screens/examples/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
+import {ProfileScreen} from "./screens/ProfileScreen";
 import {Platform} from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
@@ -55,8 +55,8 @@ function ProfileStackScreen() {
         <ProfileStack.Navigator>
             <ProfileStack.Screen
                 name="ProfileScreen"
-                component={ContextExample}
-                options={{headerShown: false}}/>
+                component={ProfileScreen}
+                options={{headerShown: false}} />
         </ProfileStack.Navigator>
     );
 }
