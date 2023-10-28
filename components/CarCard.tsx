@@ -3,7 +3,7 @@ import React from "react";
 import backendHandler from "../services/BackendHandler";
 import {CarCardPropsForReal} from "../screens/ScreenParams";
 
-const CarCard = ({params, navigation}: CarCardPropsForReal ) => {
+function CarCard({params, navigation}: CarCardPropsForReal ){
     const car = params.car
     const alignLeft = params.alignLeft
 

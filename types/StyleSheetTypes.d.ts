@@ -33,13 +33,6 @@ export interface CarCardStyleSheetI {
         justifyContent: FlexStyle['justifyContent'],
         paddingRight: FlexStyle['paddingRight'],
     },
-    car_preview_container: {
-        flex: FlexStyle['flex'],
-        paddingTop: FlexStyle['paddingTop'],
-        paddingLeft: FlexStyle['paddingLeft'],
-        paddingRight: FlexStyle['paddingRight'],
-        backgroundColor: ColorValue,
-    },
     car_preview_card: {
         minHeight: FlexStyle['minHeight'],
         borderRadius: number,

@@ -22,20 +22,13 @@ export function getCarCardStylesheet() : CarCardStyleSheetI{
             justifyContent: 'space-between',
             paddingRight: 15,
         },
-        car_preview_container: {
-            flex: 1,
-            paddingTop: 50,
-            paddingLeft: 25,
-            paddingRight: 25,
-            backgroundColor: theme.backgroundColor,
-        },
         car_preview_card: {
             minHeight: 150,
             borderRadius: 25,
             overflow: 'hidden',
             justifyContent: 'space-between',
             marginTop: 25,
-            backgroundColor: '#F0F6F6',
+            backgroundColor: theme.contrastColor,
             padding: 7,
         },
         car_preview_card_image_box: {
