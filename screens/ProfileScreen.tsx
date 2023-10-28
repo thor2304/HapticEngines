@@ -34,19 +34,13 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
         console.log(error)
     })
 
-
-    // View created to be able to add edit icon besides name in the future.
-    // TODO: Add functionality to allow users to edit their information.
-
     return (
         <View style={styles.container}>
             <Image
                 style={cStyle.image}
                 source={{uri: backendHandler.getImageUrl(user.image)}} />
 
-            <View>
-                <Text style={cStyle.name}>{user.name}</Text>
-            </View>
+            <Text style={cStyle.name}>{user.name}</Text>
             <Text style={cStyle.info}>{user.email}</Text>
             <Text style={cStyle.info}>{user.phoneNumber}</Text>
             <Text style={cStyle.info}>{user.billingAddress}</Text>
