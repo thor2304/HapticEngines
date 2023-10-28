@@ -4,12 +4,26 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    FlatList
+    FlatList,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../components/BackendHandler";
+import * as Haptics from 'expo-haptics';
+import {useSoundPlayer} from "../components/SoundPlayerContext";
+import {SoundPlayerContext} from "../components/SoundPlayerContext";
+import {Audio} from "expo-av";
 
+
+async function loadSound(): Promise<Audio.Sound> {
+    const soundObject = new Audio.Sound();
+
+    await soundObject.loadAsync({uri: "https://www.fesliyanstudios.com/soundeffects-download.php?id=4715"});
+
+    console.log(soundObject)
+    return soundObject;
+
+}
 
 /**
  * This is the primary screen, showing all the cars
@@ -18,7 +32,10 @@ import backendHandler from "../components/BackendHandler";
  */
 export function Discovery({route, navigation}: DiscoveryProps) {
 
-    // const allCars = await BackendHandler.getCars();
+    const {playSound} = useContext(SoundPlayerContext); // Access the playSound function from the SoundPlayerContext
+    const soundFile1 = require('../assets/test.mp3');
+    const soundObject = loadSound();
+
     const allCars: Backend.CarCollection = []
 
 
@@ -37,6 +54,8 @@ export function Discovery({route, navigation}: DiscoveryProps) {
                       renderItem={({item, index}) =>
                           <TouchableOpacity
                               onPress={() => {
+                                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy); // Haptic feedback
+                                  playSound(soundFile1); // Play the sound
                                   /* 1. Navigate to the Details route with params */
                                   navigation.navigate('CarDetailsScreen', {
                                       car: item,

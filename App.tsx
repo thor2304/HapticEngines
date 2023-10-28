@@ -7,6 +7,7 @@ import {ContextExample} from "./screens/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
+import {SoundPlayerProvider} from "./components/SoundPlayerContext";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -56,22 +57,24 @@ const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
     return (
         <ThemeContextProvider>
-            <NavigationContainer>
-                <Tab.Navigator screenOptions={{headerShown: false}}>
-                    <Tab.Screen
-                        name="DiscoveryScreenStack"
-                        component={DiscoveryStackScreen}
-                        options={{title: 'Discover'}}/>
-                    <Tab.Screen
-                        name="MyRentalsScreenStack"
-                        component={MyRentalsStackScreen}
-                        options={{title: 'My Rentals'}}/>
-                    <Tab.Screen
-                        name="ProfileScreenStack"
-                        component={ProfileStackScreen}
-                        options={{title: 'Profile'}}/>
-                </Tab.Navigator>
-            </NavigationContainer>
+            <SoundPlayerProvider>
+                <NavigationContainer>
+                    <Tab.Navigator screenOptions={{headerShown: false}}>
+                        <Tab.Screen
+                            name="DiscoveryScreenStack"
+                            component={DiscoveryStackScreen}
+                            options={{title: 'Discover'}}/>
+                        <Tab.Screen
+                            name="MyRentalsScreenStack"
+                            component={MyRentalsStackScreen}
+                            options={{title: 'My Rentals'}}/>
+                        <Tab.Screen
+                            name="ProfileScreenStack"
+                            component={ProfileStackScreen}
+                            options={{title: 'Profile'}}/>
+                    </Tab.Navigator>
+                </NavigationContainer>
+            </SoundPlayerProvider>
         </ThemeContextProvider>
     );
 }
