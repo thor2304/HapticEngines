@@ -32,8 +32,9 @@ export function Discovery({route, navigation}: DiscoveryProps) {
     })
 
     return (
-        <View style={pageStyles.car_preview_container}>
+        <View style={pageStyles.background}>
             <FlatList data={data}
+                      style={pageStyles.car_preview_list}
                       renderItem={({item, index}) =>
                         <CarCard
                             params={
@@ -64,12 +65,18 @@ const pageStyles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingRight: 15,
     },
-    car_preview_container: {
+    background: {
         flex: 1,
-        paddingTop: 50,
+        maxHeight: window.innerHeight,
+        minWidth: window.innerWidth,
+        backgroundColor: '#FFF',
+    },
+    car_preview_list: {
+        flex: 1,
+        marginTop: 25,
         paddingLeft: 25,
         paddingRight: 25,
-        backgroundColor: '#FFF',
+        maxHeight: window.innerHeight,
     },
     car_preview_card: {
         minHeight: 150,

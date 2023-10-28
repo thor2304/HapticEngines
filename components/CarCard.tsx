@@ -55,13 +55,6 @@ const pageStyles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingRight: 15,
     },
-    car_preview_container: {
-        flex: 1,
-        paddingTop: 50,
-        paddingLeft: 25,
-        paddingRight: 25,
-        backgroundColor: '#FFF',
-    },
     car_preview_card: {
         minHeight: 150,
         borderRadius: 25,
