@@ -73,7 +73,6 @@ const pageStyles = StyleSheet.create({
     },
     car_preview_list: {
         flex: 1,
-        marginTop: 25,
         paddingLeft: 25,
         paddingRight: 25,
         maxHeight: window.innerHeight,
