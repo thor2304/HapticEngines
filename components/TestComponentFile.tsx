@@ -1,8 +1,7 @@
 import React from 'react';
-
 import { Button } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import BackgroundTask from './BackgroundTask';
+import BackgroundTask from '../Notifications/BackgroundTask';
 
 
 type RootStackParamList = {
@@ -14,7 +13,7 @@ type TestComponentNavigationProp = NativeStackNavigationProp<RootStackParamList,
 const TestComponent = ({ navigation }: { navigation: TestComponentNavigationProp }) => {
     return (
         <>
-        <BackgroundTask></BackgroundTask>
+            <BackgroundTask></BackgroundTask>
             <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
         </>
     );
