@@ -63,8 +63,11 @@ export default function App() {
             console.log('error')
         }
         else {
-            AsyncStorage.setItem('carHash', value)
-        }});
+            AsyncStorage.setItem('carHash', value).finally(() => {
+                console.log('carHash set')
+            })
+        }
+    });
 
     return (
         <ThemeContextProvider>
