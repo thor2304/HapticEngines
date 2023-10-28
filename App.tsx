@@ -1,5 +1,5 @@
 import {NavigationContainer} from "@react-navigation/native";
-import {ThemeContextProvider} from "./components/ThemeContext";
+import {ThemeContext, ThemeContextProvider} from "./components/ThemeContext";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
@@ -10,6 +10,10 @@ import {NavigatorParamList} from "./screens/ScreenParams";
 import {Platform} from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
+import {useContext, useState} from "react";
+import DiscoverySvg from "./assets/logos/discovery.svg";
+import ProfileSvg from "./assets/logos/profile.svg";
+import MyRentalsSvg from "./assets/logos/myrentals.svg";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -69,26 +73,48 @@ export default function App() {
         NavigationBar.setVisibilityAsync("hidden").then(r =>{});
     }
 
+    // Themes context
+
+    const [theme, setTheme] = useState(useContext(ThemeContext).theme);
+
     return (
         <ThemeContextProvider>
-            <CustomSafeAreaView>
-                <NavigationContainer>
-                    <Tab.Navigator screenOptions={{headerShown: false}}>
-                        <Tab.Screen
-                            name="DiscoveryScreenStack"
-                            component={DiscoveryStackScreen}
-                            options={{title: 'Discover'}}/>
-                        <Tab.Screen
-                            name="MyRentalsScreenStack"
-                            component={MyRentalsStackScreen}
-                            options={{title: 'My Rentals'}}/>
-                        <Tab.Screen
-                            name="ProfileScreenStack"
-                            component={ProfileStackScreen}
-                            options={{title: 'Profile'}}/>
-                    </Tab.Navigator>
-                </NavigationContainer>
-            </CustomSafeAreaView>
+                <CustomSafeAreaView>
+                    <NavigationContainer>
+                        <Tab.Navigator
+                            screenOptions={( route) => ({
+                            headerShown: false,
+                            tabBarStyle: { backgroundColor: theme.backgroundColor, height: 60, paddingBottom: 10, paddingTop: 10 },
+                            tabBarLabelStyle: { color: theme.textColor },
+                            tabBarIcon: ({focused}) => {
+                                setTheme(useContext(ThemeContext).theme);
+                                if (route.route.name === 'DiscoveryScreenStack') {
+                                    return <DiscoverySvg height={30}></DiscoverySvg>
+                                } else if (route.route.name === 'ProfileScreenStack') {
+                                    return <ProfileSvg height={25}></ProfileSvg>
+                                } else if (route.route.name === 'MyRentalsScreenStack') {
+                                    return <MyRentalsSvg height={25}></MyRentalsSvg>
+                                }
+                            },
+                        })}>
+                            <Tab.Screen
+                                name="DiscoveryScreenStack"
+                                component={DiscoveryStackScreen}
+                                options={{title: 'Discover'}}
+                            />
+                            <Tab.Screen
+                                name="MyRentalsScreenStack"
+                                component={MyRentalsStackScreen}
+                                options={{title: 'My Rentals'}}
+                            />
+                            <Tab.Screen
+                                name="ProfileScreenStack"
+                                component={ProfileStackScreen}
+                                options={{title: 'Profile'}}
+                            />
+                        </Tab.Navigator>
+                    </NavigationContainer>
+                </CustomSafeAreaView>
         </ThemeContextProvider>
     );
 }
