@@ -1,24 +1,6 @@
 import {ColorValue, FlexAlignType, FlexStyle} from "react-native";
 
-export interface ColorPalette {
-    contrast: string;
-    text: string;
-    background: string;
-}
-
-export const lightColors: ColorPalette = {
-    contrast: "#3081d3",
-    text: "#000000",
-    background: "#9ae5ff"
-}
-
-export const darkColors: ColorPalette = {
-    contrast: "#3081d3",
-    text: "#ffffff",
-    background: "#12364f"
-}
-
-export interface StyleSheet {
+export interface StyleSheetI {
     container: {
         flex: number;
         backgroundColor: ColorValue;
@@ -35,3 +17,13 @@ export interface StyleSheet {
         color: ColorValue;
     }
 }
+
+export type buttonStyleType = { backgroundColor: ColorValue; color: ColorValue };
+export type containerStyleType = {
+    flex: number;
+    backgroundColor: ColorValue;
+    color: ColorValue;
+    alignItems: FlexAlignType;
+    justifyContent: FlexStyle["justifyContent"]
+};
+export type textStyleType = { color: ColorValue; backgroundColor: ColorValue };

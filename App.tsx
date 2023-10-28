@@ -1,63 +1,77 @@
-import {StyleSheet} from "./components/ColorPalette"
-import {View} from "react-native";
-import {ChildView} from "./components/CoolName";
-import {ContextExample} from "./components/ContextExample";
-import {TestComponent} from "./components/TestComponentFile";
 import {NavigationContainer} from "@react-navigation/native";
+import {ThemeContextProvider} from "./components/ThemeContext";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {CarDetailScreen} from "./screens/CarDetailScreen";
+import {MyRentals} from "./screens/MyRentals";
+import {ContextExample} from "./screens/examples/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {exampleContext} from "./components/ExampleContext";
-import {useState} from "react";
-import {Theme} from "./components/Themes";
-import {StarWars} from "./components/starWars";
+import {Discovery} from "./screens/Discovery";
+import {NavigatorParamList} from "./screens/ScreenParams";
 
-const Tab = createBottomTabNavigator();
+const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
-
-function HomeScreen() {
-    const [theme, setTheme] = useState<Theme>({
-        contrastColor: "#365050",
-        textColor: "#000000",
-        backgroundColor: "#00ffff"
-    })
-
-    // Stylesheet used is the interface from ColorPalette.tsx
-    const styles: StyleSheet = {
-        container: {
-            flex: 1,
-            backgroundColor: theme.backgroundColor,
-            color: theme.textColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        text: {
-            color: theme.textColor,
-            backgroundColor: theme.backgroundColor,
-        },
-        button: {
-            backgroundColor: theme.contrastColor,
-            color: theme.textColor,
-        }
-    }
-
+function DiscoveryStackScreen() {
     return (
-        <exampleContext.Provider value={{theme: theme, setState: setTheme}}>
-            <View style={styles.container}>
-                <ChildView name={"He"} description={"He"} styleSheet={styles}></ChildView>
-                <ContextExample></ContextExample>
-                <StarWars></StarWars>
-            </View>
-        </exampleContext.Provider>
+        <DiscoveryStack.Navigator>
+            <DiscoveryStack.Screen
+                name="DiscoveryScreen"
+                component={Discovery}
+                options={{headerShown: false}}/>
+            <DiscoveryStack.Screen
+                name="CarDetailsScreen"
+                component={CarDetailScreen}/>
+        </DiscoveryStack.Navigator>
     );
 }
-export default function App() {
 
+const MyRentalsStack = createNativeStackNavigator<NavigatorParamList>();
+
+function MyRentalsStackScreen() {
     return (
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="TestComponent" component={TestComponent} />
-                <Tab.Screen name="ContextExample" component={ContextExample} />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <MyRentalsStack.Navigator>
+            <MyRentalsStack.Screen
+                name="MyRentalsScreen"
+                component={MyRentals}
+                options={{headerShown: false}}/>
+        </MyRentalsStack.Navigator>
+    );
+}
+
+// This type is used to define the parameters passed to the ProfileScreen
+const ProfileStack = createNativeStackNavigator<NavigatorParamList>();
+
+function ProfileStackScreen() {
+    return (
+        <ProfileStack.Navigator>
+            <ProfileStack.Screen
+                name="ProfileScreen"
+                component={ContextExample}
+                options={{headerShown: false}}/>
+        </ProfileStack.Navigator>
+    );
+}
+
+// Application
+const Tab = createBottomTabNavigator<NavigatorParamList>();
+export default function App() {
+    return (
+        <ThemeContextProvider>
+            <NavigationContainer>
+                <Tab.Navigator screenOptions={{headerShown: false}}>
+                    <Tab.Screen
+                        name="DiscoveryScreenStack"
+                        component={DiscoveryStackScreen}
+                        options={{title: 'Discover'}}/>
+                    <Tab.Screen
+                        name="MyRentalsScreenStack"
+                        component={MyRentalsStackScreen}
+                        options={{title: 'My Rentals'}}/>
+                    <Tab.Screen
+                        name="ProfileScreenStack"
+                        component={ProfileStackScreen}
+                        options={{title: 'Profile'}}/>
+                </Tab.Navigator>
+            </NavigationContainer>
+        </ThemeContextProvider>
     );
 }
