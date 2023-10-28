@@ -10,13 +10,13 @@ import {NavigatorParamList} from "./screens/ScreenParams";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
-function HomeStackScreen() {
-    return(
+function DiscoveryStackScreen() {
+    return (
         <DiscoveryStack.Navigator>
             <DiscoveryStack.Screen
                 name="DiscoveryScreen"
                 component={Discovery}
-                options={{headerShown: false}} />
+                options={{headerShown: false}}/>
             <DiscoveryStack.Screen
                 name="CarDetailsScreen"
                 component={CarDetailScreen}/>
@@ -24,15 +24,15 @@ function HomeStackScreen() {
     );
 }
 
-
 const MyRentalsStack = createNativeStackNavigator<NavigatorParamList>();
+
 function MyRentalsStackScreen() {
-    return(
+    return (
         <MyRentalsStack.Navigator>
             <MyRentalsStack.Screen
                 name="MyRentalsScreen"
                 component={MyRentals}
-                options={{headerShown: false}} />
+                options={{headerShown: false}}/>
         </MyRentalsStack.Navigator>
     );
 }
@@ -41,12 +41,12 @@ function MyRentalsStackScreen() {
 const ProfileStack = createNativeStackNavigator<NavigatorParamList>();
 
 function ProfileStackScreen() {
-    return(
+    return (
         <ProfileStack.Navigator>
             <ProfileStack.Screen
                 name="ProfileScreen"
                 component={ContextExample}
-                options={{headerShown: false}} />
+                options={{headerShown: false}}/>
         </ProfileStack.Navigator>
     );
 }
@@ -57,17 +57,17 @@ export default function App() {
     return (
         <ThemeContextProvider>
             <NavigationContainer>
-                <Tab.Navigator screenOptions={{ headerShown: false}}>
+                <Tab.Navigator screenOptions={{headerShown: false}}>
                     <Tab.Screen
-                        name="DiscoveryScreen"
-                        component={HomeStackScreen}
-                        options={{title: 'Discover'}} />
+                        name="DiscoveryScreenStack"
+                        component={DiscoveryStackScreen}
+                        options={{title: 'Discover'}}/>
                     <Tab.Screen
-                        name="MyRentalsScreen"
+                        name="MyRentalsScreenStack"
                         component={MyRentalsStackScreen}
                         options={{title: 'My Rentals'}}/>
                     <Tab.Screen
-                        name="ProfileScreen"
+                        name="ProfileScreenStack"
                         component={ProfileStackScreen}
                         options={{title: 'Profile'}}/>
                 </Tab.Navigator>
