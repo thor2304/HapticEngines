@@ -36,7 +36,6 @@ export function playHapticFeedbackMultipleTimes(id: number) {
         for (let i = 0; i < hapticTimings.length; i++) {
             await delay(hapticTimings[i]);
             playHaptic(hapticFeedbackStyles[i]);
-            console.log("Haptic played", hapticFeedbackStyles[i])
         }
     })();
 }
