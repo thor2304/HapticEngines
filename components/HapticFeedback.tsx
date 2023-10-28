@@ -11,7 +11,6 @@ function playHaptic(feedBackStyle: Haptics.ImpactFeedbackStyle) {
 function getlistOfTimesBetweenHaptics(id: number) : number[] {
     const json = require('../assets/haptic.json');
     const jsonObject = json[id];
-    console.log(jsonObject.timings);
     return jsonObject.timings;
 }
 
