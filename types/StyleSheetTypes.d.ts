@@ -1,4 +1,4 @@
-import {ColorValue, DimensionValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
+import {ColorValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
 
 export interface StyleSheetI {
     container: {
@@ -16,6 +16,10 @@ export interface StyleSheetI {
         backgroundColor: ColorValue;
         color: ColorValue;
     }
+    background: {
+        flex: FlexStyle['flex'],
+        backgroundColor: ColorValue
+    }
 }
 
 export interface CarPreviewCard {
@@ -29,6 +33,18 @@ export interface CarPreviewCard {
     padding: number,
 }
 
+export interface CarListStyleSheetI {
+    car_list: {
+        flex: FlexStyle['flex'],
+        paddingLeft: FlexStyle['paddingLeft'],
+        paddingRight: FlexStyle['paddingRight'],
+    },
+    car_list_title: {
+        fontWeight: TextStyle['fontWeight'],
+        fontSize: TextStyle['fontSize'],
+        color: ColorValue,
+    }
+}
 export interface CarCardStyleSheetI {
     bold: {
         fontWeight: TextStyle['fontWeight']
@@ -63,7 +79,10 @@ export interface CarCardStyleSheetI {
     }
 }
 
-
+export type backgroundStyleType = {
+    flex: FlexStyle['flex'],
+    backgroundColor: ColorValue
+}
 export type buttonStyleType = { backgroundColor: ColorValue; color: ColorValue };
 export type containerStyleType = {
     flex: number;
