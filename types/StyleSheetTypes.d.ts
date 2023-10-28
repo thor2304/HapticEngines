@@ -1,4 +1,4 @@
-import {ColorValue, DimensionValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
+import {ColorValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
 
 export interface StyleSheetI {
     container: {
