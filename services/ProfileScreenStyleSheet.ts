@@ -8,13 +8,11 @@ export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
 
     return {
         name: {
-            fontFamily: 'Inter',
             fontSize: 32,
             fontWeight: '700',
             color: theme.textColor,
         },
         details: {
-            fontFamily: 'Inter',
             fontSize: 24,
             fontWeight: '700',
             color: theme.subTextColor,
@@ -39,10 +37,15 @@ export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
         },
         button: {
             backgroundColor: theme.contrastColor,
-            padding: 5,
-            minWidth: 100,
+            paddingVertical: 5,
+            minWidth: 150,
             borderRadius: 10,
             alignItems: 'center',
+        },
+        buttonText: {
+            fontSize: 12,
+            fontWeight: '700',
+            color: theme.subTextColor,
         }
     }
 }

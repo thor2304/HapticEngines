@@ -19,8 +19,16 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
     const context = useContext(ThemeContext);
     const styles: StyleSheetI = getDefaultStyleSheet();
 
+    const [buttonText, setButtonText] = useState("Dark theme");
+
     function changeState() {
         context.setTheme(context.theme === darkTheme ? lightTheme : darkTheme)
+        if (context.theme === lightTheme) {
+            setButtonText("Light theme")
+        }
+        if (context.theme === darkTheme) {
+            setButtonText("Dark theme")
+        }
     }
 
     let [user, setUser] = useState<Backend.User>({
@@ -44,7 +52,7 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
     return (
         <View style={styles.container}>
             <Pressable style={pageStyles.button} onPress={changeState}>
-                <Text style={pageStyles.details}>Button</Text>
+                <Text style={pageStyles.details}>{buttonText}</Text>
             </Pressable>
             <View style={pageStyles.backgroundCard}>
                 <Image

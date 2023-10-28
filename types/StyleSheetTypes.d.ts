@@ -65,13 +65,11 @@ export interface CarCardStyleSheetI {
 
 export interface ProfileScreenStylesheetI {
     name: {
-        fontFamily: TextStyle['fontFamily'],
         fontSize: TextStyle['fontSize'],
         fontWeight: TextStyle['fontWeight'],
         color: TextStyle['color'],
     },
     details: {
-        fontFamily: TextStyle['fontFamily'],
         fontSize: TextStyle['fontSize'],
         fontWeight: TextStyle['fontWeight'],
         color: ColorValue,
@@ -96,10 +94,15 @@ export interface ProfileScreenStylesheetI {
     },
     button: {
         backgroundColor: ColorValue,
-        padding: FlexStyle['padding'],
+        paddingVertical: FlexStyle['paddingVertical'],
         minWidth: FlexStyle['minWidth'],
         borderRadius: number,
         alignItems: FlexStyle['alignItems'],
+    },
+    buttonText: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: ColorValue,
     }
 }
 
