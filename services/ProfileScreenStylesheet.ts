@@ -4,6 +4,7 @@ import {ThemeContext} from "../components/ThemeContext";
 
 export function getProfileScreenStylesheet() : ProfileScreenStylesheetI {
     const theme = useContext(ThemeContext).theme
+    const imageSize = 128
 
     return {
         name: {
@@ -14,13 +15,27 @@ export function getProfileScreenStylesheet() : ProfileScreenStylesheetI {
         },
         details: {
             fontFamily: 'Inter',
-            fontSize: 26,
+            fontSize: 24,
             fontWeight: '700',
             color: theme.subTextColor,
         },
+        detailsGroup: {
+            alignItems: 'center',
+        },
         image: {
-            width: 128,
-            height: 128,
-        }
+            width: imageSize,
+            height: imageSize,
+            borderRadius: imageSize/2,
+        },
+        backgroundCard: {
+            backgroundColor: theme.contrastColor,
+            margin: 10,
+            padding: 10,
+            minHeight: 320,
+            minWidth: 300,
+            borderRadius: 25,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+        },
     }
 }

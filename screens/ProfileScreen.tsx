@@ -38,14 +38,17 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
 
     return (
         <View style={styles.container}>
-            <Image
-                style={pageStyle.image}
-                source={{uri: backendHandler.getImageUrl(user.image)}} />
-
-            <Text style={pageStyle.name}>{user.name}</Text>
-            <Text style={pageStyle.details}>{user.email}</Text>
-            <Text style={pageStyle.details}>{user.phoneNumber}</Text>
-            <Text style={pageStyle.details}>{user.billingAddress}</Text>
+            <View style={pageStyle.backgroundCard}>
+                <Image
+                    style={pageStyle.image}
+                    source={{uri: backendHandler.getImageUrl(user.image)}} />
+                <Text style={pageStyle.name}>{user.name}</Text>
+                <View style={pageStyle.detailsGroup}>
+                    <Text style={pageStyle.details}>{user.email}</Text>
+                    <Text style={pageStyle.details}>{user.phoneNumber}</Text>
+                    <Text style={pageStyle.details}>{user.billingAddress}</Text>
+                </View>
+            </View>
         </View>
     );
 }

@@ -29,11 +29,25 @@ export interface ProfileScreenStylesheetI {
         fontFamily: TextStyle['fontFamily'],
         fontSize: TextStyle['fontSize'],
         fontWeight: TextStyle['fontWeight'],
-        color: TextStyle['color'],
+        color: ColorValue,
     },
+    detailsGroup: {
+        alignItems: FlexStyle['alignItems'],
+    }
     image: {
-        width: number,
-        height: number,
+        width: FlexStyle['width'],
+        height: FlexStyle['height'],
+        borderRadius: number,
+    },
+    backgroundCard: {
+        backgroundColor: ColorValue,
+        margin: FlexStyle['margin'],
+        padding: FlexStyle['padding'],
+        minHeight: FlexStyle['minHeight'],
+        minWidth: FlexStyle['minWidth'],
+        borderRadius: number,
+        alignItems: FlexStyle['alignItems'],
+        justifyContent: FlexStyle['justifyContent'],
     }
 }
 
