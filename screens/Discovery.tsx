@@ -28,8 +28,7 @@ export function Discovery({route, navigation}: DiscoveryProps) {
             backgroundColor: theme.backgroundColor,
         }
     });
-
-    // const allCars = await BackendHandler.getCars();
+    
     const allCars: Backend.CarCollection = []
 
     let [data, setData] = useState(allCars);
