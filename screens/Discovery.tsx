@@ -9,21 +9,8 @@ import {
 import React, {useContext, useState} from "react";
 import {DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../components/BackendHandler";
-import * as Haptics from 'expo-haptics';
-import {useSoundPlayer} from "../components/SoundPlayerContext";
 import {SoundPlayerContext} from "../components/SoundPlayerContext";
-import {Audio} from "expo-av";
-
-
-async function loadSound(): Promise<Audio.Sound> {
-    const soundObject = new Audio.Sound();
-
-    await soundObject.loadAsync({uri: "https://www.fesliyanstudios.com/soundeffects-download.php?id=4715"});
-
-    console.log(soundObject)
-    return soundObject;
-
-}
+import {playHapticFeedbackMultipleTimes} from "../components/HapticFeedback";
 
 /**
  * This is the primary screen, showing all the cars
@@ -32,13 +19,11 @@ async function loadSound(): Promise<Audio.Sound> {
  */
 export function Discovery({route, navigation}: DiscoveryProps) {
 
+    // For playing sounds (only local files work)
     const {playSound} = useContext(SoundPlayerContext); // Access the playSound function from the SoundPlayerContext
     const soundFile1 = require('../assets/test.mp3');
-    const soundObject = loadSound();
 
     const allCars: Backend.CarCollection = []
-
-
     let [data, setData] = useState(allCars);
 
     backendHandler.getCars()
@@ -54,8 +39,7 @@ export function Discovery({route, navigation}: DiscoveryProps) {
                       renderItem={({item, index}) =>
                           <TouchableOpacity
                               onPress={() => {
-                                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy); // Haptic feedback
-                                  playSound(soundFile1); // Play the sound
+                                  playHapticFeedbackMultipleTimes(0) // Haptic feedback
                                   /* 1. Navigate to the Details route with params */
                                   navigation.navigate('CarDetailsScreen', {
                                       car: item,
