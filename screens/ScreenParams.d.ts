@@ -9,6 +9,12 @@ type CarCardParams = {
     alignLeft: boolean
 }
 
+type CarListParams = {
+    data: Backend.CarCollection,
+    switchAlignment: boolean,
+
+}
+
 // This type is used to define the parameters passed to the CarDetailsScreen and the DiscoveryScreen
 type NavigatorParamList = {
     CarDetailsScreen: CarDetailParams;
@@ -35,9 +41,18 @@ export type discoveryNavigation = DiscoveryProps.navigation
 // Props for MyRentalsScreen
 export type MyRentalsProps = NativeStackScreenProps<NavigatorParamList, 'MyRentalsScreen'>
 
+
+
 // Component params:
 export type CarCardPropsForReal = {
     params: CarCardParams,
     navigation: discoveryNavigation,
     children?: never[]
 }
+
+export type CarListProps = {
+    params: CarListParams,
+    navigation: discoveryNavigation,
+    children?: never[]
+}
+
