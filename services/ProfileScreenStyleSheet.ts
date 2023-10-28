@@ -2,7 +2,7 @@ import {ProfileScreenStylesheetI} from "../types/StyleSheetTypes";
 import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
 
-export function getProfileScreenStylesheet() : ProfileScreenStylesheetI {
+export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
     const theme = useContext(ThemeContext).theme
     const imageSize = 128
 
@@ -25,7 +25,7 @@ export function getProfileScreenStylesheet() : ProfileScreenStylesheetI {
         image: {
             width: imageSize,
             height: imageSize,
-            borderRadius: imageSize/2,
+            borderRadius: imageSize / 2,
         },
         backgroundCard: {
             backgroundColor: theme.contrastColor,
@@ -37,5 +37,12 @@ export function getProfileScreenStylesheet() : ProfileScreenStylesheetI {
             alignItems: 'center',
             justifyContent: 'space-between',
         },
+        button: {
+            backgroundColor: theme.contrastColor,
+            padding: 5,
+            minWidth: 100,
+            borderRadius: 10,
+            alignItems: 'center',
+        }
     }
 }

@@ -1,10 +1,12 @@
 import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {StyleSheetI} from "../types/StyleSheetTypes";
-import {Text, View, Image} from "react-native";
-import React, {useState} from "react";
+import {Text, View, Image, Pressable} from "react-native";
+import React, {useContext, useState} from "react";
 import {ProfileProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
-import {getProfileScreenStylesheet} from "../services/ProfileScreenStylesheet";
+import {getProfileScreenStyleSheet} from "../services/ProfileScreenStyleSheet";
+import {darkTheme, lightTheme} from "../components/Themes";
+import {ThemeContext} from "../components/ThemeContext";
 
 /**
  * This is the profile screen, which shows information about the user.
@@ -13,10 +15,13 @@ import {getProfileScreenStylesheet} from "../services/ProfileScreenStylesheet";
  */
 export function ProfileScreen({route, navigation} : ProfileProps) {
     const userID = 2;
-    const pageStyle = getProfileScreenStylesheet()
-
-    // Stylesheet used is the interface from ColorPalette.tsx
+    const pageStyles = getProfileScreenStyleSheet();
+    const context = useContext(ThemeContext);
     const styles: StyleSheetI = getDefaultStyleSheet();
+
+    function changeState() {
+        context.setTheme(context.theme === darkTheme ? lightTheme : darkTheme)
+    }
 
     let [user, setUser] = useState<Backend.User>({
         id: 0,
@@ -25,7 +30,7 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
         phoneNumber: "Phone number unavailable",
         billingAddress: "Billing address unavailable",
         image: "404_img.png",
-    });
+    })
 
     backendHandler.getUser(userID).then((user) => {
         if (user == undefined){
@@ -38,17 +43,20 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
 
     return (
         <View style={styles.container}>
-            <View style={pageStyle.backgroundCard}>
+            <Pressable style={pageStyles.button} onPress={changeState}>
+                <Text style={pageStyles.details}>Button</Text>
+            </Pressable>
+            <View style={pageStyles.backgroundCard}>
                 <Image
-                    style={pageStyle.image}
-                    source={{uri: backendHandler.getImageUrl(user.image)}} />
-                <Text style={pageStyle.name}>{user.name}</Text>
-                <View style={pageStyle.detailsGroup}>
-                    <Text style={pageStyle.details}>{user.email}</Text>
-                    <Text style={pageStyle.details}>{user.phoneNumber}</Text>
-                    <Text style={pageStyle.details}>{user.billingAddress}</Text>
+                    style={pageStyles.image}
+                    source={{uri: backendHandler.getImageUrl(user.image)}}/>
+                <Text style={pageStyles.name}>{user.name}</Text>
+                <View style={pageStyles.detailsGroup}>
+                    <Text style={pageStyles.details}>{user.email}</Text>
+                    <Text style={pageStyles.details}>{user.phoneNumber}</Text>
+                    <Text style={pageStyles.details}>{user.billingAddress}</Text>
                 </View>
             </View>
         </View>
-    );
+    )
 }

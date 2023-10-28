@@ -78,7 +78,7 @@ export interface ProfileScreenStylesheetI {
     },
     detailsGroup: {
         alignItems: FlexStyle['alignItems'],
-    }
+    },
     image: {
         width: FlexStyle['width'],
         height: FlexStyle['height'],
@@ -93,6 +93,13 @@ export interface ProfileScreenStylesheetI {
         borderRadius: number,
         alignItems: FlexStyle['alignItems'],
         justifyContent: FlexStyle['justifyContent'],
+    },
+    button: {
+        backgroundColor: ColorValue,
+        padding: FlexStyle['padding'],
+        minWidth: FlexStyle['minWidth'],
+        borderRadius: number,
+        alignItems: FlexStyle['alignItems'],
     }
 }
 

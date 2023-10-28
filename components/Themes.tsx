@@ -3,7 +3,7 @@ import {darkColors, lightColors} from "./ColorPalette";
 
 export interface Theme {
     textColor: ColorValue;
-    subTextColor: ColorValue
+    subTextColor: ColorValue;
     backgroundColor: ColorValue;
     contrastColor: ColorValue;
 }
