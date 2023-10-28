@@ -1,9 +1,10 @@
 import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {StyleSheetI} from "../types/StyleSheetTypes";
-import {Text, View, StyleSheet, Image} from "react-native";
+import {Text, View, Image} from "react-native";
 import React, {useState} from "react";
 import {ProfileProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
+import {getProfileScreenStylesheet} from "../services/ProfileScreenStylesheet";
 
 /**
  * This is the profile screen, which shows information about the user.
@@ -12,6 +13,7 @@ import backendHandler from "../services/BackendHandler";
  */
 export function ProfileScreen({route, navigation} : ProfileProps) {
     const userID = 2;
+    const pageStyle = getProfileScreenStylesheet()
 
     // Stylesheet used is the interface from ColorPalette.tsx
     const styles: StyleSheetI = getDefaultStyleSheet();
@@ -37,31 +39,13 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
     return (
         <View style={styles.container}>
             <Image
-                style={cStyle.image}
+                style={pageStyle.image}
                 source={{uri: backendHandler.getImageUrl(user.image)}} />
 
-            <Text style={cStyle.name}>{user.name}</Text>
-            <Text style={cStyle.info}>{user.email}</Text>
-            <Text style={cStyle.info}>{user.phoneNumber}</Text>
-            <Text style={cStyle.info}>{user.billingAddress}</Text>
+            <Text style={pageStyle.name}>{user.name}</Text>
+            <Text style={pageStyle.details}>{user.email}</Text>
+            <Text style={pageStyle.details}>{user.phoneNumber}</Text>
+            <Text style={pageStyle.details}>{user.billingAddress}</Text>
         </View>
     );
 }
-
-const cStyle = StyleSheet.create ({
-    name: {
-        fontFamily: 'Inter',
-        fontSize: 32,
-        fontWeight: '700'
-    },
-    info: {
-        fontFamily: 'Inter',
-        fontSize: 26,
-        fontWeight: '700',
-        color: '#BFBFBF'
-    },
-    image: {
-        width: 128,
-        height: 128
-    }
-});

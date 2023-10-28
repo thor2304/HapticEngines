@@ -1,4 +1,4 @@
-import {ColorValue, FlexAlignType, FlexStyle} from "react-native";
+import {ColorValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
 
 export interface StyleSheetI {
     container: {
@@ -15,6 +15,25 @@ export interface StyleSheetI {
     button: {
         backgroundColor: ColorValue;
         color: ColorValue;
+    }
+}
+
+export interface ProfileScreenStylesheetI {
+    name: {
+        fontFamily: TextStyle['fontFamily'],
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: TextStyle['color'],
+    },
+    details: {
+        fontFamily: TextStyle['fontFamily'],
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: TextStyle['color'],
+    },
+    image: {
+        width: number,
+        height: number,
     }
 }
 
