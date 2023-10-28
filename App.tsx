@@ -10,7 +10,6 @@ import {NavigatorParamList} from "./screens/ScreenParams";
 import {Platform} from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
-import {SoundPlayerProvider} from "./components/SoundPlayerContext";
 import {useContext, useState} from "react";
 import DiscoverySvg from "./assets/logos/discovery.svg";
 import ProfileSvg from "./assets/logos/profile.svg";
@@ -77,7 +76,6 @@ export default function App() {
 
     return (
         <ThemeContextProvider>
-            <SoundPlayerProvider>
                 <CustomSafeAreaView>
                     <NavigationContainer>
                         <Tab.Navigator
@@ -114,7 +112,6 @@ export default function App() {
                         </Tab.Navigator>
                     </NavigationContainer>
                 </CustomSafeAreaView>
-            </SoundPlayerProvider>
         </ThemeContextProvider>
     );
 }

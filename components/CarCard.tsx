@@ -3,6 +3,7 @@ import React from "react";
 import backendHandler from "../services/BackendHandler";
 import {CarCardPropsForReal} from "../screens/ScreenParams";
 import {getCarCardStylesheet} from "../services/CarCardStylesheet";
+import {playHapticFeedbackMultipleTimes} from "./HapticFeedback";
 
 function CarCard({params, navigation}: CarCardPropsForReal ){
     const car = params.car
@@ -13,6 +14,7 @@ function CarCard({params, navigation}: CarCardPropsForReal ){
     return (
         <TouchableOpacity
             onPress={() => {
+                playHapticFeedbackMultipleTimes(0) // Haptic feedback
                 /* 1. Navigate to the Details route with params */
                 navigation.navigate('CarDetailsScreen', {
                     car: car,
