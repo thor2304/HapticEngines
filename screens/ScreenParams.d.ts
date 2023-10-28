@@ -15,6 +15,9 @@ type NavigatorParamList = {
     DiscoveryScreen: DiscoveryParams;
     MyRentalsScreen: RentalParams;
     ProfileScreen: ProfileParams;
+    DiscoveryScreenStack: undefined;
+    MyRentalsScreenStack: undefined;
+    ProfileScreenStack: undefined;
     CarCard: CarCardParams;
 }
 
