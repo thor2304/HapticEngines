@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "the-travelling-car-salesman",
-    "slug": "thetravellingcarsalesman",
+    "slug": "the-travelling-car-salesman",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
