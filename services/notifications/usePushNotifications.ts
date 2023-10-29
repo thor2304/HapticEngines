@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
@@ -16,7 +16,7 @@ export function usePushNotifications(): PushNotificationstate {
             shouldPlaySound: false,
             shouldSetBadge: false,
         }),
-        });
+    });
 
     const [expoPushToken, setExpoPushToken] = useState<Notifications.ExpoPushToken | undefined>();
     const [notification, setNotification] = useState<Notifications.Notification | undefined>();
@@ -25,7 +25,7 @@ export function usePushNotifications(): PushNotificationstate {
 
     async function registerForPushNotificationsAsync() {
         let token;
-        if(Device.isDevice){
+        if (Device.isDevice) {
             const { status: existingStatus } = await Notifications.getPermissionsAsync();
             let finalStatus = existingStatus;
 
@@ -38,20 +38,24 @@ export function usePushNotifications(): PushNotificationstate {
                 alert("Failed to get push token for push notification!");
                 return;
             }
-            token = await Notifications.getExpoPushTokenAsync ({
+            /**
+             * Expo constants is information that remains constant.
+            Project id is pulled from App.JSON "expo"
+            and should always be precent as we are using expo libraries.
+            https://docs.expo.dev/versions/latest/sdk/constants/
+             */
+            token = await Notifications.getExpoPushTokenAsync({
                 projectId: Constants.expoConfig?.extra?.eas.projectId,
             });
-        }   
-        else{
+        }
+        else {
             alert("Physical device is needed for push noti");
-            }  
+        }
 
-        if(Platform.OS === 'android'){
+        if (Platform.OS === 'android') {
             Notifications.setNotificationChannelAsync('default', {
                 name: 'default',
                 importance: Notifications.AndroidImportance.MAX,
-                vibrationPattern: [0, 250, 250, 250],
-                lightColor: '#FF231F7C',
             });
         }
         return token;
@@ -59,28 +63,27 @@ export function usePushNotifications(): PushNotificationstate {
 
     useEffect(() => {
         registerForPushNotificationsAsync()
-            .then((token) => 
-            {
+            .then((token) => {
                 setExpoPushToken(token)
             })
 
-            notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
-                setNotification(notification);
-            });
+        notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
+            setNotification(notification);
+        });
 
-            responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
-                console.log(response);
-            });
+        responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
+            console.log(response);
+        });
 
 
-    return () => {
-        Notifications.removeNotificationSubscription(notificationListener.current!);
-        Notifications.removeNotificationSubscription(responseListener.current!);
-    };
+        return () => {
+            Notifications.removeNotificationSubscription(notificationListener.current!);
+            Notifications.removeNotificationSubscription(responseListener.current!);
+        };
 
     }, []);
 
-    return{
+    return {
         expoPushToken,
         notification,
     }
