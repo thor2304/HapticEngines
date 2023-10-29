@@ -30,11 +30,8 @@ class BackendHandlerClass {
     }
 
     async getCarHash(): Promise<Backend.CarHash | undefined> {
-        const [carHash, setCarHash] = useState<Backend.CarHash>()
-
-        fetchFromAPIUnderlyingText("cars/hash", setCarHash, validateCarCollection)
-
-        return carHash
+        // return "heheheh"
+        return await fetchFromAPIUnderlyingText("cars/hash")
     }
 
     async getManufacturer(id: number): Promise<Backend.Manufacturer | undefined> {
@@ -120,17 +117,9 @@ function fetchFromAPIUnderlying(endpoint: string,
 }
 
 // fetch from api but response.text instead
-function fetchFromAPIUnderlyingText(endpoint: string,
-                                    setDataOption: React.Dispatch<React.SetStateAction<any>>,
-                                    validatorFunction: (possibleCollection: any) => any): void {
-    useEffect(() => {
-        fetch(apiURL + "/" + endpoint)
-            .then(response => response.text())
-            // .then(json => {
-            //     return validatorFunction(json)
-            // })
-            .then(json => setDataOption(json))
-    }, [])
+async function fetchFromAPIUnderlyingText(endpoint: string): Promise<string> {
+    const response = await fetch(apiURL + "/" + endpoint)
+    return response.text()
 }
 
 

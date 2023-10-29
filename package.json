@@ -13,6 +13,7 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.13",
+    "@react-native-async-storage/async-storage": "^1.19.3",
     "expo": "~49.0.8",
     "expo-background-fetch": "~11.3.0",
     "expo-notifications": "~0.20.1",

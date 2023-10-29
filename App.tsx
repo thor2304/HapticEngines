@@ -57,18 +57,6 @@ function ProfileStackScreen() {
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
 
-    //could be extracted to a method
-    BackendHandler.getCarHash().then((value) => {
-        if (value == null || value == undefined) {
-            console.log('error')
-        }
-        else {
-            AsyncStorage.setItem('carHash', value).finally(() => {
-                console.log('carHash set')
-            })
-        }
-    });
-
     return (
         <ThemeContextProvider>
             <NavigationContainer>

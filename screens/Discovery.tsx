@@ -18,10 +18,8 @@ import {CarCard} from "../components/CarCard";
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
 export function Discovery({route, navigation}: DiscoveryProps) {
-
     // const allCars = await BackendHandler.getCars();
     const allCars: Backend.CarCollection = []
-
 
     let [data, setData] = useState(allCars);
 
