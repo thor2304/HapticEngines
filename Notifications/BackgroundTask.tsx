@@ -11,40 +11,50 @@ import BackendHandler from '../services/BackendHandler';
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
 TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
+
   const now = Date.now();
-
-  const expoPushToken = await Notifications.getExpoPushTokenAsync({
-    projectId: "85585586-7779-45d0-a2d2-e8acc246ea7b",
-  });
-
-  AsyncStorage.getItem('carHash').then((value => { console.log(value + " from LOCAL") }));
-
-  // if (BackendHandler.getCarHash().then((value => { value })) == AsyncStorage.getItem('carHash').then((value => { value }))) {
-  //   console.log("Same hash");
-  // }
-  // else {
-  //   console.log("Not same Hash");
-  //   BackendHandler.getCarHash().then((value) => {
-  //     AsyncStorage.setItem('carHash', JSON.stringify(value))
-  //   })
-  // }
-
-  fetch('https://exp.host/--/api/v2/push/send', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Accept-encoding': 'gzip, deflate',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      "to": expoPushToken.data,
-      "title": "Background Fetch test",
-      "body": "Background fetch call at date: " + new Date(now).toString(),
-      "priority": "high"
-    }),
-  }),
-
-    console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
+        const expoPushToken = await Notifications.getExpoPushTokenAsync({
+          projectId: "85585586-7779-45d0-a2d2-e8acc246ea7b",
+        });
+      
+        const [carHash, setCarHash] = useState<string | null>(null);
+        BackendHandler.getCarHash().then((value) => { 
+          setCarHash(value || "null")
+          console.log(value + " from getCarHash");
+          return value
+        });
+        
+        //   // Call getCarHash and await its result
+        //   const carHash = await BackendHandler.getCarHash();
+      
+        //   if (carHash) {
+        //     console.log("Car Hash from getCarHash:", carHash);
+        //     // Now you can use the carHash as needed
+        //   } else {
+        //     console.log("Failed to fetch car hash.");
+        //   }
+      
+        //   AsyncStorage.getItem('carHash').then((value) => {
+        //     console.log(value + " from LOCAL");
+        //   });
+      
+          fetch('https://exp.host/--/api/v2/push/send', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Accept-encoding': 'gzip, deflate',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              "to": expoPushToken.data,
+              "title": "Background Fetch test",
+              "body": "Background fetch call at date: " + new Date(now).toString(),
+              "priority": "high"
+            }),
+          });
+      
+          console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
+      
 
   return BackgroundFetch.BackgroundFetchResult.NewData;
 });
@@ -62,6 +72,8 @@ async function unregisterBackgroundFetchAsync() {
 }
 
 export default function BackgroundFetchScreen() {
+
+
 
   const [isRegistered, setIsRegistered] = React.useState(false);
   const [status, setStatus] = React.useState(null);
