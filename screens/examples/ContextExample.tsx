@@ -5,7 +5,7 @@ import {darkTheme, lightTheme} from "../../components/Themes";
 import {getDefaultStyleSheet} from "../../services/Stylesheet";
 import {ProfileProps} from "../ScreenParams";
 import {StyleSheetI} from "../../types/StyleSheetTypes";
-import BackgroundTask from "../../services/notifications/BackgroundTask";
+import BackgroundTask from '../../components/BackgroundFetchBtn';
 
 export function ContextExample ({route, navigation}: ProfileProps) {
     const context = useContext(ThemeContext);
