@@ -1,11 +1,12 @@
-import {getDefaultStyleSheet} from "../services/Stylesheet"
-import {StyleSheetI} from "../types/StyleSheetTypes";
-import {Text, View, Image, Pressable} from "react-native";
 import React, {useContext, useState} from "react";
-import {ProfileProps} from "./ScreenParams";
+import {Text, View, Image, Pressable} from "react-native";
 import backendHandler from "../services/BackendHandler";
+import {ProfileProps} from "./ScreenParams";
+import {StyleSheetI} from "../types/StyleSheetTypes";
+import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {getProfileScreenStyleSheet} from "../services/ProfileScreenStyleSheet";
 import {darkTheme, lightTheme} from "../components/Themes";
+import {UserContext} from "../components/UserContext";
 import {ThemeContext} from "../components/ThemeContext";
 
 /**
@@ -14,8 +15,8 @@ import {ThemeContext} from "../components/ThemeContext";
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
 export function ProfileScreen({route, navigation} : ProfileProps) {
-    const userID = 2;
     const pageStyles = getProfileScreenStyleSheet();
+    const userID = useContext(UserContext);
     const context = useContext(ThemeContext);
     const styles: StyleSheetI = getDefaultStyleSheet();
 
