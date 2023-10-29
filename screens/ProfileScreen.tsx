@@ -6,8 +6,8 @@ import {StyleSheetI} from "../types/StyleSheetTypes";
 import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {getProfileScreenStyleSheet} from "../services/ProfileScreenStyleSheet";
 import {darkTheme, lightTheme} from "../components/Themes";
-import {UserContext} from "../components/UserContext";
 import {ThemeContext} from "../components/ThemeContext";
+import UserContext from "../components/UserContext";
 
 /**
  * This is the profile screen, which shows information about the user.
@@ -16,18 +16,19 @@ import {ThemeContext} from "../components/ThemeContext";
  */
 export function ProfileScreen({route, navigation} : ProfileProps) {
     const pageStyles = getProfileScreenStyleSheet();
-    const userID = useContext(UserContext);
-    const context = useContext(ThemeContext);
+    // TODO: Har tilføjet en værdi der henter context fra UserContext og ændret backendhandleren's givede værdi til at bruge den i stedet for.
+    const userContext = useContext(UserContext);
+    const themeContext = useContext(ThemeContext);
     const styles: StyleSheetI = getDefaultStyleSheet();
 
     const [buttonText, setButtonText] = useState("Dark theme");
 
     function changeState() {
-        context.setTheme(context.theme === darkTheme ? lightTheme : darkTheme)
-        if (context.theme === lightTheme) {
+        themeContext.setTheme(themeContext.theme === darkTheme ? lightTheme : darkTheme)
+        if (themeContext.theme === lightTheme) {
             setButtonText("Light theme")
         }
-        if (context.theme === darkTheme) {
+        if (themeContext.theme === darkTheme) {
             setButtonText("Dark theme")
         }
     }
@@ -41,7 +42,7 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
         image: "404_img.png",
     })
 
-    backendHandler.getUser(userID).then((user) => {
+    backendHandler.getUser(userContext).then((user) => {
         if (user == undefined){
             return
         }
