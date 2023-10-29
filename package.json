@@ -28,7 +28,7 @@
     "expo-navigation-bar": "~2.3.0",
     "react-native-svg": "13.9.0",
     "react-native-vector-icons": "^10.0.1",
-    "react-native-svg-transformer": "^1.1.0"
+    "react-native-svg-transformer": "^1.1.0",
     "react-native-background-fetch": "^4.2.1",
     "react-native-push-notification": "^8.1.1",
     "expo-device": "~5.4.0",

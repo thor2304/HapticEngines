@@ -40,7 +40,7 @@ async function saveCarHash(hash: string): Promise<void> {
 async function getAndSaveCarHash(): Promise<void> {
     // fetch the hash
     const hash = await fetchCarHash()
-    // save that bish
+    // save the hash
     await saveCarHash(hash)
 }
 
@@ -87,6 +87,7 @@ async function getExpoToken(){
 }
 
 async function backgroundTask() {
+
     console.log("Background task started")
 
     const carHashFromServer = await fetchCarHash();
@@ -130,7 +131,8 @@ export default function BackgroundFetchScreen() {
     const [status, setStatus] = React.useState(null);
 
     React.useEffect(() => {
-        checkStatusAsync().then(r => r);
+        checkStatusAsync().then(r => r)
+        
     }, []);
 
     const [fetchStatus, setFetchStatus] = useState<BackgroundFetchStatus | null>(null);
