@@ -96,13 +96,25 @@ class BackendHandlerClass {
     //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
 }
 
-
+/**
+ * This is used when the endpoint matches one of the endpoints on the server directly
+ * @param endpoint
+ * @param setDataOption
+ * @param validatorFunction
+ */
 function fetchFromAPI(endpoint: Backend.Endpoint,
                       setDataOption: React.Dispatch<React.SetStateAction<any>>,
                       validatorFunction: (possibleCollection: any) => any): void {
     fetchFromAPIUnderlying(endpoint, setDataOption, validatorFunction)
 }
 
+/**
+ * This is used when the endpoint is custom built with parameters.
+ * If possible use {@link fetchFromAPI} instead
+ * @param endpoint
+ * @param setDataOption
+ * @param validatorFunction
+ */
 function fetchFromAPIUnderlying(endpoint: string,
                                 setDataOption: React.Dispatch<React.SetStateAction<any>>,
                                 validatorFunction: (possibleCollection: any) => any): void {

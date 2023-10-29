@@ -56,7 +56,6 @@ function ProfileStackScreen() {
 // Application
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 export default function App() {
-
     return (
         <ThemeContextProvider>
             <NavigationContainer>
