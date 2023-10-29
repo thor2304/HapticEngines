@@ -5,7 +5,7 @@ type RentalParams = undefined;
 type ProfileParams = {userId: number};
 type CarDetailParams = { car: Backend.car };
 type CarCardParams = {
-    car: Backend.Car | Backend.Rental,
+    car: Backend.Car,
     alignLeft: boolean
 }
 
@@ -15,7 +15,7 @@ type CarListParams = {
 }
 
 type CarSectionListParams = {
-    data: {title?: string, data: (backend.RentalCollection) | (backend.CarCollection)}[],
+    data: {title?: string, data: Collection}[],
     switchAlignment: boolean,
 }
 
