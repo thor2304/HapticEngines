@@ -6,6 +6,7 @@ import MyRentalsSvg from "../assets/logos/myrentals.svg";
 import {RouteProp} from "@react-navigation/native";
 import {NavigatorParamList} from "../screens/ScreenParams";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {TouchableOpacity} from "react-native";
 
 export function CustomTabNavigator ({children} : {children: React.ReactNode}) {
 
@@ -15,10 +16,12 @@ export function CustomTabNavigator ({children} : {children: React.ReactNode}) {
 
     return (
         <Tab.Navigator
+            backBehavior={"history"}
             screenOptions={( route: {route: RouteProp<NavigatorParamList, keyof NavigatorParamList>, navigation: any})  => ({
                 headerShown: false,
                 tabBarStyle: { backgroundColor: theme.backgroundColor, height: 60, paddingBottom: 10, paddingTop: 10 },
                 tabBarLabelStyle: { color: theme.textColor },
+                tabBarButton: (prop) => <TouchableOpacity{...prop} />,
                 tabBarIcon: ({focused} : any) => {
                     if (route.route.name === 'DiscoveryScreenStack') {
                         return <DiscoverySvg height={30}></DiscoverySvg>
