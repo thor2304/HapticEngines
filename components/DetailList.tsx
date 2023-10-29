@@ -1,25 +1,28 @@
 import {CarListProps} from "../screens/ScreenParams";
 import {DetailCard} from "./DetailCard";
-import {FlatList, StyleSheet} from "react-native";
+import {FlatList, Image, StyleSheet, View} from "react-native";
 import React from "react";
+import backendHandler from "../services/BackendHandler";
+import {getDetailStylesheet} from "../services/DetailStyleSheet";
 
 export function DetailList({params, navigation}: CarListProps){
     const data = params.data
     const switchAlignment = params.switchAlignment
 
+    const pageStyles = getDetailStylesheet()
+
     return (
         <FlatList data={data}
-                  style={pageStyles.car_preview_list}
+                  style={pageStyles}
                   renderItem={({item, index}) =>
-                      <DetailCard
-                          params={
-                              {
-                                  car: item,
-                                  alignLeft: (switchAlignment ? (index % 2 == 0) : true)
-                              }
-                          }
-                          navigation={navigation}>
-                      </DetailCard>
+                      <View style={pageStyles.detail_preview_card_image_box}>
+                          <Image
+                              style={pageStyles.detail_image}
+                              source={{
+                                  uri: backendHandler.getImageUrl(item.imageName),
+                              }}
+                          />
+                      </View>
                   }
         />
     )
