@@ -109,14 +109,21 @@ function fetchFromAPI(endpoint: Backend.Endpoint,
 function fetchFromAPIUnderlying(endpoint: string,
                                 setDataOption: React.Dispatch<React.SetStateAction<any>>,
                                 validatorFunction: (possibleCollection: any) => any): void {
+    const apiString = apiURL + "/" + endpoint
+
+
     useEffect(() => {
-        fetch(apiURL + "/" + endpoint)
-            .then(response => response.json())
+        fetch(apiString)
+            .then(response => response.json().catch(() => {
+                console.error("Invalid response from API, not valid JSON: " + apiString + " " + response)
+            }))
             .then(json => {
                 return validatorFunction(json)
             })
             .then(json => setDataOption(json))
     }, [])
+
+
 }
 
 

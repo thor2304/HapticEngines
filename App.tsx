@@ -11,16 +11,12 @@ import {Platform} from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
 import {CustomTabNavigator} from "./components/CustomTabNavigator";
-import userContext, {UserContextProvider} from "./components/UserContext";
+import {UserContextProvider} from "./components/UserContext";
 import User from "./types/classes/User";
 import UserContext from "./components/UserContext";
 import {useContext} from "react";
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
-
-// TODO: Har prøvet at assigne id'en her, ved ikke om der er et bedre sted at gøre det.
-const [user, setUser] = useContext(UserContext);
-setUser({id: 1});
 
 function DiscoveryStackScreen() {
     return (

@@ -8,7 +8,7 @@ export interface ColorPalette {
 export const lightColors: ColorPalette = {
     contrast: "#80b3d5",
     text: "#000000",
-    subText: "#BFBFBF",
+    subText: "#656565",
     background: "#9ae5ff"
 }
 
