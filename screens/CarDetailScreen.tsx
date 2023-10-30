@@ -4,7 +4,7 @@ import React, {useContext, useState} from "react";
 import {CarDetailsProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
 import {playHapticFeedbackMultipleTimes} from "../services/HapticFeedback";
-import {RentedContext} from "../components/examples/RentedContext";
+import {RentedContext} from "../components/RentedContext";
 
 /**
  * This is the screen that is displayed when the user clicks on a car in the Discovery screen.

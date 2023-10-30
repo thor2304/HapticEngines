@@ -12,7 +12,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
 import {CustomTabNavigator} from "./components/CustomTabNavigator";
 import {UserContextProvider} from "./components/UserContext";
-import {RentedContextProvider} from "./components/examples/RentedContext";
+import {RentedContextProvider} from "./components/RentedContext";
 
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
