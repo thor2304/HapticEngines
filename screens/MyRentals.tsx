@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {CarSectionListParams, MyRentalsProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
 import {getDefaultStyleSheet} from "../services/Stylesheet";
 import {CarSectionList} from "../components/CarSectionList";
+import {UserContext} from "../components/UserContext";
 
 export function MyRentals({route, navigation}: MyRentalsProps) {
     const pageStyles = getDefaultStyleSheet()
@@ -12,9 +13,10 @@ export function MyRentals({route, navigation}: MyRentalsProps) {
 
     let [data, setData] = useState(allRentalsByUser);
 
-    let userId = 1
 
-    backendHandler.getRentalsByUser(userId).then((rentals) => {
+    const userContext = useContext(UserContext)
+
+    backendHandler.getRentalsByUser(userContext.user.id).then((rentals) => {
         if (rentals === undefined) {
             return
         }
