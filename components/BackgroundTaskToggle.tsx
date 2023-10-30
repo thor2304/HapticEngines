@@ -11,7 +11,6 @@ import {
 import {getDefaultStyleSheet} from "../services/Stylesheet";
 
 export default function BackgroundFetchScreen() {
-    console.log("BackgroundFetchScreen")
     const [isRegistered, setIsRegistered] = React.useState(false);
 
     React.useEffect(() => {
