@@ -23,7 +23,6 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
     });
 
     const car: Backend.Car = route.params.car;
-    const alignLeft = route.params.alignLeft
 
     const viewStyles = getDetailStylesheet()
 
@@ -39,30 +38,34 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
                 navigation
             }>
             </DetailList>
-            <View style={alignLeft ? viewStyles.row : viewStyles.reverse_row}>
-                <View style={viewStyles.detail_preview_card_text_box}>
+            <View style={viewStyles.row}>
+                <View style={viewStyles.detail_preview_card_rumble_box}>
                     <Text style={viewStyles.detail_preview_card_text}>Rumble</Text>
                 </View>
-                <View style={viewStyles.detail_preview_card_text_box}>
+                <View style={viewStyles.detail_preview_card_specs_box}>
                     <Text style={viewStyles.detail_preview_card_text}>{car.engineCCSize}</Text>
                     <Text style={viewStyles.detail_preview_card_text}>Doors: {car.doors}</Text>
                     <Text style={viewStyles.detail_preview_card_text}>Fuel type: {car.fuelType.name}</Text>
                     <Text style={viewStyles.detail_preview_card_text}>Wheel size: {car.wheelSize}</Text>
                 </View>
             </View>
-            <View style={alignLeft ? viewStyles.row : viewStyles.reverse_row}>
-                <View style={viewStyles.detail_preview_card_text_box}>
+            <View style={viewStyles.row}>
+                <View style={viewStyles.detail_preview_card_description_box}>
                     <Text style={[viewStyles.detail_preview_card_text]}>Description</Text>
                     <Text style={viewStyles.detail_preview_card_text}>{car.description}</Text>
                 </View>
-                <View style={viewStyles.detail_preview_card_text_box}>
+                <View style={viewStyles.detail_preview_card_pricing_box}>
                     <Text style={viewStyles.detail_preview_card_text}>Pricing</Text>
                     <Text style={viewStyles.detail_preview_card_text}>{car.pricePerDay} / Day</Text>
                     <Text style={viewStyles.detail_preview_card_text}>{car.pricePerWeek} / Week</Text>
                 </View>
             </View>
             <View style={viewStyles.detail_button}>
-                <Button title={"Rent car"}></Button>
+                <Button title={"Rent car"} onPress={
+                    () => {
+                        console.log("Pressed rent car button")
+                    }
+                }></Button>
             </View>
         </View>
     );

@@ -93,7 +93,28 @@ export interface DetailStyleSheetI {
     detail_preview_card_image_box: {
         flex: FlexStyle['flex'],
     },
-    detail_preview_card_text_box: {
+    detail_preview_card_specs_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+    },
+    detail_preview_card_rumble_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+    },
+    detail_preview_card_pricing_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+    },
+    detail_preview_card_description_box: {
         flexDirection: FlexStyle['flexDirection'],
         justifyContent: FlexStyle['justifyContent'],
         flex: FlexStyle['flex'],

@@ -18,6 +18,13 @@ export function getDetailStylesheet() : DetailStyleSheetI{
     }
 
     return {
+        detail_button: {
+            backgroundColor: theme.contrastColor,
+            color: theme.textColor
+        },
+        detail_button_text: {
+            color: theme.textColor
+        },
         bold: {
             fontWeight: 'bold',
         },
@@ -34,12 +41,33 @@ export function getDetailStylesheet() : DetailStyleSheetI{
         },
         detail_preview_card: detailPreviewCard,
         detail_preview_card_image_box: {
-            flex: 0.6,
+            flex: 1,
         },
-        detail_preview_card_text_box: {
+        detail_preview_card_specs_box: {
             flexDirection: 'column',
             justifyContent: 'space-around',
-            flex: 0.38,
+            flex: 0.78,
+            Height: 150,
+            backgroundColor: theme.contrastColor,
+        },
+        detail_preview_card_rumble_box: {
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            flex: 0.18,
+            Height: 150,
+            backgroundColor: theme.contrastColor,
+        },
+        detail_preview_card_pricing_box: {
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            flex: 0.48,
+            Height: 150,
+            backgroundColor: theme.contrastColor,
+        },
+        detail_preview_card_description_box: {
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            flex: 0.48,
             Height: 150,
             backgroundColor: theme.contrastColor,
         },
@@ -50,5 +78,6 @@ export function getDetailStylesheet() : DetailStyleSheetI{
             height: 150,
             borderRadius: detailPreviewCard.borderRadius - detailPreviewCard.padding,
         }
+
     }
 }

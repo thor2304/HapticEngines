@@ -1,5 +1,4 @@
 import {CarListProps} from "../screens/ScreenParams";
-import {DetailCard} from "./DetailCard";
 import {FlatList, Image, StyleSheet, View} from "react-native";
 import React from "react";
 import backendHandler from "../services/BackendHandler";
@@ -13,7 +12,7 @@ export function DetailList({params, navigation}: CarListProps){
 
     return (
         <FlatList data={data}
-                  style={pageStyles}
+                  style={{borderWidth:5}}
                   renderItem={({item, index}) =>
                       <View style={pageStyles.detail_preview_card_image_box}>
                           <Image
