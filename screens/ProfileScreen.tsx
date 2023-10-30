@@ -8,6 +8,7 @@ import {getProfileScreenStyleSheet} from "../services/ProfileScreenStyleSheet";
 import {darkTheme, lightTheme} from "../components/Themes";
 import {ThemeContext} from "../components/ThemeContext";
 import {defaultUser, UserContext} from "../components/UserContext";
+import BackgroundFetchScreen from "../components/BackgroundTaskToggle";
 
 /**
  * This is the profile screen, which shows information about the user.
@@ -71,6 +72,7 @@ export function ProfileScreen({route, navigation}: ProfileProps) {
             <Pressable style={pageStyles.button} onPress={changeUser}>
                 <Text style={pageStyles.details}>Switch user</Text>
             </Pressable>
+            <BackgroundFetchScreen/>
         </View>
     )
 }
