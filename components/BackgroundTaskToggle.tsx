@@ -34,7 +34,7 @@ export default function BackgroundFetchScreen() {
         await updateStatusVariables();
     };
 
-    const defaultStyles = getDefaultStyleSheet()
+    const defaultStyles = getDefaultStyleSheet().copy()
 
     const customStyles = StyleSheet.create({
         textContainer: {
@@ -52,6 +52,8 @@ export default function BackgroundFetchScreen() {
             color: defaultStyles.text.color,
         }
     });
+
+    defaultStyles.container.flex = 0.5
 
     return (
         <View style={defaultStyles.container}>

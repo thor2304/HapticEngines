@@ -20,8 +20,6 @@ class BackendHandlerClass {
      * @throws Error if the response from the API is not valid
      */
     async getCars(): Promise<Backend.CarCollection> {
-        // Should of course be implemented, but the return hides ts errors
-
         const [cars, setCars] = useState<Backend.CarCollection>([])
 
         fetchFromAPI("cars", setCars, validateCarCollection)
@@ -87,13 +85,9 @@ class BackendHandlerClass {
         return rentals
     }
 
-
-
     getImageUrl(imageName: string): string {
         return apiURL + "/images/" + imageName
     }
-
-    //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
 }
 
 /**
@@ -118,14 +112,18 @@ function fetchFromAPI(endpoint: Backend.Endpoint,
 function fetchFromAPIUnderlying(endpoint: string,
                                 setDataOption: React.Dispatch<React.SetStateAction<any>>,
                                 validatorFunction: (possibleCollection: any) => any): void {
+    const apiString = apiURL + "/" + endpoint
+
     useEffect(() => {
-        fetch(apiURL + "/" + endpoint)
-            .then(response => response.json())
+        fetch(apiString)
+            .then(response => response.json().catch(() => {
+                console.error("Invalid response from API, not valid JSON: " + apiString + " " + response)
+            }))
             .then(json => {
                 return validatorFunction(json)
             })
             .then(json => setDataOption(json))
-    }, [])
+    }, [apiString])
 }
 
 // fetch from api but response.text instead
@@ -136,7 +134,8 @@ async function fetchFromAPIUnderlyingText(endpoint: string): Promise<string> {
 
 
 function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>, validatorFunction: (possibleCollection: any) => any): void {
-    fetchFromAPIUnderlying(endpoint + "/" + id, setDataOption, validatorFunction)
+    const apiString = endpoint + "/" + id
+    fetchFromAPIUnderlying(apiString, setDataOption, validatorFunction)
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {
