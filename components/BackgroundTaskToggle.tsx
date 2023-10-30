@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {BackgroundFetchStatus} from "expo-background-fetch";
 import * as BackgroundFetch from "expo-background-fetch";
 import * as TaskManager from "expo-task-manager";
-import {Button, Pressable, StyleSheet, Text, View} from "react-native";
+import {Pressable, StyleSheet, Text, View} from "react-native";
 import {
     BACKGROUND_FETCH_TASK,
     registerBackgroundFetchAsync,
@@ -72,11 +72,6 @@ export default function BackgroundFetchScreen() {
                 </Text>
             </Text>
             <View style={customStyles.textContainer}>
-                <Pressable
-                    title={isRegistered ? 'Unregister BackgroundFetch task' : 'Register BackgroundFetch task'}
-                    onPress={toggleFetchTask}
-                    style={defaultStyles.button}
-                />
                 <Pressable
                     onPress={toggleFetchTask}
                     style={({pressed}) => [
