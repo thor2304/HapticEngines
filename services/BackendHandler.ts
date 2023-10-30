@@ -20,8 +20,6 @@ class BackendHandlerClass {
      * @throws Error if the response from the API is not valid
      */
     async getCars(): Promise<Backend.CarCollection> {
-        // Should of course be implemented, but the return hides ts errors
-
         const [cars, setCars] = useState<Backend.CarCollection>([])
 
         fetchFromAPI("cars", setCars, validateCarCollection)
@@ -90,13 +88,9 @@ class BackendHandlerClass {
         return rentals
     }
 
-
-
     getImageUrl(imageName: string): string {
         return apiURL + "/images/" + imageName
     }
-
-    //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
 }
 
 
@@ -111,7 +105,6 @@ function fetchFromAPIUnderlying(endpoint: string,
                                 validatorFunction: (possibleCollection: any) => any): void {
     const apiString = apiURL + "/" + endpoint
 
-
     useEffect(() => {
         fetch(apiString)
             .then(response => response.json().catch(() => {
@@ -121,14 +114,13 @@ function fetchFromAPIUnderlying(endpoint: string,
                 return validatorFunction(json)
             })
             .then(json => setDataOption(json))
-    }, [])
-
-
+    }, [apiString])
 }
 
 
 function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>, validatorFunction: (possibleCollection: any) => any): void {
-    fetchFromAPIUnderlying(endpoint + "/" + id, setDataOption, validatorFunction)
+    const apiString = endpoint + "/" + id
+    fetchFromAPIUnderlying(apiString, setDataOption, validatorFunction)
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {

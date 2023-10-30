@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {Text, View, Image, Pressable} from "react-native";
 import backendHandler from "../services/BackendHandler";
 import {ProfileProps} from "./ScreenParams";
@@ -7,25 +7,23 @@ import {getDefaultStyleSheet} from "../services/Stylesheet"
 import {getProfileScreenStyleSheet} from "../services/ProfileScreenStyleSheet";
 import {darkTheme, lightTheme} from "../components/Themes";
 import {ThemeContext} from "../components/ThemeContext";
-import {UserContext} from "../components/UserContext";
+import {defaultUser, UserContext} from "../components/UserContext";
 
 /**
  * This is the profile screen, which shows information about the user.
  * @param route The parameters passed to this screen
  * @param navigation The navigation object passed to this screen, used to navigate to other screens
  */
-export function ProfileScreen({route, navigation} : ProfileProps) {
+export function ProfileScreen({route, navigation}: ProfileProps) {
     const userContext = useContext(UserContext);
     const themeContext = useContext(ThemeContext);
 
     const pageStyles = getProfileScreenStyleSheet();
     const styles: StyleSheetI = getDefaultStyleSheet();
 
-    console.log("Profile screen rerender User id: " + userContext.user)
-
     const [buttonText, setButtonText] = useState("Dark theme");
 
-    function changeState() {
+    function changeTheme() {
         themeContext.setTheme(themeContext.theme === darkTheme ? lightTheme : darkTheme)
         if (themeContext.theme === lightTheme) {
             setButtonText("Light theme")
@@ -35,53 +33,39 @@ export function ProfileScreen({route, navigation} : ProfileProps) {
         }
     }
 
-    const defaultUser: Backend.User = {
-        id: 0,
-        name: "Name unavailable",
-        email: "Email unavailable",
-        phoneNumber: "Phone number unavailable",
-        billingAddress: "Billing address unavailable",
-        image: "404_img.png",
-    }
+    const [userId, setUserId] = useState(defaultUser.id)
 
-    let [user, setUser] = useState<Backend.User>(defaultUser)
-
-    useEffect(() => {
-        backendHandler.getUser(userContext.user).then((user) => {
-            if (user == undefined){
-                user = defaultUser
-            }
-            setUser(user)
-        }).catch((error) => {
-            console.log(error)
-        })
+    backendHandler.getUser(userId).then((user) => {
+        if (user == undefined) {
+            user = defaultUser
+        }
+        userContext.setUser(user)
+    }).catch((error) => {
+        console.warn(error)
     })
 
-    function changeUser(){
-        console.log("Changing user")
-
-        if(userContext.user === 1){
-            userContext.setUser(2)
-            return
+    function changeUser() {
+        if (userContext.user.id === 1) {
+            setUserId(2)
+        } else {
+            setUserId(1)
         }
-
-        userContext.setUser(1)
     }
 
     return (
         <View style={styles.container}>
-            <Pressable style={pageStyles.button} onPress={changeState}>
+            <Pressable style={pageStyles.button} onPress={changeTheme}>
                 <Text style={pageStyles.details}>{buttonText}</Text>
             </Pressable>
             <View style={pageStyles.backgroundCard}>
                 <Image
                     style={pageStyles.image}
-                    source={{uri: backendHandler.getImageUrl(user.image)}}/>
-                <Text style={pageStyles.name}>{user.name}</Text>
+                    source={{uri: backendHandler.getImageUrl(userContext.user.image)}}/>
+                <Text style={pageStyles.name}>{userContext.user.name}</Text>
                 <View style={pageStyles.detailsGroup}>
-                    <Text style={pageStyles.details}>{user.email}</Text>
-                    <Text style={pageStyles.details}>{user.phoneNumber}</Text>
-                    <Text style={pageStyles.details}>{user.billingAddress}</Text>
+                    <Text style={pageStyles.details}>{userContext.user.email}</Text>
+                    <Text style={pageStyles.details}>{userContext.user.phoneNumber}</Text>
+                    <Text style={pageStyles.details}>{userContext.user.billingAddress}</Text>
                 </View>
             </View>
             <Pressable style={pageStyles.button} onPress={changeUser}>

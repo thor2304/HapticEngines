@@ -1,9 +1,20 @@
 import React, { createContext, useState } from "react";
 
-export const UserContext = createContext({ user: 0, setUser: (user: number) => {} });
+export const defaultUser: Backend.User = {
+    id: 1,
+    name: "Name unavailable",
+    email: "Email unavailable",
+    phoneNumber: "Phone number unavailable",
+    billingAddress: "Billing address unavailable",
+    image: "404_img.png",
+}
+
+export const UserContext = createContext({ user: defaultUser, setUser: (user: Backend.User) => {
+        console.log("User set to " + user + " in the wrong place")
+    } });
 
 export const UserContextProvider = ({ children } :{ children: React.ReactNode }) => {
-    const [user, setUser] = useState(1);
+    const [user, setUser] = useState(defaultUser);
 
     return (
         <UserContext.Provider value={{user, setUser}}>
@@ -11,5 +22,3 @@ export const UserContextProvider = ({ children } :{ children: React.ReactNode })
         </UserContext.Provider>
     );
 }
-
-// TODO: Har addet TODO: kommentarer de steder jeg har ændret noget i et forsøg på at få context id'et til at virke :)
