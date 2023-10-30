@@ -103,8 +103,8 @@ class BackendHandlerClass {
  * @param validatorFunction
  */
 function fetchFromAPI(endpoint: Backend.Endpoint,
-    setDataOption: React.Dispatch<React.SetStateAction<any>>,
-    validatorFunction: (possibleCollection: any) => any): void {
+                      setDataOption: React.Dispatch<React.SetStateAction<any>>,
+                      validatorFunction: (possibleCollection: any) => any): void {
     fetchFromAPIUnderlying(endpoint, setDataOption, validatorFunction)
 }
 
@@ -116,8 +116,8 @@ function fetchFromAPI(endpoint: Backend.Endpoint,
  * @param validatorFunction
  */
 function fetchFromAPIUnderlying(endpoint: string,
-    setDataOption: React.Dispatch<React.SetStateAction<any>>,
-    validatorFunction: (possibleCollection: any) => any): void {
+                                setDataOption: React.Dispatch<React.SetStateAction<any>>,
+                                validatorFunction: (possibleCollection: any) => any): void {
     useEffect(() => {
         fetch(apiURL + "/" + endpoint)
             .then(response => response.json())
