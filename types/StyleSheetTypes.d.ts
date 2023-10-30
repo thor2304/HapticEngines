@@ -1,4 +1,4 @@
-import {ColorValue, DimensionValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
+import {ColorValue, FlexAlignType, FlexStyle, TextStyle} from "react-native";
 
 export interface StyleSheetI {
     container: {
@@ -16,6 +16,10 @@ export interface StyleSheetI {
         backgroundColor: ColorValue;
         color: ColorValue;
     }
+    background: {
+        flex: FlexStyle['flex'],
+        backgroundColor: ColorValue
+    }
 }
 
 export interface CarPreviewCard {
@@ -29,6 +33,18 @@ export interface CarPreviewCard {
     padding: number,
 }
 
+export interface CarListStyleSheetI {
+    car_list: {
+        flex: FlexStyle['flex'],
+        paddingLeft: FlexStyle['paddingLeft'],
+        paddingRight: FlexStyle['paddingRight'],
+    },
+    car_list_title: {
+        fontWeight: TextStyle['fontWeight'],
+        fontSize: TextStyle['fontSize'],
+        color: ColorValue,
+    }
+}
 export interface CarCardStyleSheetI {
     bold: {
         fontWeight: TextStyle['fontWeight']
@@ -72,6 +88,52 @@ export interface DetailPreviewCard {
     marginBottom: FlexStyle['marginBottom'],
     backgroundColor: ColorValue,
     padding: number,
+}
+export type backgroundStyleType = {
+    flex: FlexStyle['flex'],
+    backgroundColor: ColorValue
+}
+export interface ProfileScreenStylesheetI {
+    name: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: TextStyle['color'],
+    },
+    details: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: ColorValue,
+    },
+    detailsGroup: {
+        alignItems: FlexStyle['alignItems'],
+    },
+    image: {
+        width: FlexStyle['width'],
+        height: FlexStyle['height'],
+        borderRadius: number,
+    },
+    backgroundCard: {
+        backgroundColor: ColorValue,
+        margin: FlexStyle['margin'],
+        padding: FlexStyle['padding'],
+        minHeight: FlexStyle['minHeight'],
+        minWidth: FlexStyle['minWidth'],
+        borderRadius: number,
+        alignItems: FlexStyle['alignItems'],
+        justifyContent: FlexStyle['justifyContent'],
+    },
+    button: {
+        backgroundColor: ColorValue,
+        paddingVertical: FlexStyle['paddingVertical'],
+        minWidth: FlexStyle['minWidth'],
+        borderRadius: number,
+        alignItems: FlexStyle['alignItems'],
+    },
+    buttonText: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: ColorValue,
+    }
 }
 
 export interface DetailStyleSheetI {

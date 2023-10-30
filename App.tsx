@@ -3,14 +3,16 @@ import {ThemeContextProvider} from "./components/ThemeContext";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
-import {ContextExample} from "./screens/examples/ContextExample";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Discovery} from "./screens/Discovery";
 import {NavigatorParamList} from "./screens/ScreenParams";
+import {ProfileScreen} from "./screens/ProfileScreen";
 import {Platform} from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
 import {CustomTabNavigator} from "./components/CustomTabNavigator";
+import {UserContextProvider} from "./components/UserContext";
+
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
@@ -40,6 +42,9 @@ function MyRentalsStackScreen() {
                 name="MyRentalsScreen"
                 component={MyRentals}
                 options={{headerShown: false}}/>
+            <MyRentalsStack.Screen
+                name="CarDetailsScreen"
+                component={CarDetailScreen}/>
         </MyRentalsStack.Navigator>
     );
 }
@@ -52,8 +57,8 @@ function ProfileStackScreen() {
         <ProfileStack.Navigator>
             <ProfileStack.Screen
                 name="ProfileScreen"
-                component={ContextExample}
-                options={{headerShown: false}}/>
+                component={ProfileScreen}
+                options={{headerShown: false}} />
         </ProfileStack.Navigator>
     );
 }
@@ -68,28 +73,30 @@ export default function App() {
     }
 
     return (
-        <ThemeContextProvider>
-            <CustomSafeAreaView>
-                <NavigationContainer>
-                    <CustomTabNavigator>
-                        <Tab.Screen
-                            name="DiscoveryScreenStack"
-                            component={DiscoveryStackScreen}
-                            options={{title: 'Discover'}}
-                        />
-                        <Tab.Screen
-                            name="MyRentalsScreenStack"
-                            component={MyRentalsStackScreen}
-                            options={{title: 'My Rentals'}}
-                        />
-                        <Tab.Screen
-                            name="ProfileScreenStack"
-                            component={ProfileStackScreen}
-                            options={{title: 'Profile'}}
-                        />
-                    </CustomTabNavigator>
-                </NavigationContainer>
-            </CustomSafeAreaView>
-        </ThemeContextProvider>
+        <UserContextProvider>
+            <ThemeContextProvider>
+                <CustomSafeAreaView>
+                    <NavigationContainer>
+                        <CustomTabNavigator>
+                            <Tab.Screen
+                                name="DiscoveryScreenStack"
+                                component={DiscoveryStackScreen}
+                                options={{title: 'Discover'}}
+                            />
+                            <Tab.Screen
+                                name="MyRentalsScreenStack"
+                                component={MyRentalsStackScreen}
+                                options={{title: 'My Rentals'}}
+                            />
+                            <Tab.Screen
+                                name="ProfileScreenStack"
+                                component={ProfileStackScreen}
+                                options={{title: 'Profile'}}
+                            />
+                        </CustomTabNavigator>
+                    </NavigationContainer>
+                </CustomSafeAreaView>
+            </ThemeContextProvider>
+        </UserContextProvider>
     );
 }
