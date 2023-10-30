@@ -79,6 +79,16 @@ export interface CarCardStyleSheetI {
     }
 }
 
+export interface DetailPreviewCard {
+    minHeight: FlexStyle['minHeight'],
+    borderRadius: number,
+    overflow: FlexStyle['overflow'],
+    justifyContent: FlexStyle['justifyContent'],
+    marginTop: FlexStyle['marginTop'],
+    marginBottom: FlexStyle['marginBottom'],
+    backgroundColor: ColorValue,
+    padding: number,
+}
 export type backgroundStyleType = {
     flex: FlexStyle['flex'],
     backgroundColor: ColorValue
@@ -125,6 +135,77 @@ export interface ProfileScreenStylesheetI {
         color: ColorValue,
     }
 }
+
+export interface DetailStyleSheetI {
+    bold: {
+        fontWeight: TextStyle['fontWeight']
+    },
+    row: {
+        flexDirection: FlexStyle['flexDirection'],
+    },
+    reverse_row: {
+        flexDirection: FlexStyle['flexDirection'],
+        flexWrap: FlexStyle['flexWrap'],
+        justifyContent: FlexStyle['justifyContent'],
+        paddingRight: FlexStyle['paddingRight'],
+    },
+    detail_preview_card: DetailPreviewCard,
+    detail_preview_card_image_box: {
+        flex: FlexStyle['flex'],
+    },
+    detail_text_container_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        Height: FlexStyle['height'],
+        MarginTop: FlexStyle['marginTop'],
+    },
+    detail_preview_card_specs_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
+    },
+    detail_preview_card_rumble_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
+    },
+    detail_preview_card_pricing_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
+    },
+    detail_preview_card_description_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        flex: FlexStyle['flex'],
+        Height: FlexStyle['height'],
+        backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
+    },
+    detail_preview_card_text: {
+        color: ColorValue,
+    },
+    detail_image: {
+        height: FlexStyle['height'],
+    }
+    detail_button: {
+        backgroundColor: ColorValue,
+        color: ColorValue,
+    }
+    detail_button_text: {
+        color: ColorValue,
+    }
+}
+
 
 export type buttonStyleType = { backgroundColor: ColorValue; color: ColorValue };
 export type containerStyleType = {
