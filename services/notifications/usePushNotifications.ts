@@ -8,7 +8,7 @@ export interface PushNotificationstate {
     expoPushToken: Notifications.ExpoPushToken | undefined;
 }
 
-export function usePushNotifications(): PushNotificationstate {
+export function PushNotifications(): PushNotificationstate {
     Notifications.setNotificationHandler({
         handleNotification: async () => ({
             shouldShowAlert: true,
