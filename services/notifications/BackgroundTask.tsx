@@ -1,13 +1,10 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { BackgroundFetchStatus } from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 import * as BackgroundFetch from 'expo-background-fetch';
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackendHandler from '../BackendHandler';
 
-const BACKGROUND_FETCH_TASK = 'background-fetch';
+export const BACKGROUND_FETCH_TASK = 'background-fetch';
 const expoProjectID = '85585586-7779-45d0-a2d2-e8acc246ea7b';
 const emptyResponse = "no response from server"
 const emptyLocal = "no hash saved local"
@@ -114,7 +111,7 @@ async function backgroundTask() {
 // Define the task with the system.
 TaskManager.defineTask(BACKGROUND_FETCH_TASK, backgroundTask);
 
-async function registerBackgroundFetchAsync() {
+export async function registerBackgroundFetchAsync() {
     await getAndSaveCarHash()
     return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
         minimumInterval: fetchInterval,
@@ -123,75 +120,6 @@ async function registerBackgroundFetchAsync() {
     });
 }
 
-async function unregisterBackgroundFetchAsync() {
+export async function unregisterBackgroundFetchAsync() {
     return BackgroundFetch.unregisterTaskAsync(BACKGROUND_FETCH_TASK);
 }
-
-
-export default function BackgroundFetchScreen() {
-    const [isRegistered, setIsRegistered] = React.useState(false);
-    const [status, setStatus] = React.useState(null);
-
-    React.useEffect(() => {
-        checkStatusAsync().then(r => r)
-
-    }, []);
-
-    const [fetchStatus, setFetchStatus] = useState<BackgroundFetchStatus | null>(null);
-
-    const checkStatusAsync = async () => {
-
-        const status = await BackgroundFetch.getStatusAsync();
-        const isRegistered = await TaskManager.isTaskRegisteredAsync(BACKGROUND_FETCH_TASK);
-        setFetchStatus(status);
-        setIsRegistered(isRegistered);
-    };
-
-    const toggleFetchTask = async () => {
-        if (isRegistered) {
-            await unregisterBackgroundFetchAsync();
-        } else {
-            await registerBackgroundFetchAsync();
-        }
-
-        await checkStatusAsync();
-    };
-
-    return (
-        <View style={styles.screen}>
-            <View style={styles.textContainer}>
-                <Text>
-                    Background fetch status:{' '}
-                    <Text style={styles.boldText}>
-                        {status && BackgroundFetch.BackgroundFetchStatus[status]}
-                    </Text>
-                </Text>
-                <Text>
-                    Background fetch task name:{' '}
-                    <Text style={styles.boldText}>
-                        {isRegistered ? BACKGROUND_FETCH_TASK : 'Not registered yet!'}
-                    </Text>
-                </Text>
-            </View>
-            <View style={styles.textContainer}></View>
-            <Button
-                title={isRegistered ? 'Unregister BackgroundFetch task' : 'Register BackgroundFetch task'}
-                onPress={toggleFetchTask}
-            />
-        </View>
-    );
-}
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textContainer: {
-        margin: 10,
-    },
-    boldText: {
-        fontWeight: 'bold',
-    },
-});
