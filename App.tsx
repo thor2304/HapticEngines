@@ -40,7 +40,7 @@ function MyRentalsStackScreen() {
                 name="MyRentalsScreen"
                 component={MyRentals}
                 options={{headerShown: false}}/>
-            <DiscoveryStack.Screen
+            <MyRentalsStack.Screen
                 name="CarDetailsScreen"
                 component={CarDetailScreen}/>
         </MyRentalsStack.Navigator>
