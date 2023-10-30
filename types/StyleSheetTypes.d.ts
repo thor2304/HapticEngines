@@ -126,7 +126,6 @@ export interface DetailStyleSheetI {
     },
     detail_image: {
         height: FlexStyle['height'],
-        borderRadius: number,
     }
     detail_button: {
         backgroundColor: ColorValue,

@@ -1,5 +1,5 @@
 import {CarListProps} from "../screens/ScreenParams";
-import {FlatList, Image, StyleSheet, View} from "react-native";
+import {FlatList, Image, StyleSheet, Text, View} from "react-native";
 import React from "react";
 import backendHandler from "../services/BackendHandler";
 import {getDetailStylesheet} from "../services/DetailStyleSheet";

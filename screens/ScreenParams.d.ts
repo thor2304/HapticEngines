@@ -3,7 +3,7 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 type DiscoveryParams = undefined;
 type RentalParams = undefined;
 type ProfileParams = {userId: number};
-type CarDetailParams = { car: Backend.car };
+type CarDetailParams = { car: Backend.Car };
 type CarCardParams = {
     car: Backend.Car,
     alignLeft: boolean

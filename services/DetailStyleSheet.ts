@@ -76,8 +76,6 @@ export function getDetailStylesheet() : DetailStyleSheetI{
         },
         detail_image: {
             height: 150,
-            borderRadius: detailPreviewCard.borderRadius - detailPreviewCard.padding,
         }
-
     }
 }
