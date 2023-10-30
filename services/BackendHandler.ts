@@ -30,8 +30,8 @@ class BackendHandlerClass {
     }
 
     async getCarHash(): Promise<Backend.CarHash | undefined> {
-        return "heheheh"
-        //return await fetchFromAPIUnderlyingText("cars/hash")
+        //return "heheheh"
+        return await fetchFromAPIUnderlyingText("cars/hash")
     }
 
     async getManufacturer(id: number): Promise<Backend.Manufacturer | undefined> {
