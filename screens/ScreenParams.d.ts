@@ -12,7 +12,11 @@ type CarCardParams = {
 type CarListParams = {
     data: Backend.CarCollection,
     switchAlignment: boolean,
+}
 
+type CarSectionListParams = {
+    sections: Array<{title?: string, data: Backend.CarCollection}>,
+    switchAlignment: boolean,
 }
 
 // This type is used to define the parameters passed to the CarDetailsScreen and the DiscoveryScreen
@@ -52,6 +56,12 @@ export type CarCardPropsForReal = {
 
 export type CarListProps = {
     params: CarListParams,
+    navigation: discoveryNavigation,
+    children?: never[]
+}
+
+export type CarSectionListProps = {
+    params: CarSectionListParams,
     navigation: discoveryNavigation,
     children?: never[]
 }
