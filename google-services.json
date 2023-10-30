@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1094387518518",
+    "project_id": "hapticengine-19300",
+    "storage_bucket": "hapticengine-19300.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094387518518:android:9961411b0c95aa5de69c97",
+        "android_client_info": {
+          "package_name": "com.the_travelling_car_salesman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIk0jA-x7v6-mGTL4Byk-7onWv2oOegGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

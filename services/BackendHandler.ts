@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Car from "../types/classes/Car";
 import Manufacturer from "../types/classes/Manufacturer";
 import User from "../types/classes/User";
@@ -28,11 +28,8 @@ class BackendHandlerClass {
     }
 
     async getCarHash(): Promise<Backend.CarHash | undefined> {
-        const [carHash, setCarHash] = useState<Backend.CarHash>()
-
-        fetchFromAPI("carHash", setCarHash, (possibleCollection: any) => possibleCollection)
-
-        return carHash
+        //return "heheheh"
+        return await fetchFromAPIUnderlyingText("cars/hash")
     }
 
     async getManufacturer(id: number): Promise<Backend.Manufacturer | undefined> {
@@ -93,13 +90,25 @@ class BackendHandlerClass {
     }
 }
 
-
+/**
+ * This is used when the endpoint matches one of the endpoints on the server directly
+ * @param endpoint
+ * @param setDataOption
+ * @param validatorFunction
+ */
 function fetchFromAPI(endpoint: Backend.Endpoint,
                       setDataOption: React.Dispatch<React.SetStateAction<any>>,
                       validatorFunction: (possibleCollection: any) => any): void {
     fetchFromAPIUnderlying(endpoint, setDataOption, validatorFunction)
 }
 
+/**
+ * This is used when the endpoint is custom built with parameters.
+ * If possible use {@link fetchFromAPI} instead
+ * @param endpoint
+ * @param setDataOption
+ * @param validatorFunction
+ */
 function fetchFromAPIUnderlying(endpoint: string,
                                 setDataOption: React.Dispatch<React.SetStateAction<any>>,
                                 validatorFunction: (possibleCollection: any) => any): void {
@@ -115,6 +124,12 @@ function fetchFromAPIUnderlying(endpoint: string,
             })
             .then(json => setDataOption(json))
     }, [apiString])
+}
+
+// fetch from api but response.text instead
+async function fetchFromAPIUnderlyingText(endpoint: string): Promise<string> {
+    const response = await fetch(apiURL + "/" + endpoint)
+    return response.text()
 }
 
 
