@@ -1,6 +1,12 @@
 import {useContext} from "react";
 import {ThemeContext} from "../components/ThemeContext";
-import {buttonStyleType, containerStyleType, StyleSheetI, textStyleType} from "../types/StyleSheetTypes";
+import {
+    backgroundStyleType,
+    buttonStyleType,
+    containerStyleType,
+    StyleSheetI,
+    textStyleType
+} from "../types/StyleSheetTypes";
 
 /**
  * The Stylesheet that is returned from this method is frozen and its properties cannot be changed.<br>
@@ -28,23 +34,31 @@ export function getDefaultStyleSheet(): MyStyleSheet {
         color: theme.textColor,
     }
 
-    return new FrozenStyleSheet(buttonStyle, containerStyle, textStyle);
+    const backgroundStyle: backgroundStyleType = {
+        flex: 1,
+        backgroundColor: theme.backgroundColor,
+    }
+
+    return new FrozenStyleSheet(buttonStyle, containerStyle, textStyle, backgroundStyle);
 }
 
 export class MyStyleSheet implements StyleSheetI {
     button: buttonStyleType;
     container: containerStyleType;
     text: textStyleType;
+    background: backgroundStyleType;
 
     /**
      * @param button
      * @param container
      * @param text
+     * @param background
      */
-    constructor(button: buttonStyleType, container: containerStyleType, text: textStyleType) {
+    constructor(button: buttonStyleType, container: containerStyleType, text: textStyleType, background: backgroundStyleType) {
         this.button = button;
         this.container = container;
         this.text = text;
+        this.background = background;
     }
 
     /**
@@ -55,14 +69,15 @@ export class MyStyleSheet implements StyleSheetI {
         const buttonCopy = {...this.button};
         const containerCopy = {...this.container};
         const textCopy = {...this.text};
+        const backgroundCopy = {...this.background}
 
-        return new MyStyleSheet(buttonCopy, containerCopy, textCopy);
+        return new MyStyleSheet(buttonCopy, containerCopy, textCopy, backgroundCopy);
     }
 }
 
 class FrozenStyleSheet extends MyStyleSheet {
-    constructor(button: buttonStyleType, container: containerStyleType, text: textStyleType) {
-        super(button, container, text);
+    constructor(button: buttonStyleType, container: containerStyleType, text: textStyleType, background: backgroundStyleType) {
+        super(button, container, text, background);
         // Prevent overwriting of the properties of this object
         Object.freeze(this.button);
         Object.freeze(this.container);
