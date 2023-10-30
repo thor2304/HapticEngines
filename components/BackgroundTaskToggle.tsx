@@ -35,44 +35,60 @@ export default function BackgroundFetchScreen() {
         await updateStatusVariables();
     };
 
-    const stylesTwo = getDefaultStyleSheet()
+    const defaultStyles = getDefaultStyleSheet()
+
+    const customStyles = StyleSheet.create({
+        textContainer: {
+            // margin: 5,
+            padding: 5,
+        },
+        boldText: {
+            fontWeight: 'bold',
+        },
+        button: {
+            borderRadius: 8,
+            padding: 6,
+        },
+        buttonText: {
+            color: defaultStyles.text.color,
+        }
+    });
 
     return (
-        <View style={stylesTwo.container}>
-            <View style={styles.textContainer}>
-                <Text style={stylesTwo.text}>
+        <View style={defaultStyles.container}>
+            <Text style={customStyles.textContainer}>
+                <Text style={defaultStyles.text}>
                     Background fetch status:{' '}
-                    <Text style={styles.boldText}>
+                    <Text style={customStyles.boldText}>
                         {fetchStatus && BackgroundFetch.BackgroundFetchStatus[fetchStatus]}
                     </Text>
                 </Text>
-                <Text style={stylesTwo.text}>
+            </Text>
+            <Text style={customStyles.textContainer}>
+                <Text style={defaultStyles.text}>
                     Background fetch task name:{' '}
-                    <Text style={styles.boldText}>
+                    <Text style={customStyles.boldText}>
                         {isRegistered ? BACKGROUND_FETCH_TASK : 'Not registered yet!'}
                     </Text>
                 </Text>
+            </Text>
+            <View style={customStyles.textContainer}>
+                <Pressable
+                    title={isRegistered ? 'Unregister BackgroundFetch task' : 'Register BackgroundFetch task'}
+                    onPress={toggleFetchTask}
+                    style={defaultStyles.button}
+                />
+                <Pressable
+                    onPress={toggleFetchTask}
+                    style={({pressed}) => [
+                        {
+                            backgroundColor: pressed ? defaultStyles.button.color : defaultStyles.button.backgroundColor,
+                        },
+                        customStyles.button,
+                    ]}>
+                    <Text style={customStyles.buttonText}>{isRegistered ? 'Unregister BackgroundFetch task' : 'Register BackgroundFetch task'}</Text>
+                </Pressable>
             </View>
-            <View style={styles.textContainer}></View>
-            <Pressable
-                title={isRegistered ? 'Unregister BackgroundFetch task' : 'Register BackgroundFetch task'}
-                onPress={toggleFetchTask}
-                style={stylesTwo.button}
-            />
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textContainer: {
-        margin: 10,
-    },
-    boldText: {
-        fontWeight: 'bold',
-    },
-});
