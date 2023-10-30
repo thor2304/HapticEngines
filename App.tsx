@@ -12,6 +12,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
 import {CustomTabNavigator} from "./components/CustomTabNavigator";
 import {UserContextProvider} from "./components/UserContext";
+import {RentedContextProvider} from "./components/examples/RentedContext";
 
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
@@ -29,6 +30,10 @@ function DiscoveryStackScreen() {
                 <DiscoveryStack.Screen
                     name="CarDetailsScreen"
                     component={CarDetailScreen}/>
+                <DiscoveryStack.Screen
+                    name="MyRentalsScreen"
+                    component={MyRentals}
+                    options={{headerShown: false}}/>
             </DiscoveryStack.Navigator>
     );
 }
@@ -75,27 +80,29 @@ export default function App() {
     return (
         <UserContextProvider>
             <ThemeContextProvider>
-                <CustomSafeAreaView>
-                    <NavigationContainer>
-                        <CustomTabNavigator>
-                            <Tab.Screen
-                                name="DiscoveryScreenStack"
-                                component={DiscoveryStackScreen}
-                                options={{title: 'Discover'}}
-                            />
-                            <Tab.Screen
-                                name="MyRentalsScreenStack"
-                                component={MyRentalsStackScreen}
-                                options={{title: 'My Rentals'}}
-                            />
-                            <Tab.Screen
-                                name="ProfileScreenStack"
-                                component={ProfileStackScreen}
-                                options={{title: 'Profile'}}
-                            />
-                        </CustomTabNavigator>
-                    </NavigationContainer>
-                </CustomSafeAreaView>
+                <RentedContextProvider>
+                    <CustomSafeAreaView>
+                        <NavigationContainer>
+                            <CustomTabNavigator>
+                                <Tab.Screen
+                                    name="DiscoveryScreenStack"
+                                    component={DiscoveryStackScreen}
+                                    options={{title: 'Discover'}}
+                                />
+                                <Tab.Screen
+                                    name="MyRentalsScreenStack"
+                                    component={MyRentalsStackScreen}
+                                    options={{title: 'My Rentals'}}
+                                />
+                                <Tab.Screen
+                                    name="ProfileScreenStack"
+                                    component={ProfileStackScreen}
+                                    options={{title: 'Profile'}}
+                                />
+                            </CustomTabNavigator>
+                        </NavigationContainer>
+                    </CustomSafeAreaView>
+                </RentedContextProvider>
             </ThemeContextProvider>
         </UserContextProvider>
     );
