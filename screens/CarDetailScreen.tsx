@@ -17,51 +17,74 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
 
     const pageStyles = StyleSheet.create({
         background: {
+            flex: 1,
             backgroundColor: theme.backgroundColor,
+        },
+        page_title_text: {
+            fontSize: 30,
+            fontWeight: 'bold',
+        },
+        image_box: {
+            height: 200,
+        },
+        image: {
+            flex: 1,
+            borderRadius: 25,
+        },
+        details_box: {
+            flexDirection: 'column',
+            alignContent: 'space-between',
+            justifyContent: 'space-between',
+            borderWidth: 5,
+        },
+        row: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 20,
+            borderWidth: 5,
         }
     });
 
     const car: Backend.Car = route.params.car;
 
-    const viewStyles = getDetailStylesheet()
-
-    const defaultStyleSheet = getDefaultStyleSheet();
-
     return (
         <View style={pageStyles.background}>
-            <Text style={defaultStyleSheet.text}>    {car.model} </Text>
-            <DetailList params={{
-                data:[car],
-                switchAlignment: true
-            }} navigation={
-                navigation
-            }>
-            </DetailList>
-            <View style={viewStyles.detail_text_container_box}>
-                <View style={viewStyles.row}>
-                    <View style={viewStyles.detail_preview_card_specs_box}>
-                        <Text style={viewStyles.detail_preview_card_text}>{car.engineCCSize}</Text>
-                        <Text style={viewStyles.detail_preview_card_text}>Doors: {car.doors}</Text>
-                        <Text style={viewStyles.detail_preview_card_text}>Fuel type: {car.fuelType.name}</Text>
-                        <Text style={viewStyles.detail_preview_card_text}>Wheel size: {car.wheelSize}</Text>
+            <View>
+                <Text style={pageStyles.page_title_text}>{car.model}</Text>
+            </View>
+            <View style={pageStyles.image_box}>
+                <Image
+                    style={pageStyles.image}
+                    source={{
+                        uri: backendHandler.getImageUrl(car.imageName),
+                    }}
+                />
+            </View>
+            <View style={pageStyles.details_box}>
+                <View style={pageStyles.row}>
+                    <View style={{flex: 0.74, borderWidth: 2}}>
+                        <Text>{car.engineCCSize}</Text>
+                        <Text>Doors: {car.doors}</Text>
+                        <Text>Fuel type: {car.fuelType.name}</Text>
+                        <Text>Wheel size: {car.wheelSize}</Text>
                     </View>
-                    <View style={viewStyles.detail_preview_card_rumble_box}>
-                        <Text style={viewStyles.detail_preview_card_text}>Rumble</Text>
+                    <View style={{flex: 0.24, borderWidth: 2}}>
+                        <Text>Rumble</Text>
                     </View>
                 </View>
-                <View style={viewStyles.row}>
-                    <View style={viewStyles.detail_preview_card_pricing_box}>
-                        <Text style={viewStyles.detail_preview_card_text}>Pricing</Text>
-                        <Text style={viewStyles.detail_preview_card_text}>{car.pricePerDay} / Day</Text>
-                        <Text style={viewStyles.detail_preview_card_text}>{car.pricePerWeek} / Week</Text>
+                <View style={pageStyles.row}>
+                    <View style={{flex: 0.49, borderWidth: 2}}>
+                        <Text>Pricing</Text>
+                        <Text>{car.pricePerDay} / Day</Text>
+                        <Text>{car.pricePerWeek} / Week</Text>
                     </View>
-                    <View style={viewStyles.detail_preview_card_description_box}>
-                        <Text style={[viewStyles.detail_preview_card_text]}>Description</Text>
-                        <Text style={viewStyles.detail_preview_card_text}>{car.description}</Text>
+                    <View style={{flex: 0.49, borderWidth: 2}}>
+                        <Text>Description</Text>
+                        <Text>{car.description}</Text>
                     </View>
                 </View>
             </View>
-            <View style={viewStyles.detail_button}>
+            <View style={{borderWidth: 5}}>
                 <Button title={"Rent car"} onPress={
                     () => {
                         console.log("Pressed rent car button")
