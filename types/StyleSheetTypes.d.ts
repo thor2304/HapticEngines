@@ -80,8 +80,6 @@ export interface DetailStyleSheetI {
     },
     row: {
         flexDirection: FlexStyle['flexDirection'],
-        flexWrap: FlexStyle['flexWrap'],
-        justifyContent: FlexStyle['justifyContent'],
     },
     reverse_row: {
         flexDirection: FlexStyle['flexDirection'],
@@ -93,12 +91,19 @@ export interface DetailStyleSheetI {
     detail_preview_card_image_box: {
         flex: FlexStyle['flex'],
     },
+    detail_text_container_box: {
+        flexDirection: FlexStyle['flexDirection'],
+        justifyContent: FlexStyle['justifyContent'],
+        Height: FlexStyle['height'],
+        MarginTop: FlexStyle['marginTop'],
+    },
     detail_preview_card_specs_box: {
         flexDirection: FlexStyle['flexDirection'],
         justifyContent: FlexStyle['justifyContent'],
         flex: FlexStyle['flex'],
         Height: FlexStyle['height'],
         backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
     },
     detail_preview_card_rumble_box: {
         flexDirection: FlexStyle['flexDirection'],
@@ -106,6 +111,7 @@ export interface DetailStyleSheetI {
         flex: FlexStyle['flex'],
         Height: FlexStyle['height'],
         backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
     },
     detail_preview_card_pricing_box: {
         flexDirection: FlexStyle['flexDirection'],
@@ -113,6 +119,7 @@ export interface DetailStyleSheetI {
         flex: FlexStyle['flex'],
         Height: FlexStyle['height'],
         backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
     },
     detail_preview_card_description_box: {
         flexDirection: FlexStyle['flexDirection'],
@@ -120,6 +127,7 @@ export interface DetailStyleSheetI {
         flex: FlexStyle['flex'],
         Height: FlexStyle['height'],
         backgroundColor: ColorValue,
+        MarginTop: FlexStyle['marginTop'],
     },
     detail_preview_card_text: {
         color: ColorValue,

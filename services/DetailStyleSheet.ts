@@ -30,8 +30,6 @@ export function getDetailStylesheet() : DetailStyleSheetI{
         },
         row: {
             flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
         },
         reverse_row: {
             flexDirection: 'row-reverse',
@@ -43,39 +41,49 @@ export function getDetailStylesheet() : DetailStyleSheetI{
         detail_preview_card_image_box: {
             flex: 1,
         },
+        detail_text_container_box: {
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            Height: 800,
+            MarginTop: 50,
+        },
         detail_preview_card_specs_box: {
             flexDirection: 'column',
             justifyContent: 'space-around',
             flex: 0.78,
-            Height: 150,
+            Height: 200,
             backgroundColor: theme.contrastColor,
+            MarginTop: 40,
         },
         detail_preview_card_rumble_box: {
             flexDirection: 'column',
             justifyContent: 'space-around',
             flex: 0.18,
-            Height: 150,
+            Height: 200,
             backgroundColor: theme.contrastColor,
+            MarginTop: 40,
         },
         detail_preview_card_pricing_box: {
             flexDirection: 'column',
             justifyContent: 'space-around',
             flex: 0.48,
-            Height: 150,
+            Height: 200,
             backgroundColor: theme.contrastColor,
+            MarginTop: 40,
         },
         detail_preview_card_description_box: {
             flexDirection: 'column',
             justifyContent: 'space-around',
             flex: 0.48,
-            Height: 150,
+            Height: 200,
             backgroundColor: theme.contrastColor,
+            MarginTop: 40,
         },
         detail_preview_card_text: {
             color: theme.textColor,
         },
         detail_image: {
-            height: 150,
+            height: 200,
         }
     }
 }

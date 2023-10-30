@@ -14,14 +14,12 @@ export function DetailList({params, navigation}: CarListProps){
         <FlatList data={data}
                   style={{borderWidth:5}}
                   renderItem={({item, index}) =>
-                      <View style={pageStyles.detail_preview_card_image_box}>
-                          <Image
-                              style={pageStyles.detail_image}
-                              source={{
-                                  uri: backendHandler.getImageUrl(item.imageName),
-                              }}
-                          />
-                      </View>
+                      <Image
+                          style={pageStyles.detail_image}
+                          source={{
+                              uri: backendHandler.getImageUrl(item.imageName),
+                          }}
+                      />
                   }
         />
     )

@@ -17,7 +17,6 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
 
     const pageStyles = StyleSheet.create({
         background: {
-            flex: 1,
             backgroundColor: theme.backgroundColor,
         }
     });
@@ -38,26 +37,28 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
                 navigation
             }>
             </DetailList>
-            <View style={viewStyles.row}>
-                <View style={viewStyles.detail_preview_card_rumble_box}>
-                    <Text style={viewStyles.detail_preview_card_text}>Rumble</Text>
+            <View style={viewStyles.detail_text_container_box}>
+                <View style={viewStyles.row}>
+                    <View style={viewStyles.detail_preview_card_specs_box}>
+                        <Text style={viewStyles.detail_preview_card_text}>{car.engineCCSize}</Text>
+                        <Text style={viewStyles.detail_preview_card_text}>Doors: {car.doors}</Text>
+                        <Text style={viewStyles.detail_preview_card_text}>Fuel type: {car.fuelType.name}</Text>
+                        <Text style={viewStyles.detail_preview_card_text}>Wheel size: {car.wheelSize}</Text>
+                    </View>
+                    <View style={viewStyles.detail_preview_card_rumble_box}>
+                        <Text style={viewStyles.detail_preview_card_text}>Rumble</Text>
+                    </View>
                 </View>
-                <View style={viewStyles.detail_preview_card_specs_box}>
-                    <Text style={viewStyles.detail_preview_card_text}>{car.engineCCSize}</Text>
-                    <Text style={viewStyles.detail_preview_card_text}>Doors: {car.doors}</Text>
-                    <Text style={viewStyles.detail_preview_card_text}>Fuel type: {car.fuelType.name}</Text>
-                    <Text style={viewStyles.detail_preview_card_text}>Wheel size: {car.wheelSize}</Text>
-                </View>
-            </View>
-            <View style={viewStyles.row}>
-                <View style={viewStyles.detail_preview_card_description_box}>
-                    <Text style={[viewStyles.detail_preview_card_text]}>Description</Text>
-                    <Text style={viewStyles.detail_preview_card_text}>{car.description}</Text>
-                </View>
-                <View style={viewStyles.detail_preview_card_pricing_box}>
-                    <Text style={viewStyles.detail_preview_card_text}>Pricing</Text>
-                    <Text style={viewStyles.detail_preview_card_text}>{car.pricePerDay} / Day</Text>
-                    <Text style={viewStyles.detail_preview_card_text}>{car.pricePerWeek} / Week</Text>
+                <View style={viewStyles.row}>
+                    <View style={viewStyles.detail_preview_card_pricing_box}>
+                        <Text style={viewStyles.detail_preview_card_text}>Pricing</Text>
+                        <Text style={viewStyles.detail_preview_card_text}>{car.pricePerDay} / Day</Text>
+                        <Text style={viewStyles.detail_preview_card_text}>{car.pricePerWeek} / Week</Text>
+                    </View>
+                    <View style={viewStyles.detail_preview_card_description_box}>
+                        <Text style={[viewStyles.detail_preview_card_text]}>Description</Text>
+                        <Text style={viewStyles.detail_preview_card_text}>{car.description}</Text>
+                    </View>
                 </View>
             </View>
             <View style={viewStyles.detail_button}>
