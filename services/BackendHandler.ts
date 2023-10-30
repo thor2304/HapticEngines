@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Car from "../types/classes/Car";
 import Manufacturer from "../types/classes/Manufacturer";
 import User from "../types/classes/User";
@@ -20,8 +20,6 @@ class BackendHandlerClass {
      * @throws Error if the response from the API is not valid
      */
     async getCars(): Promise<Backend.CarCollection> {
-        // Should of course be implemented, but the return hides ts errors
-
         const [cars, setCars] = useState<Backend.CarCollection>([])
 
         fetchFromAPI("cars", setCars, validateCarCollection)
@@ -30,11 +28,8 @@ class BackendHandlerClass {
     }
 
     async getCarHash(): Promise<Backend.CarHash | undefined> {
-        const [carHash, setCarHash] = useState<Backend.CarHash>()
-
-        fetchFromAPI("carHash", setCarHash, (possibleCollection: any) => possibleCollection)
-
-        return carHash
+        //return "heheheh"
+        return await fetchFromAPIUnderlyingText("cars/hash")
     }
 
     async getManufacturer(id: number): Promise<Backend.Manufacturer | undefined> {
@@ -90,38 +85,57 @@ class BackendHandlerClass {
         return rentals
     }
 
-
-
     getImageUrl(imageName: string): string {
         return apiURL + "/images/" + imageName
     }
-
-    //... For all the other endpoints. You will also have to implement the classes for User, FuelType, Manufacturer, etc.
 }
 
-
+/**
+ * This is used when the endpoint matches one of the endpoints on the server directly
+ * @param endpoint
+ * @param setDataOption
+ * @param validatorFunction
+ */
 function fetchFromAPI(endpoint: Backend.Endpoint,
                       setDataOption: React.Dispatch<React.SetStateAction<any>>,
                       validatorFunction: (possibleCollection: any) => any): void {
     fetchFromAPIUnderlying(endpoint, setDataOption, validatorFunction)
 }
 
+/**
+ * This is used when the endpoint is custom built with parameters.
+ * If possible use {@link fetchFromAPI} instead
+ * @param endpoint
+ * @param setDataOption
+ * @param validatorFunction
+ */
 function fetchFromAPIUnderlying(endpoint: string,
                                 setDataOption: React.Dispatch<React.SetStateAction<any>>,
                                 validatorFunction: (possibleCollection: any) => any): void {
+    const apiString = apiURL + "/" + endpoint
+
     useEffect(() => {
-        fetch(apiURL + "/" + endpoint)
-            .then(response => response.json())
+        fetch(apiString)
+            .then(response => response.json().catch(() => {
+                console.error("Invalid response from API, not valid JSON: " + apiString + " " + response)
+            }))
             .then(json => {
                 return validatorFunction(json)
             })
             .then(json => setDataOption(json))
-    }, [])
+    }, [apiString])
+}
+
+// fetch from api but response.text instead
+async function fetchFromAPIUnderlyingText(endpoint: string): Promise<string> {
+    const response = await fetch(apiURL + "/" + endpoint)
+    return response.text()
 }
 
 
 function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>, validatorFunction: (possibleCollection: any) => any): void {
-    fetchFromAPIUnderlying(endpoint + "/" + id, setDataOption, validatorFunction)
+    const apiString = endpoint + "/" + id
+    fetchFromAPIUnderlying(apiString, setDataOption, validatorFunction)
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {

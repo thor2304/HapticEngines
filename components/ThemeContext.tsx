@@ -17,5 +17,5 @@ export function ThemeContextProvider({ children } : { children: React.ReactNode 
             {children}
         </ThemeContext.Provider>
     );
-};
+}
 

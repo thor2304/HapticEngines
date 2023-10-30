@@ -83,6 +83,49 @@ export type backgroundStyleType = {
     flex: FlexStyle['flex'],
     backgroundColor: ColorValue
 }
+export interface ProfileScreenStylesheetI {
+    name: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: TextStyle['color'],
+    },
+    details: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: ColorValue,
+    },
+    detailsGroup: {
+        alignItems: FlexStyle['alignItems'],
+    },
+    image: {
+        width: FlexStyle['width'],
+        height: FlexStyle['height'],
+        borderRadius: number,
+    },
+    backgroundCard: {
+        backgroundColor: ColorValue,
+        margin: FlexStyle['margin'],
+        padding: FlexStyle['padding'],
+        minHeight: FlexStyle['minHeight'],
+        minWidth: FlexStyle['minWidth'],
+        borderRadius: number,
+        alignItems: FlexStyle['alignItems'],
+        justifyContent: FlexStyle['justifyContent'],
+    },
+    button: {
+        backgroundColor: ColorValue,
+        paddingVertical: FlexStyle['paddingVertical'],
+        minWidth: FlexStyle['minWidth'],
+        borderRadius: number,
+        alignItems: FlexStyle['alignItems'],
+    },
+    buttonText: {
+        fontSize: TextStyle['fontSize'],
+        fontWeight: TextStyle['fontWeight'],
+        color: ColorValue,
+    }
+}
+
 export type buttonStyleType = { backgroundColor: ColorValue; color: ColorValue };
 export type containerStyleType = {
     flex: number;
