@@ -8,7 +8,7 @@ import Car from "../types/classes/Car";
 export function CarSectionList({params, navigation}: CarSectionListProps){
     const pageStyles = getCarListStylesheet()
 
-    const data = params.data
+    const data = params.sections
     const switchAlignment = params.switchAlignment
 
     return (
@@ -22,13 +22,16 @@ export function CarSectionList({params, navigation}: CarSectionListProps){
                 <CarCard
                     params={
                         {
-                            car: (item instanceof Car) ? item : item.car,
+                            car: item,
                             alignLeft: (switchAlignment ? (index % 2 == 0) : true)
                         }
                     }
                     navigation={navigation}>
                 </CarCard>
             )}
+            keyExtractor={(car, index) => {
+                return JSON.stringify(car) + index
+            }}
         />
     )
 }

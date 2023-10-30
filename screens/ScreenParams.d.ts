@@ -15,7 +15,7 @@ type CarListParams = {
 }
 
 type CarSectionListParams = {
-    data: {title?: string, data: Collection}[],
+    sections: Array<{title?: string, data: Backend.CarCollection}>,
     switchAlignment: boolean,
 }
 

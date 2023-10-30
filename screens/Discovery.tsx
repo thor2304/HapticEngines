@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { useState } from "react";
-import {DiscoveryProps} from "./ScreenParams";
+import {CarSectionListParams, DiscoveryProps} from "./ScreenParams";
 import backendHandler from "../services/BackendHandler";
 import {getDefaultStyleSheet} from "../services/Stylesheet";
 import {CarSectionList} from "../components/CarSectionList";
@@ -23,21 +23,20 @@ export function Discovery({navigation}: DiscoveryProps) {
         console.log(error)
     })
 
-    const viewData = [
-        {
-            data: data,
-        }
-    ]
+
+    const carSectionParams: CarSectionListParams = {
+        sections: [
+            {
+                data: data,
+            }
+        ],
+        switchAlignment: true
+    }
 
     return (
         <View style={pageStyles.background}>
             <CarSectionList
-                params={
-                    {
-                        data: viewData,
-                        switchAlignment: true
-                    }
-                }
+                params={carSectionParams}
                 navigation={navigation}
             />
         </View>
