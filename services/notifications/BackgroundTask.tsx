@@ -78,6 +78,27 @@ async function sendNotification(): Promise<void> {
     });
 }
 
+async function sendNotificationForDemo(): Promise<void> {
+    console.log("Sending notification")
+    const now = Date.now();
+
+    const expoPushToken = await getExpoToken()
+    await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Accept-encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "to": expoPushToken.data,
+            "title": "BackgroundTask Fetch",
+            "body": "No Database Update: " + new Date(now).toString(),
+            "priority": "high"
+        }),
+    });
+}
+
 async function getExpoToken() {
     return await Notifications.getExpoPushTokenAsync({
         projectId: expoProjectID,
@@ -97,6 +118,7 @@ async function backgroundTask() {
 
     if (compareHashes(carHashFromServer, localHash)) {
         // early return as guard clause
+        await sendNotificationForDemo()
         return
     }
 
