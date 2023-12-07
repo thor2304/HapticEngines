@@ -10,12 +10,12 @@ export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
         name: {
             fontSize: 32,
             fontWeight: '700',
-            color: theme.textColor,
+            color: theme.onPrimaryColor,
         },
         details: {
             fontSize: 24,
             fontWeight: '700',
-            color: theme.subTextColor,
+            color: theme.onPrimaryColor,
         },
         detailsGroup: {
             alignItems: 'center',
@@ -26,7 +26,7 @@ export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
             borderRadius: imageSize / 2,
         },
         backgroundCard: {
-            backgroundColor: theme.contrastColor,
+            backgroundColor: theme.primaryColor,
             margin: 10,
             padding: 10,
             minHeight: 320,
@@ -36,7 +36,7 @@ export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
             justifyContent: 'space-between',
         },
         button: {
-            backgroundColor: theme.contrastColor,
+            backgroundColor: theme.primaryColor,
             paddingVertical: 5,
             minWidth: 150,
             borderRadius: 10,
@@ -45,7 +45,7 @@ export function getProfileScreenStyleSheet() : ProfileScreenStylesheetI {
         buttonText: {
             fontSize: 12,
             fontWeight: '700',
-            color: theme.subTextColor,
+            color: theme.onPrimaryColor,
         }
     }
 }

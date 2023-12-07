@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {ThemeContext} from "./ThemeContext";
 import DiscoverySvg from "../assets/logos/discovery.svg";
 import ProfileSvg from "../assets/logos/profile.svg";
@@ -20,7 +20,7 @@ export function CustomTabNavigator ({children} : {children: React.ReactNode}) {
             screenOptions={( route: {route: RouteProp<NavigatorParamList, keyof NavigatorParamList>, navigation: any})  => ({
                 headerShown: false,
                 tabBarStyle: { backgroundColor: theme.backgroundColor, height: 60, paddingBottom: 10, paddingTop: 10 },
-                tabBarLabelStyle: { color: theme.textColor },
+                tabBarLabelStyle: { color: theme.onBackgroundColor },
                 tabBarButton: (prop) => <TouchableOpacity{...prop} />,
                 tabBarIcon: ({focused} : any) => {
                     if (route.route.name === 'DiscoveryScreenStack') {

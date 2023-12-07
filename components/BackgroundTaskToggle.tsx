@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useContext} from "react";
 import {BackgroundFetchStatus} from "expo-background-fetch";
 import * as BackgroundFetch from "expo-background-fetch";
 import * as TaskManager from "expo-task-manager";
@@ -9,9 +10,11 @@ import {
     unregisterBackgroundFetchAsync
 } from "../services/notifications/BackgroundTask";
 import {getDefaultStyleSheet} from "../services/Stylesheet";
+import {ThemeContext} from "./ThemeContext";
 
 export default function BackgroundFetchScreen() {
     const [isRegistered, setIsRegistered] = React.useState(false);
+    const theme = useContext(ThemeContext).theme
 
     React.useEffect(() => {
         updateStatusVariables().then(r => r)
@@ -49,7 +52,7 @@ export default function BackgroundFetchScreen() {
             padding: 6,
         },
         buttonText: {
-            color: defaultStyles.text.color,
+            color: theme.onPrimaryColor,
         }
     });
 
