@@ -92,6 +92,7 @@ declare namespace Backend {
         transmission: Transmission;
         wheelSize: number;
         imageName: imageName;
+        imageNames: imageName[];
     }
 
     /**
