@@ -13,7 +13,7 @@ export function getCarCardStylesheet() : CarCardStyleSheetI{
         justifyContent: 'space-between',
         marginTop: 12,
         marginBottom: 12,
-        backgroundColor: theme.primaryColor,
+        backgroundColor: theme.secondaryColor,
         padding: 7,
     }
 
@@ -43,7 +43,7 @@ export function getCarCardStylesheet() : CarCardStyleSheetI{
             Height: 150,
         },
         car_preview_card_text: {
-            color: theme.onPrimaryColor,
+            color: theme.onSecondaryColor,
         },
         car_image: {
             height: 150,

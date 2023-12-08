@@ -29,7 +29,11 @@ function DiscoveryStackScreen() {
                     }}/>
                 <DiscoveryStack.Screen
                     name="CarDetailsScreen"
-                    component={CarDetailScreen}/>
+                    component={CarDetailScreen}
+                    options={{headerStyle: {
+                            backgroundColor: '#2962ff',
+                        },
+                        headerTintColor: "#ffffff"}}/>
                 <DiscoveryStack.Screen
                     name="MyRentalsScreen"
                     component={MyRentals}
@@ -49,7 +53,11 @@ function MyRentalsStackScreen() {
                 options={{headerShown: false}}/>
             <MyRentalsStack.Screen
                 name="CarDetailsScreen"
-                component={CarDetailScreen}/>
+                component={CarDetailScreen}
+                options={{headerStyle: {
+                        backgroundColor: '#2962ff',
+                    },
+                headerTintColor: "#ffffff"}}/>
         </MyRentalsStack.Navigator>
     );
 }

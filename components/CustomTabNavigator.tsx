@@ -19,8 +19,8 @@ export function CustomTabNavigator ({children} : {children: React.ReactNode}) {
             backBehavior={"history"}
             screenOptions={( route: {route: RouteProp<NavigatorParamList, keyof NavigatorParamList>, navigation: any})  => ({
                 headerShown: false,
-                tabBarStyle: { backgroundColor: theme.backgroundColor, height: 60, paddingBottom: 10, paddingTop: 10 },
-                tabBarLabelStyle: { color: theme.onBackgroundColor },
+                tabBarStyle: { backgroundColor: theme.navbarColor, height: 60, paddingBottom: 10, paddingTop: 10 },
+                tabBarLabelStyle: { color: theme.onNavbarColor },
                 tabBarButton: (prop) => <TouchableOpacity{...prop} />,
                 tabBarIcon: ({focused} : any) => {
                     if (route.route.name === 'DiscoveryScreenStack') {

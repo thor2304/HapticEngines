@@ -64,7 +64,7 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
             marginTop: 10,
         },
         button: {
-            backgroundColor: theme.primaryColor,
+            backgroundColor: theme.secondaryColor,
             paddingVertical: 5,
             borderRadius: 10,
             paddingTop: 40,
@@ -73,12 +73,12 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
             textAlign: 'center',
         },
         buttonText: {
-            color: theme.onPrimaryColor,
+            color: theme.onSecondaryColor,
             fontSize: 12,
             fontWeight: 'bold',
         },
         smallText: {
-            color: theme.onPrimaryColor,
+            color: theme.onSecondaryColor,
             fontSize: 10,
             marginBottom: 15,
             marginLeft: 15,
@@ -109,24 +109,24 @@ export function CarDetailScreen({route, navigation} : CarDetailsProps) {
             </View>
             <View style={pageStyles.details_box}>
                 <View style={pageStyles.row}>
-                    <View style={{flex: 0.74, borderWidth: 0, backgroundColor: theme.primaryColor, borderRadius: 25}}>
-                        <Text style={{marginTop: 15, marginLeft: 15, color: theme.onPrimaryColor}}>Engine CC size: {car.engineCCSize}</Text>
-                        <Text style={{marginLeft: 15, color: theme.onPrimaryColor}}>Doors: {car.doors}</Text>
-                        <Text style={{marginLeft: 15, color: theme.onPrimaryColor}}>Fuel type: {car.fuelType.name}</Text>
-                        <Text style={{marginBottom: 15, marginLeft: 15, color: theme.onPrimaryColor}}>Wheel size: {car.wheelSize}</Text>
+                    <View style={{flex: 0.74, borderWidth: 0, backgroundColor: theme.secondaryColor, borderRadius: 25}}>
+                        <Text style={{marginTop: 15, marginLeft: 15, color: theme.onSecondaryColor}}>Engine CC size: {car.engineCCSize}</Text>
+                        <Text style={{marginLeft: 15, color: theme.onSecondaryColor}}>Doors: {car.doors}</Text>
+                        <Text style={{marginLeft: 15, color: theme.onSecondaryColor}}>Fuel type: {car.fuelType.name}</Text>
+                        <Text style={{marginBottom: 15, marginLeft: 15, color: theme.onSecondaryColor}}>Wheel size: {car.wheelSize}</Text>
                     </View>
-                    <View style={{flex: 0.24, borderWidth: 0, backgroundColor: theme.primaryColor, borderRadius: 25, alignContent: "center", alignItems: "center"}}>
+                    <View style={{flex: 0.24, borderWidth: 0, backgroundColor: theme.secondaryColor, borderRadius: 25, alignContent: "center", alignItems: "center"}}>
                         <Pressable style={pageStyles.button} onPress={runHapticFeedback}><Text style={pageStyles.buttonText}>Rumble</Text></Pressable>
                     </View>
                 </View>
                 <View style={pageStyles.row}>
-                    <View style={{flex: 0.49, borderWidth: 0, backgroundColor: theme.primaryColor, borderRadius: 25}}>
-                        <Text style={{marginTop: 10, marginLeft: 15, marginBottom: 15, fontWeight: 'bold', color: theme.onPrimaryColor}}>Pricing</Text>
-                        <Text style={{marginLeft: 15, color: theme.onPrimaryColor}}>{car.pricePerDay} / Day</Text>
-                        <Text style={{marginBottom: 15, marginLeft: 15, color: theme.onPrimaryColor}}>{car.pricePerWeek} / Week</Text>
+                    <View style={{flex: 0.49, borderWidth: 0, backgroundColor: theme.secondaryColor, borderRadius: 25}}>
+                        <Text style={{marginTop: 10, marginLeft: 15, marginBottom: 15, fontWeight: 'bold', color: theme.onSecondaryColor}}>Pricing</Text>
+                        <Text style={{marginLeft: 15, color: theme.onSecondaryColor}}>{car.pricePerDay} / Day</Text>
+                        <Text style={{marginBottom: 15, marginLeft: 15, color: theme.onSecondaryColor}}>{car.pricePerWeek} / Week</Text>
                     </View>
-                    <View style={{flex: 0.49, borderWidth: 0, backgroundColor: theme.primaryColor, borderRadius: 25}}>
-                        <Text style={{marginTop: 10, marginLeft: 15, marginBottom: 5, fontWeight: 'bold', color: theme.onPrimaryColor}}>Description</Text>
+                    <View style={{flex: 0.49, borderWidth: 0, backgroundColor: theme.secondaryColor, borderRadius: 25}}>
+                        <Text style={{marginTop: 10, marginLeft: 15, marginBottom: 5, fontWeight: 'bold', color: theme.onSecondaryColor}}>Description</Text>
                         <Text style={pageStyles.smallText}>{car.description}</Text>
                     </View>
                 </View>
