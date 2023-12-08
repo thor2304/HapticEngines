@@ -15,6 +15,7 @@ export default class Car implements Backend.Car{
     pricePerWeek: number;
     wheelSize: number;
     imageName: string;
+    imageNames: string[];
 
     constructor(json: string |object){
         const parsed: Backend.Car = typeof json == "string" ? JSON.parse(json) : json;
@@ -23,13 +24,13 @@ export default class Car implements Backend.Car{
             throw new Error("Invalid response from API, car is not an object" + parsed)
         }
 
-        if (Object.keys(parsed).length !== 12) {
+        if (Object.keys(parsed).length !== 13) {
             throw new Error("Invalid response from API, car object does not have the correct number of keys (12)" + parsed)
         }
 
         if (parsed.id === undefined || parsed.manufacturer === undefined || parsed.model === undefined || parsed.fuelType === undefined ||
             parsed.pricePerDay === undefined || parsed.pricePerWeek === undefined || parsed.description === undefined || parsed.doors === undefined ||
-            parsed.engineCCSize === undefined || parsed.transmission === undefined || parsed.wheelSize === undefined || parsed.imageName === undefined) {
+            parsed.engineCCSize === undefined || parsed.transmission === undefined || parsed.wheelSize === undefined || parsed.imageName === undefined || parsed.imageNames === undefined){
             throw new Error("Invalid response from API, car object does not have the correct keys, " +
                 "should be id, manufacturer, model, fuelType, pricePerDay, pricePerWeek, description, doors, engineCCSize, transmission, wheelSize and imageName" + parsed)
         }
@@ -40,6 +41,7 @@ export default class Car implements Backend.Car{
         this.doors = parsed.doors;
         this.engineCCSize = parsed.engineCCSize;
         this.imageName = parsed.imageName;
+        this.imageNames = parsed.imageNames;
         this.pricePerDay = parsed.pricePerDay;
         this.pricePerWeek = parsed.pricePerWeek;
         this.wheelSize = parsed.wheelSize;
@@ -51,6 +53,7 @@ export default class Car implements Backend.Car{
         if (this.id == null || this.model == null || this.description == null || this.doors == null ||
             this.engineCCSize == null || this.imageName == null || this.pricePerDay == null || this.pricePerWeek == null
             || this.wheelSize == null || this.manufacturer == null || this.fuelType == null || this.transmission == null
+            || this.imageNames == null
         ){
             throw new Error(`Car is missing attributes: ${this}`);
         }
