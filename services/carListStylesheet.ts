@@ -14,7 +14,7 @@ export function getCarListStylesheet(): CarListStyleSheetI{
         car_list_title: {
             fontWeight: 'bold',
             fontSize: 25,
-            color: theme.textColor,
+            color: theme.onBackgroundColor,
         }
     }
 }

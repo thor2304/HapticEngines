@@ -19,19 +19,19 @@ export function getDefaultStyleSheet(): MyStyleSheet {
     const containerStyle: containerStyleType = {
         flex: 1,
         backgroundColor: theme.backgroundColor,
-        color: theme.textColor,
+        color: theme.onBackgroundColor,
         alignItems: 'center',
         justifyContent: 'center',
     }
 
     const textStyle: textStyleType = {
-        color: theme.textColor,
+        color: theme.onBackgroundColor,
         backgroundColor: theme.backgroundColor,
     }
 
     const buttonStyle: buttonStyleType = {
-        backgroundColor: theme.contrastColor,
-        color: theme.textColor,
+        backgroundColor: theme.primaryColor,
+        color: theme.onPrimaryColor,
     }
 
     const backgroundStyle: backgroundStyleType = {

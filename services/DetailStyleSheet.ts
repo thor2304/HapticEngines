@@ -13,17 +13,17 @@ export function getDetailStylesheet() : DetailStyleSheetI{
         justifyContent: 'space-between',
         marginTop: 12,
         marginBottom: 12,
-        backgroundColor: theme.contrastColor,
+        backgroundColor: theme.primaryColor,
         padding: 7,
     }
 
     return {
         detail_button: {
-            backgroundColor: theme.contrastColor,
-            color: theme.textColor
+            backgroundColor: theme.primaryColor,
+            color: theme.onPrimaryColor
         },
         detail_button_text: {
-            color: theme.textColor
+            color: theme.onPrimaryColor
         },
         bold: {
             fontWeight: 'bold',
@@ -52,7 +52,7 @@ export function getDetailStylesheet() : DetailStyleSheetI{
             justifyContent: 'space-around',
             flex: 0.78,
             Height: 200,
-            backgroundColor: theme.contrastColor,
+            backgroundColor: theme.primaryColor,
             MarginTop: 40,
         },
         detail_preview_card_rumble_box: {
@@ -60,7 +60,7 @@ export function getDetailStylesheet() : DetailStyleSheetI{
             justifyContent: 'space-around',
             flex: 0.18,
             Height: 200,
-            backgroundColor: theme.contrastColor,
+            backgroundColor: theme.primaryColor,
             MarginTop: 40,
         },
         detail_preview_card_pricing_box: {
@@ -68,7 +68,7 @@ export function getDetailStylesheet() : DetailStyleSheetI{
             justifyContent: 'space-around',
             flex: 0.48,
             Height: 200,
-            backgroundColor: theme.contrastColor,
+            backgroundColor: theme.primaryColor,
             MarginTop: 40,
         },
         detail_preview_card_description_box: {
@@ -76,11 +76,11 @@ export function getDetailStylesheet() : DetailStyleSheetI{
             justifyContent: 'space-around',
             flex: 0.48,
             Height: 200,
-            backgroundColor: theme.contrastColor,
+            backgroundColor: theme.primaryColor,
             MarginTop: 40,
         },
         detail_preview_card_text: {
-            color: theme.textColor,
+            color: theme.onPrimaryColor,
         },
         detail_image: {
             height: 200,

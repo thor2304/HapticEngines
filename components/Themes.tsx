@@ -2,22 +2,34 @@ import {ColorValue} from "react-native";
 import {darkColors, lightColors} from "./ColorPalette";
 
 export interface Theme {
-    textColor: ColorValue;
-    subTextColor: ColorValue;
+    primaryColor: ColorValue;
+    onPrimaryColor: ColorValue;
+    secondaryColor: ColorValue;
+    onSecondaryColor: ColorValue;
     backgroundColor: ColorValue;
-    contrastColor: ColorValue;
+    onBackgroundColor: ColorValue;
+    navbarColor: ColorValue;
+    onNavbarColor: ColorValue;
 }
 
 export const lightTheme: Theme = {
-    textColor: lightColors.text,
-    subTextColor: lightColors.subText,
+    primaryColor: lightColors.primary,
+    onPrimaryColor: lightColors.onPrimary,
+    secondaryColor: lightColors.secondary,
+    onSecondaryColor: lightColors.onSecondary,
     backgroundColor: lightColors.background,
-    contrastColor: lightColors.contrast
+    onBackgroundColor: lightColors.onBackground,
+    navbarColor: lightColors.navbar,
+    onNavbarColor: lightColors.onNavbar
 }
 
 export const darkTheme: Theme = {
-    textColor: darkColors.text,
-    subTextColor: darkColors.subText,
+    primaryColor: darkColors.primary,
+    onPrimaryColor: darkColors.onPrimary,
+    secondaryColor: darkColors.secondary,
+    onSecondaryColor: darkColors.onSecondary,
     backgroundColor: darkColors.background,
-    contrastColor: darkColors.contrast
+    onBackgroundColor: darkColors.onBackground,
+    navbarColor: darkColors.navbar,
+    onNavbarColor: darkColors.onNavbar
 }

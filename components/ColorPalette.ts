@@ -1,20 +1,32 @@
 export interface ColorPalette {
-    contrast: string;
-    text: string;
-    subText: string;
+    primary: string;
+    onPrimary: string;
+    secondary: string;
+    onSecondary: string;
     background: string;
+    onBackground: string;
+    navbar: string;
+    onNavbar: string;
 }
 
 export const lightColors: ColorPalette = {
-    contrast: "#80b3d5",
-    text: "#000000",
-    subText: "#656565",
-    background: "#9ae5ff"
+    primary: "#2962ff",
+    onPrimary: "#ffffff",
+    secondary: "#3599FD",
+    onSecondary: "#ffffff",
+    background: "#e5f2ff",
+    onBackground: "#1a1b1f",
+    navbar: "#e1f5fe",
+    onNavbar: "#3e4759"
 }
 
 export const darkColors: ColorPalette = {
-    contrast: "#3081d3",
-    text: "#ffffff",
-    subText: "#BFBFBF",
-    background: "#12364f"
+    primary: "#2962ff",
+    onPrimary: "#ffffff",
+    secondary: "#4d9df1",
+    onSecondary: "#003354",
+    background: "#001429",
+    onBackground: "#e3e2e6",
+    navbar: "#000017",
+    onNavbar: "#dae2f9"
 }

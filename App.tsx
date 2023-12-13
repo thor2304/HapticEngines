@@ -1,5 +1,5 @@
 import {NavigationContainer} from "@react-navigation/native";
-import {ThemeContextProvider} from "./components/ThemeContext";
+import {ThemeContext, ThemeContextProvider} from "./components/ThemeContext";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {CarDetailScreen} from "./screens/CarDetailScreen";
 import {MyRentals} from "./screens/MyRentals";
@@ -13,11 +13,14 @@ import {CustomSafeAreaView} from "./components/CustomSafeAreaView";
 import {CustomTabNavigator} from "./components/CustomTabNavigator";
 import {UserContextProvider} from "./components/UserContext";
 import {RentedContextProvider} from "./components/RentedContext";
+import {useContext} from "react";
 
 
 const DiscoveryStack = createNativeStackNavigator<NavigatorParamList>();
 
 function DiscoveryStackScreen() {
+    const theme = useContext(ThemeContext).theme
+
     return (
             <DiscoveryStack.Navigator>
                 <DiscoveryStack.Screen
@@ -29,7 +32,11 @@ function DiscoveryStackScreen() {
                     }}/>
                 <DiscoveryStack.Screen
                     name="CarDetailsScreen"
-                    component={CarDetailScreen}/>
+                    component={CarDetailScreen}
+                    options={{headerStyle: {
+                            backgroundColor: theme.secondaryColor.toString(),
+                        },
+                        headerTintColor: theme.onSecondaryColor.toString()}}/>
                 <DiscoveryStack.Screen
                     name="MyRentalsScreen"
                     component={MyRentals}
@@ -41,6 +48,8 @@ function DiscoveryStackScreen() {
 const MyRentalsStack = createNativeStackNavigator<NavigatorParamList>();
 
 function MyRentalsStackScreen() {
+    const theme = useContext(ThemeContext).theme
+
     return (
         <MyRentalsStack.Navigator>
             <MyRentalsStack.Screen
@@ -49,7 +58,11 @@ function MyRentalsStackScreen() {
                 options={{headerShown: false}}/>
             <MyRentalsStack.Screen
                 name="CarDetailsScreen"
-                component={CarDetailScreen}/>
+                component={CarDetailScreen}
+                options={{headerStyle: {
+                        backgroundColor: theme.secondaryColor.toString(),
+                    },
+                headerTintColor: theme.onSecondaryColor.toString()}}/>
         </MyRentalsStack.Navigator>
     );
 }
