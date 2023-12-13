@@ -88,6 +88,17 @@ class BackendHandlerClass {
     getImageUrl(imageName: string): string {
         return apiURL + "/images/" + imageName
     }
+
+    //Post a new rental to the API
+    async postRental(userID: string, carID: string, startDate: String, endDate: String): Promise<void> {
+        const rental = {
+            user_id: userID,
+            car_id: carID,
+            start_date: startDate,
+            end_date: endDate
+        }
+        postToAPI("rentals", rental)
+    }
 }
 
 /**
@@ -136,6 +147,20 @@ async function fetchFromAPIUnderlyingText(endpoint: string): Promise<string> {
 function fetchFromAPIWithId(endpoint: Backend.EndpointWithIds, id: number, setDataOption: React.Dispatch<React.SetStateAction<any>>, validatorFunction: (possibleCollection: any) => any): void {
     const apiString = endpoint + "/" + id
     fetchFromAPIUnderlying(apiString, setDataOption, validatorFunction)
+}
+
+function postToAPI(endpoint: string, body: any): void {
+    fetch(apiURL + "/" + endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Error posting to API: " + response)
+        }
+    })
 }
 
 function validateManufacturer(manufacturer: any): Backend.Manufacturer {
